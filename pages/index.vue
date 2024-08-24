@@ -1,4 +1,5 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications
+//https://image.nuxt.com/usage/nuxt-img
 <template>
   <div>
     <h1>Salut ! Tu es sur la première page de erwan</h1>
@@ -15,6 +16,11 @@
         upload
         
       </v-btn>
+      <div v-if="photoUrl.length">
+      <nuxt-img
+      :src="photoUrl"
+      />
+      </div>
       
     <div/>
 <div/></div></div></template>
@@ -22,6 +28,7 @@
 <script setup lang="ts">
 import { useUploadStore } from '~/stores/uploadStore'
 const uploadStore = useUploadStore()
+const photoUrl = ref("")
 
 const photos: Ref<File | File[] | null | undefined> = ref(null)
 
@@ -30,7 +37,9 @@ const upload = () => {
   if (!photos.value) return console.log("photos is undefined or null")
   if ((photos.value as Array<File>).length) return console.log("this is an array")
   console.log("everything seems ok")
-  uploadStore.uploadPhoto(photos.value as File)
+  const photoFile = photos.value as File
+  photoUrl.value = URL.createObjectURL(photoFile)
+  uploadStore.uploadPhoto(photoFile)
 }
 
   
