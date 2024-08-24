@@ -1,5 +1,3 @@
-import { useUploadStore } from '../stores/photo/uploadStore';
-import { useUploadStore } from '../stores/uploadStore';
 //https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications
 <template>
   <div>
@@ -17,6 +15,7 @@ import { useUploadStore } from '../stores/uploadStore';
         upload
         
       </v-btn>
+      
     <div/>
 <div/></div></div></template>
 
@@ -35,21 +34,7 @@ const upload = () => {
 }
 
   
-// const validationRules = [
-//   (files: File[]) => validateSize(files),
-// ];
 
-//Validate the size of the file
-// const validateSize = (files: File[]) => {
-//   if(!files || !files.length || !files[0]) {
-//     return true;
-//   }
-//   if (files[0].size > 1000000) {
-
-//     return 'File size should be less than 1MB';
-//   }
-//   return true;
-// };
 
 
 
