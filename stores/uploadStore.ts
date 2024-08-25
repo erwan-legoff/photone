@@ -10,19 +10,26 @@ export const useUploadStore = defineStore({
   }
   },
   actions: {
-    async uploadPhoto(photo:File) {
+    async uploadPhoto(photo: File) {
+      try {
+ 
       const uploadPhotoUrl = "http://localhost:8080/photos/dumb"
-      console.log("photo:",photo)
-      // Crée un objet FormData
       const formData = new FormData();
-      formData.append(photo.name, photo);
-
-      const response = await $fetch(uploadPhotoUrl, {
-        method: "POST",
-        body: formData,
-      });
+      formData.append("photo", photo);
+    
       
-      console.log(JSON.stringify(response))
+      const response = await $fetch(uploadPhotoUrl, {
+          method: "POST",
+          body: formData,
+        });
+      
+      
+        console.log(JSON.stringify(response))
+      } catch (error) {
+        
+        console.error('error while uploading photo', error)
+        
+      }
     }
 
 

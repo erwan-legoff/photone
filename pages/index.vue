@@ -38,6 +38,7 @@ const upload = () => {
   if ((photos.value as Array<File>).length) return console.log("this is an array")
   console.log("everything seems ok")
   const photoFile = photos.value as File
+
   photoUrl.value = URL.createObjectURL(photoFile)
   uploadStore.uploadPhoto(photoFile)
 }
