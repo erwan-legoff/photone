@@ -10,13 +10,13 @@ export const useUploadStore = defineStore({
   }
   },
   actions: {
-    async uploadPhoto(photo: File) {
+    async uploadPhoto(medium: File) {
       try {
  
-      const uploadPhotoUrl = "http://localhost:8080/photos/dumb"
+      const uploadPhotoUrl = "http://localhost:8080/medias"
       const formData = new FormData();
-      formData.append("photo", photo);
-    
+      formData.append("medium", medium);
+      console.log('formData', JSON.stringify(formData))
       
       const response = await $fetch(uploadPhotoUrl, {
           method: "POST",
