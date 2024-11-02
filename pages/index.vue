@@ -26,6 +26,7 @@
 <div/></div></div></template>
 
 <script setup lang="ts">
+import type { GetMediumDto } from '~/stores/types/GetMediumDto';
 import { useUploadStore } from '~/stores/uploadStore'
 const uploadStore = useUploadStore()
 const photoUrl = ref("")
@@ -43,6 +44,19 @@ const upload = () => {
   uploadStore.uploadPhoto(photoFile)
 }
 
+const download = async () => {
+  console.log('lets download')
+  const getMediumDto: GetMediumDto = {
+    id: '38dbddbc-82c8-4efb-9a1f-3065b86ff643'
+  }
+
+  const mediumFile = await uploadStore.getMedium(getMediumDto)
+  photoUrl.value = URL.createObjectURL(mediumFile)
+}
+
+onMounted(() => {
+  download()
+})
   
 
 
