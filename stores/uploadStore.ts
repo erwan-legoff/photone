@@ -47,7 +47,7 @@ export const useMediumStore = defineStore('medium-store',{
       }
     },
 
-    async getMedium(getMediumDto: GetMediumDto): Promise<File>{
+    async fetchMedium(getMediumDto: GetMediumDto): Promise<File>{
       const GET_MEDIUM_URL = SERVICE_ROOT + '/medium'
       try {
         const response = await $fetch<File>(GET_MEDIUM_URL, {
@@ -62,7 +62,7 @@ export const useMediumStore = defineStore('medium-store',{
       }
     },
 
-    async getMediumUrls(): Promise<Array<string>>{
+    async fetchMediumUrls(): Promise<Array<string>>{
       const GET_MEDIUM_URL = SERVICE_ROOT + '/media'
       try {
         const response = await $fetch<Array<string>>(GET_MEDIUM_URL, {
@@ -75,10 +75,10 @@ export const useMediumStore = defineStore('medium-store',{
       }
     },
 
-    async getMedia(): Promise<void>{
+    async fetchMedia(): Promise<void>{
 
       try {
-        const mediumUrls = await this.getMediumUrls();
+        const mediumUrls = await this.fetchMediumUrls();
         const fetchPromises = mediumUrls.map(url =>
           $fetch<File>(url, { method: 'GET' })
         )
@@ -89,6 +89,12 @@ export const useMediumStore = defineStore('medium-store',{
         this.handleError(error, 'getMedia')
         throw error
       }
+    },
+    getMedia() {
+      return this.media
+    },
+    isMediaLoading() {
+      return this.isMediaLoading
     },
      /**
      * Gère les erreurs en les enregistrant dans l'état et en les loggant.

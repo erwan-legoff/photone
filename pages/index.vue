@@ -1,65 +1,68 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications
 //https://image.nuxt.com/usage/nuxt-img
 <template>
-  <div>
-    <h1>Salut ! Tu es sur la première page de erwan</h1>
-    <p>Ici tu vas pouvoir uploader une image</p>
+  <v-layout>
     <div>
-      <v-file-input
-      v-model="photos"
-        
-        label="File input"
-        accept="image/*"
+      <h1>Salut ! Tu es sur la première page de erwan</h1>
+      <p>Ici tu vas pouvoir uploader une image</p>
+      <div>
+        <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" />
+        <v-btn @click="upload">
+          upload
 
-      />
-      <v-btn @click="upload">
-        upload
-        
-      </v-btn>
-      <div v-if="photoUrl.length">
-      <nuxt-img
-      :src="photoUrl"
-      />
+        </v-btn>
+        <v-row>
+          <v-col v-for="medium in media" :key="medium.name" cols="12" sm="6" md="4">
+            <v-card flat tile>
+              <v-img :src="createURL(medium)" aspect-ratio="1" class="white--text align-end" height="200">
+                <!-- Vous pouvez ajouter du contenu overlay ici si nécessaire -->
+              </v-img>
+            </v-card>
+          </v-col>
+        </v-row>
       </div>
-      
-    <div/>
-<div/></div></div></template>
+
+
+      <div />
+    </div>
+  </v-layout>
+</template>
 
 <script setup lang="ts">
-import type { GetMediumDto } from '~/stores/types/GetMediumDto';
 import { useMediumStore } from '~/stores/uploadStore'
-const uploadStore = useMediumStore()
-const photoUrl = ref("")
+const mediumStore = useMediumStore()
 
-const photos: Ref<File | File[] | null | undefined> = ref(null)
 
-const upload = () => {
+const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
+const media = computed(() => mediumStore.media)
+
+const upload = async () => {
   console.log("let's upload")
-  if (!photos.value) return console.log("photos is undefined or null")
-  if ((photos.value as Array<File>).length) return console.log("this is an array")
+  if (!mediumToUpload.value) return console.log("photos is undefined or null")
+  if ((mediumToUpload.value as Array<File>).length) return console.log("this is an array")
   console.log("everything seems ok")
-  const photoFile = photos.value as File
+  const photoFile = mediumToUpload.value as File
 
-  photoUrl.value = URL.createObjectURL(photoFile)
-  uploadStore.uploadMedium(photoFile)
+  await mediumStore.uploadMedium(photoFile)
+  downloadAll()
 }
 
-const download = async () => {
+const downloadAll = async () => {
   console.log('lets download')
-  const getMediumDto: GetMediumDto = {
-    id: '38dbddbc-82c8-4efb-9a1f-3065b86ff643'
-  }
+  mediumStore.fetchMedia()
 
-  const mediumFile = await uploadStore.getMedium(getMediumDto)
-  photoUrl.value = URL.createObjectURL(mediumFile)
+}
+
+const createURL = (file: File) => {
+  return URL.createObjectURL(file)
 }
 
 onMounted(() => {
-  download()
+  downloadAll()
 })
-  
 
 
+//
 
 
 
