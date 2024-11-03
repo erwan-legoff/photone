@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import type { GetMediumDto } from '~/stores/types/GetMediumDto';
-import { useUploadStore } from '~/stores/uploadStore'
-const uploadStore = useUploadStore()
+import { useMediumStore } from '~/stores/uploadStore'
+const uploadStore = useMediumStore()
 const photoUrl = ref("")
 
 const photos: Ref<File | File[] | null | undefined> = ref(null)
@@ -41,7 +41,7 @@ const upload = () => {
   const photoFile = photos.value as File
 
   photoUrl.value = URL.createObjectURL(photoFile)
-  uploadStore.uploadPhoto(photoFile)
+  uploadStore.uploadMedium(photoFile)
 }
 
 const download = async () => {

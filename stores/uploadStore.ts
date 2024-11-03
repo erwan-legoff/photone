@@ -1,18 +1,31 @@
 //https://pinia.vuejs.org/core-concepts/state.html
 import { defineStore } from 'pinia'
 import type { GetMediumDto } from './types/GetMediumDto';
-const SERVICE_ROOT = "http://localhost:8080"
+const SERVICE_ROOT =  process.env.NUXT_MEDIUM_SERVICE_ROOT || 'http://localhost:8080'
 //import type { PhotoDto } from './types/PhotoDto'
 //https://nuxt.com/docs/getting-started/state-management
-export const useUploadStore = defineStore({
-  id: "upload-store",
-  state: () => {
+
+export interface MediumState {
+  media: File[]
+  mediaAreLoading: boolean
+  errorMessage: string | null
+}
+
+export const useMediumStore = defineStore('medium-store',{
+  state: ():MediumState => {
     return {
-    files: [] as File[],
+      media: [] as File[],
+      mediaAreLoading: false as boolean,
+      errorMessage: null
+      
   }
   },
   actions: {
-    async uploadPhoto(medium: File) {
+    /**
+     * Upload a file to the backend
+     * @param medium - the file to upload
+     */
+    async uploadMedium(medium: File): Promise<void> {
       try {
  
       const UPLOAD_PHOTO_URL = SERVICE_ROOT + '/media'
@@ -28,8 +41,8 @@ export const useUploadStore = defineStore({
       
         console.log(JSON.stringify(response))
       } catch (error) {
-        
-        console.error('error while uploading photo', error)
+        this.handleError(error, 'uploadMedium')
+        throw error
         
       }
     },
@@ -44,10 +57,53 @@ export const useUploadStore = defineStore({
         });
         return response
       } catch (error: unknown) {
-        if(error instanceof Error) console.error('error while getting photo', error.message)
+        this.handleError(error, 'getMedium')
         throw error
       }
-    }
+    },
+
+    async getMediumUrls(): Promise<Array<string>>{
+      const GET_MEDIUM_URL = SERVICE_ROOT + '/media'
+      try {
+        const response = await $fetch<Array<string>>(GET_MEDIUM_URL, {
+          method: "GET",     
+        });
+        return response
+      } catch (error: unknown) {
+        this.handleError(error, 'getMediumUrls')
+        throw error
+      }
+    },
+
+    async getMedia(): Promise<void>{
+
+      try {
+        const mediumUrls = await this.getMediumUrls();
+        const fetchPromises = mediumUrls.map(url =>
+          $fetch<File>(url, { method: 'GET' })
+        )
+        const files = await Promise.all(fetchPromises)
+        this.media = files
+
+      } catch (error: unknown) {
+        this.handleError(error, 'getMedia')
+        throw error
+      }
+    },
+     /**
+     * Gère les erreurs en les enregistrant dans l'état et en les loggant.
+     * @param error - L'erreur capturée.
+     * @param action - L'action où l'erreur s'est produite.
+     */
+    handleError(error: unknown, action: string): void {
+      if (error instanceof Error) {
+        console.error(`Erreur dans ${action}:`, error.message)
+        this.errorMessage = `Erreur dans ${action}: ${error.message}`
+      } else {
+        console.error(`Erreur inconnue dans ${action}:`, error)
+        this.errorMessage = `Erreur inconnue dans ${action}`
+      }
+    },
 
 
   },
