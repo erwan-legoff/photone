@@ -3,8 +3,8 @@
 <template>
   <v-container>
     <div>
-      <h1>Salut ! Tu es sur la première page de erwan</h1>
-      <p>Ici tu vas pouvoir uploader une image</p>
+      <h1>Photos</h1>
+      <p>Choose a file to upload to your private space</p>
       <div>
         <v-row>
           <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" />
