@@ -16,8 +16,8 @@
       </div>
       <v-row>
         <v-col v-for="medium in media" :key="medium.name" cols="12" sm="6" md="4">
-          <v-card flat tile>
-            <v-img :src="createURL(medium)" aspect-ratio="1" class="white--text align-end" height="200">
+          <v-card tile>
+            <v-img :src="createURL(medium)">
               <!-- Vous pouvez ajouter du contenu overlay ici si nécessaire -->
             </v-img>
           </v-card>
