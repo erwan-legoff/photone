@@ -12,13 +12,17 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@nuxt/eslint": "^0.3.13",
     "@nuxt/image": "^1.7.0",
     "@pinia/nuxt": "^0.5.1",
-    "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2",
-    "vuetify-nuxt-module": "^0.14.1"
+    "vue-router": "^4.3.2"
+  },
+  "devDependencies": {
+    "nuxt": "^3.14.159",
+    "vite-plugin-vuetify": "^2.0.4",
+    "vuetify": "^3.7.4"
   }
 }
