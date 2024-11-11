@@ -25,13 +25,6 @@
           </v-col>
         </v-row>
       </div>
-
-
-
-
-
-
-
     </v-container>
   </div>
 </template>
