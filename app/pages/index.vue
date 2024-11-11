@@ -19,7 +19,11 @@
           <v-col v-for="medium in media" :key="medium.name" cols="12" sm="6" md="4">
             <v-card tile>
               <v-img :src="createURL(medium)">
-                <!-- Vous pouvez ajouter du contenu overlay ici si nécessaire -->
+                <template #placeholder>
+                  <div class="d-flex align-center justify-center fill-height">
+                    <v-progress-circular color="grey-lighten-4" indeterminate />
+                  </div>
+                </template>
               </v-img>
             </v-card>
           </v-col>
