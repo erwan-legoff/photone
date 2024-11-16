@@ -12,6 +12,11 @@
 
             </v-btn>
           </v-row>
+          <v-row>
+            <v-text-field v-model="password" label="Password" placeholder="Enter your password"
+              :type="passwordVisible ? 'text' : 'password'" clearable
+              :append-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'" @click:append="togglePasswordVisibility" />
+          </v-row>
         </div>
         <v-row>
           <v-col v-for="medium in media" :key="medium.name" cols="12" sm="6" md="4">
@@ -40,7 +45,12 @@ import { useMediumStore } from '~/stores/mediumStore'
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
 const media = computed(() => mediumStore.media)
+const password = ref('')
+const passwordVisible = ref(false);
 
+const togglePasswordVisibility = () => {
+  passwordVisible.value = !passwordVisible.value;
+}
 const upload = async () => {
   console.log("let's upload")
   if (!mediumToUpload.value) return console.log("photos is undefined or null")
