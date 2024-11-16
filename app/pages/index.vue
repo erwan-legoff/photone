@@ -2,8 +2,8 @@
   <div class="full-page-background">
     <v-container>
       <div>
-        <h1 class="text-h1">Photos</h1>
-        <p>Choose a file to upload to your private space</p>
+        <h1 class="text-h2">Photos</h1>
+        <p class="text-subtitle-1 mb-5">Choose a file to upload to your private space</p>
         <div>
           <v-row>
             <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" />
@@ -33,7 +33,10 @@
 
 <script setup lang="ts">
 import { useMediumStore } from '~/stores/mediumStore'
-
+// import crypto from 'node:crypto'
+// const mediumStore = useMediumStore()
+// const key = crypto.randomBytes(32)
+// const iv = crypto.randomBytes(16)
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
 const media = computed(() => mediumStore.media)
@@ -63,6 +66,15 @@ onMounted(() => {
   downloadAll()
 })
 
+
+// const encrypt = (textToEncrypt: string) => {
+
+//   const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.from(key), iv)
+//   const encryptedText = cipher.update(textToEncrypt)
+//   const finalEncryptedText = Buffer.concat([encryptedText, cipher.final()]);
+//   return { iv: iv.toString('hex'), encryptedData: finalEncryptedText.toString('hex') };
+
+// }
 
 
 
