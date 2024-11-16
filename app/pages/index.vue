@@ -1,10 +1,8 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications
-//https://image.nuxt.com/usage/nuxt-img
 <template>
   <div class="full-page-background">
     <v-container>
       <div>
-        <h1>Photos</h1>
+        <h1 class="text-h1">Photos</h1>
         <p>Choose a file to upload to your private space</p>
         <div>
           <v-row>
@@ -34,10 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import { useMediumStore } from '~/stores/uploadStore'
+import { useMediumStore } from '~/stores/mediumStore'
+
 const mediumStore = useMediumStore()
-
-
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
 const media = computed(() => mediumStore.media)
 
@@ -66,8 +63,6 @@ onMounted(() => {
   downloadAll()
 })
 
-
-//
 
 
 
