@@ -64,6 +64,7 @@
                 color="primary"
                 class="mt-4"
                 size="large"
+                @click="submit"
               >
                 Submit
               </v-btn>
@@ -73,7 +74,10 @@
       </v-sheet>
     </v-container>
   </template>
-<script setup>
+<script setup lang="ts">
+import type { CreateUserRequestDto } from '~/stores/types/CreateUserRequestDto'
+import { useUserStore } from '~/stores/userStore'
+
 const firstName = ref('')
 const lastName = ref('')
 const pseudo = ref('')
@@ -81,5 +85,17 @@ const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 
+const createUserDto = computed<CreateUserRequestDto>(() => ({
+  pseudo: pseudo.value,
+  email: email.value,
+  rawPassword: password.value,
+  name: firstName.value,
+  lastName: lastName.value
+}))
+const userStore = useUserStore()
+const submit = async () => {
+  console.log("SUBMIT")
+  userStore.createUser(createUserDto.value)
+}
 
 </script>
