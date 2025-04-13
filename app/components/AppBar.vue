@@ -11,6 +11,13 @@
 
         <v-btn icon>
             <v-icon>mdi-account</v-icon>
+            <v-menu activator="parent" location="bottom" transition="slide-x-reverse-transition">
+                <v-list>
+                    <v-list-item @click="navigateTo('/sign-up')">
+                        <v-list-item-title> Sign Up </v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
         </v-btn>
     </v-app-bar>
 </template>
