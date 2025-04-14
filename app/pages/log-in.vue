@@ -4,7 +4,7 @@
             <v-form @submit.prevent="submit">
                 <v-row dense>
                     <v-col cols="12">
-                        <v-text-field v-model="email" label="Email" variant="outlined" color="primary" clearable />
+                        <v-text-field v-model="pseudo" label="Pseudo" variant="outlined" color="primary" />
                     </v-col>
 
                     <v-col cols="12">
@@ -25,19 +25,15 @@
     </v-container>
 </template>
 <script setup lang="ts">
-import type { CreateUserRequestDto } from '~/stores/types/CreateUserRequestDto'
 import type { LoginDto } from '~/stores/types/LoginDto'
 import { useUserStore } from '~/stores/userStore'
 
-const firstName = ref('')
-const lastName = ref('')
 const pseudo = ref('')
-const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 
 const loginDto = computed<LoginDto>(() => ({
-    username: email.value,
+    username: pseudo.value,
     password: password.value
 }))
 const userStore = useUserStore()
