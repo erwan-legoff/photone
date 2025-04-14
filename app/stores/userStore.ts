@@ -33,10 +33,6 @@ export const useUserStore = defineStore("user-store", {
         const response = await $fetch(CREATE_USER_URL, {
           method: "POST",
           body: user,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
           credentials: "include",
         });
         notificationStore.notifySuccess("Account created successfully !");
@@ -57,10 +53,6 @@ export const useUserStore = defineStore("user-store", {
         const response = await $fetch<JwtLoginResponseDto>(LOGIN_URL, {
           method: "POST",
           body: login,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
           credentials: "include",
         });
         this.checking = false;

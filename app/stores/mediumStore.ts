@@ -9,7 +9,6 @@ const SERVICE_ROOT =
 export interface MediumState {
   media: File[];
   mediaAreLoading: boolean;
-  errorMessage: string | null;
 }
 
 export const useMediumStore = defineStore("medium-store", {
@@ -17,7 +16,6 @@ export const useMediumStore = defineStore("medium-store", {
     return {
       media: [] as File[],
       mediaAreLoading: false as boolean,
-      errorMessage: null,
     };
   },
   actions: {
@@ -31,11 +29,11 @@ export const useMediumStore = defineStore("medium-store", {
         const UPLOAD_PHOTO_URL = SERVICE_ROOT + "/media";
         const formData = new FormData();
         formData.append("medium", medium);
-        console.log("formData", JSON.stringify(formData));
 
         const response = await $fetch(UPLOAD_PHOTO_URL, {
           method: "POST",
           body: formData,
+          credentials: "include",
         });
 
         notificationStore.notifySuccess("File uploaded successfully!");
@@ -66,6 +64,7 @@ export const useMediumStore = defineStore("medium-store", {
       try {
         const response = await $fetch<Array<string>>(GET_MEDIUM_URL, {
           method: "GET",
+          credentials: "include",
         });
         return response;
       } catch (error: unknown) {
@@ -79,7 +78,7 @@ export const useMediumStore = defineStore("medium-store", {
       try {
         const mediumUrls = await this.fetchMediumUrls();
         const fetchPromises = mediumUrls.map((url) =>
-          $fetch<File>(url, { method: "GET" })
+          $fetch<File>(url, { method: "GET", credentials: "include" })
         );
         const files = await Promise.all(fetchPromises);
         this.media = files;
