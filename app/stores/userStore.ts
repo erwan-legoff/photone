@@ -3,65 +3,69 @@ import { defineStore } from "pinia";
 import type { CreateUserRequestDto } from "./types/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";
 import type { JwtLoginResponseDto } from "./types/responses/JwtLoginResponseDto";
-const SERVICE_ROOT =
-  process.env.NUXT_MEDIUM_SERVICE_ROOT || "http://localhost:8080";
-
-export interface UserState {
-  checking: boolean;
-  errorMessage: string | null;
-}
 import { useNotificationStore } from "@/stores/notificationStore";
 
 export const useUserStore = defineStore("user-store", {
-  state: (): UserState => {
+  state: () => {
     return {
-      checking: false,
-      errorMessage: null,
+      isAuthenticated: false as boolean,
     };
   },
   actions: {
-    /**
-     * Create user
-     * @param user - the user to create
-     */
-    async createUser(user: CreateUserRequestDto): Promise<void> {
+    async login(loginDto: LoginDto): Promise<void> {
       const notificationStore = useNotificationStore();
-      try {
-        this.checking = true;
-        const CREATE_USER_URL = SERVICE_ROOT + "/user";
+      const { $api } = useNuxtApp();
 
-        const response = await $fetch(CREATE_USER_URL, {
+      try {
+        const response = await $api<JwtLoginResponseDto>("api/auth/login", {
           method: "POST",
-          body: user,
-          credentials: "include",
+          body: loginDto,
         });
-        notificationStore.notifySuccess("Account created successfully !");
-        this.checking = false;
+
+        this.isAuthenticated = true;
+        notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
-        notificationStore.handleError(error, "createUser");
-        this.checking = false;
+        notificationStore.handleError(error, "login");
         throw error;
       }
     },
 
-    async login(login: LoginDto) {
+    async createUser(
+      createUserRequestDto: CreateUserRequestDto
+    ): Promise<void> {
       const notificationStore = useNotificationStore();
-      try {
-        this.checking = true;
-        const LOGIN_URL = SERVICE_ROOT + "/api/auth/login";
+      const { $api } = useNuxtApp();
 
-        const response = await $fetch<JwtLoginResponseDto>(LOGIN_URL, {
+      try {
+        await $api("/user", {
           method: "POST",
-          body: login,
-          credentials: "include",
+          body: createUserRequestDto,
         });
-        this.checking = false;
-        notificationStore.notifySuccess("Connected successfully !");
+        notificationStore.notifySuccess("Account created successfully!");
       } catch (error) {
         notificationStore.handleError(error, "createUser");
-        this.checking = false;
         throw error;
       }
+    },
+
+    async logout(): Promise<void> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        await $api("/logout", {
+          method: "POST",
+        });
+        this.isAuthenticated = false;
+        notificationStore.notifySuccess("Successfully logged out!");
+      } catch (error) {
+        notificationStore.handleError(error, "logout");
+        throw error;
+      }
+    },
+
+    isUserAuthenticated(): boolean {
+      return this.isAuthenticated;
     },
   },
 });

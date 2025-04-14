@@ -25,15 +25,15 @@ export const useMediumStore = defineStore("medium-store", {
      */
     async uploadMedium(medium: File): Promise<void> {
       const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
       try {
-        const UPLOAD_PHOTO_URL = SERVICE_ROOT + "/media";
         const formData = new FormData();
         formData.append("medium", medium);
 
-        const response = await $fetch(UPLOAD_PHOTO_URL, {
+        await $api("/media", {
           method: "POST",
           body: formData,
-          credentials: "include",
         });
 
         notificationStore.notifySuccess("File uploaded successfully!");
@@ -45,9 +45,10 @@ export const useMediumStore = defineStore("medium-store", {
 
     async fetchMedium(getMediumDto: GetMediumDto): Promise<File> {
       const notificationStore = useNotificationStore();
-      const GET_MEDIUM_URL = SERVICE_ROOT + "/medium";
+      const { $api } = useNuxtApp();
+
       try {
-        const response = await $fetch<File>(GET_MEDIUM_URL, {
+        const response = await $api<File>("/medium", {
           method: "GET",
           params: getMediumDto,
         });
@@ -60,11 +61,11 @@ export const useMediumStore = defineStore("medium-store", {
 
     async fetchMediumUrls(): Promise<Array<string>> {
       const notificationStore = useNotificationStore();
-      const GET_MEDIUM_URL = SERVICE_ROOT + "/media";
+      const { $api } = useNuxtApp();
+
       try {
-        const response = await $fetch<Array<string>>(GET_MEDIUM_URL, {
+        const response = await $api<Array<string>>("/media", {
           method: "GET",
-          credentials: "include",
         });
         return response;
       } catch (error: unknown) {
@@ -75,10 +76,12 @@ export const useMediumStore = defineStore("medium-store", {
 
     async fetchMedia(): Promise<void> {
       const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
       try {
         const mediumUrls = await this.fetchMediumUrls();
         const fetchPromises = mediumUrls.map((url) =>
-          $fetch<File>(url, { method: "GET", credentials: "include" })
+          $api<File>(url, { method: "GET" })
         );
         const files = await Promise.all(fetchPromises);
         this.media = files;
@@ -87,11 +90,13 @@ export const useMediumStore = defineStore("medium-store", {
         throw error;
       }
     },
+
     getMedia() {
       return this.media;
     },
+
     isMediaLoading() {
-      return this.isMediaLoading;
+      return this.mediaAreLoading;
     },
   },
 });
