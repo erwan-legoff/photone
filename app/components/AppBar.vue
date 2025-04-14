@@ -16,6 +16,9 @@
                     <v-list-item @click="navigateTo('/sign-up')">
                         <v-list-item-title> Sign Up </v-list-item-title>
                     </v-list-item>
+                    <v-list-item @click="navigateTo('/log-in')">
+                        <v-list-item-title> Log In </v-list-item-title>
+                    </v-list-item>
                 </v-list>
             </v-menu>
         </v-btn>

@@ -1,24 +1,24 @@
 //https://pinia.vuejs.org/core-concepts/state.html
-import { defineStore } from 'pinia'
-import type { GetMediumDto } from './types/GetMediumDto';
-const SERVICE_ROOT =  process.env.NUXT_MEDIUM_SERVICE_ROOT || 'http://localhost:8080'
+import { defineStore } from "pinia";
+import type { GetMediumDto } from "./types/GetMediumDto";
+const SERVICE_ROOT =
+  process.env.NUXT_MEDIUM_SERVICE_ROOT || "http://localhost:8080";
 //import type { PhotoDto } from './types/PhotoDto'
 //https://nuxt.com/docs/getting-started/state-management
 
 export interface MediumState {
-  media: File[]
-  mediaAreLoading: boolean
-  errorMessage: string | null
+  media: File[];
+  mediaAreLoading: boolean;
+  errorMessage: string | null;
 }
 
-export const useMediumStore = defineStore('medium-store',{
-  state: ():MediumState => {
+export const useMediumStore = defineStore("medium-store", {
+  state: (): MediumState => {
     return {
       media: [] as File[],
       mediaAreLoading: false as boolean,
-      errorMessage: null
-      
-  }
+      errorMessage: null,
+    };
   },
   actions: {
     /**
@@ -26,91 +26,73 @@ export const useMediumStore = defineStore('medium-store',{
      * @param medium - the file to upload
      */
     async uploadMedium(medium: File): Promise<void> {
+      const notificationStore = useNotificationStore();
       try {
- 
-      const UPLOAD_PHOTO_URL = SERVICE_ROOT + '/media'
-      const formData = new FormData();
-      formData.append("medium", medium);
-      console.log('formData', JSON.stringify(formData))
-      
-      const response = await $fetch(UPLOAD_PHOTO_URL, {
+        const UPLOAD_PHOTO_URL = SERVICE_ROOT + "/media";
+        const formData = new FormData();
+        formData.append("medium", medium);
+        console.log("formData", JSON.stringify(formData));
+
+        const response = await $fetch(UPLOAD_PHOTO_URL, {
           method: "POST",
           body: formData,
         });
-      
-      
-        console.log(JSON.stringify(response))
+
+        notificationStore.notifySuccess("File uploaded successfully!");
       } catch (error) {
-        this.handleError(error, 'uploadMedium')
-        throw error
-        
+        notificationStore.handleError(error, "uploadMedium");
+        throw error;
       }
     },
 
-    async fetchMedium(getMediumDto: GetMediumDto): Promise<File>{
-      const GET_MEDIUM_URL = SERVICE_ROOT + '/medium'
+    async fetchMedium(getMediumDto: GetMediumDto): Promise<File> {
+      const notificationStore = useNotificationStore();
+      const GET_MEDIUM_URL = SERVICE_ROOT + "/medium";
       try {
         const response = await $fetch<File>(GET_MEDIUM_URL, {
           method: "GET",
-          params:getMediumDto
-     
+          params: getMediumDto,
         });
-        return response
+        return response;
       } catch (error: unknown) {
-        this.handleError(error, 'getMedium')
-        throw error
+        notificationStore.handleError(error, "getMedium");
+        throw error;
       }
     },
 
-    async fetchMediumUrls(): Promise<Array<string>>{
-      const GET_MEDIUM_URL = SERVICE_ROOT + '/media'
+    async fetchMediumUrls(): Promise<Array<string>> {
+      const notificationStore = useNotificationStore();
+      const GET_MEDIUM_URL = SERVICE_ROOT + "/media";
       try {
         const response = await $fetch<Array<string>>(GET_MEDIUM_URL, {
-          method: "GET",     
+          method: "GET",
         });
-        return response
+        return response;
       } catch (error: unknown) {
-        this.handleError(error, 'getMediumUrls')
-        throw error
+        notificationStore.handleError(error, "getMediumUrls");
+        throw error;
       }
     },
 
-    async fetchMedia(): Promise<void>{
-
+    async fetchMedia(): Promise<void> {
+      const notificationStore = useNotificationStore();
       try {
         const mediumUrls = await this.fetchMediumUrls();
-        const fetchPromises = mediumUrls.map(url =>
-          $fetch<File>(url, { method: 'GET' })
-        )
-        const files = await Promise.all(fetchPromises)
-        this.media = files
-
+        const fetchPromises = mediumUrls.map((url) =>
+          $fetch<File>(url, { method: "GET" })
+        );
+        const files = await Promise.all(fetchPromises);
+        this.media = files;
       } catch (error: unknown) {
-        this.handleError(error, 'getMedia')
-        throw error
+        notificationStore.handleError(error, "getMedia");
+        throw error;
       }
     },
     getMedia() {
-      return this.media
+      return this.media;
     },
     isMediaLoading() {
-      return this.isMediaLoading
+      return this.isMediaLoading;
     },
-     /**
-     * Gère les erreurs en les enregistrant dans l'état et en les loggant.
-     * @param error - L'erreur capturée.
-     * @param action - L'action où l'erreur s'est produite.
-     */
-    handleError(error: unknown, action: string): void {
-      if (error instanceof Error) {
-        console.error(`Erreur dans ${action}:`, error.message)
-        this.errorMessage = `Erreur dans ${action}: ${error.message}`
-      } else {
-        console.error(`Erreur inconnue dans ${action}:`, error)
-        this.errorMessage = `Erreur inconnue dans ${action}`
-      }
-    },
-
-
   },
-})
+});
