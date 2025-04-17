@@ -1,4 +1,4 @@
-//https://pinia.vuejs.org/core-concepts/state.html
+
 import { defineStore } from "pinia";
 import type { CreateUserRequestDto } from "./types/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";

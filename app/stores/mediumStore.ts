@@ -1,10 +1,5 @@
-//https://pinia.vuejs.org/core-concepts/state.html
 import { defineStore } from "pinia";
 import type { GetMediumDto } from "./types/GetMediumDto";
-const SERVICE_ROOT =
-  process.env.NUXT_MEDIUM_SERVICE_ROOT || "http://localhost:8080";
-//import type { PhotoDto } from './types/PhotoDto'
-//https://nuxt.com/docs/getting-started/state-management
 
 export interface MediumState {
   media: File[];
