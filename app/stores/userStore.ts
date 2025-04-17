@@ -1,4 +1,3 @@
-
 import { defineStore } from "pinia";
 import type { CreateUserRequestDto } from "./types/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";
@@ -21,10 +20,10 @@ export const useUserStore = defineStore("user-store", {
           method: "POST",
           body: loginDto,
         });
-
         this.isAuthenticated = true;
         notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
+        this.isAuthenticated = false;
         notificationStore.handleError(error, "login");
         throw error;
       }
