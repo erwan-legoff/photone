@@ -8,10 +8,10 @@ export default defineNuxtPlugin((app) => {
     dark: true,
     colors: {
       background: '#041229',
-      surface: '#5379b8',
-      // primary: '#6200EE',
+      surface: '#4870b0',
+      primary: '#1e4a9c',
       'primary-darken-1': '#3700B3',
-      // secondary: '#03DAC6',
+      secondary: '#03DAC6',
       // 'secondary-darken-1': '#018786',
       // error: '#B00020',
       // info: '#2196F3',
