@@ -26,7 +26,7 @@ export const useMediumStore = defineStore("medium-store", {
         const formData = new FormData();
         formData.append("medium", medium);
 
-        await $api("/media", {
+        await $api("/medium", {
           method: "POST",
           body: formData,
         });
@@ -34,11 +34,10 @@ export const useMediumStore = defineStore("medium-store", {
         notificationStore.notifySuccess("File uploaded successfully!");
       } catch (error) {
         notificationStore.handleError(error, "uploadMedium");
-        throw error;
       }
     },
 
-    async fetchMedium(getMediumDto: GetMediumDto): Promise<File> {
+    async fetchMedium(getMediumDto: GetMediumDto): Promise<File | null> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
 
@@ -50,7 +49,7 @@ export const useMediumStore = defineStore("medium-store", {
         return response;
       } catch (error: unknown) {
         notificationStore.handleError(error, "getMedium");
-        throw error;
+        return null;
       }
     },
 
@@ -65,16 +64,21 @@ export const useMediumStore = defineStore("medium-store", {
         return response;
       } catch (error: unknown) {
         notificationStore.handleError(error, "getMediumUrls");
-        throw error;
+        return [];
       }
     },
 
+    /**
+     * Will fetch all media
+     */
     async fetchMedia(): Promise<void> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
 
       try {
+        // We start by fetching all URLS
         const mediumUrls = await this.fetchMediumUrls();
+        // We then fetch all images at once in parallel
         const fetchPromises = mediumUrls.map((url) =>
           $api<File>(url, { method: "GET" })
         );
@@ -82,7 +86,6 @@ export const useMediumStore = defineStore("medium-store", {
         this.media = files;
       } catch (error: unknown) {
         notificationStore.handleError(error, "getMedia");
-        throw error;
       }
     },
 

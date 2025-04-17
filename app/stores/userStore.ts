@@ -25,7 +25,7 @@ export const useUserStore = defineStore("user-store", {
       } catch (error) {
         this.isAuthenticated = false;
         notificationStore.handleError(error, "login");
-        throw error;
+        // On ne relance pas l'erreur
       }
     },
 
@@ -43,7 +43,7 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.notifySuccess("Account created successfully!");
       } catch (error) {
         notificationStore.handleError(error, "createUser");
-        throw error;
+        // On ne relance pas l'erreur
       }
     },
 
@@ -59,7 +59,7 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.notifySuccess("Successfully logged out!");
       } catch (error) {
         notificationStore.handleError(error, "logout");
-        throw error;
+        // On ne relance pas l'erreur
       }
     },
 

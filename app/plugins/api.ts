@@ -5,10 +5,6 @@ export default defineNuxtPlugin(async () => {
   const apiFetch = $fetch.create({
     baseURL: service_root,
     credentials: "include",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
   });
 
   return {
