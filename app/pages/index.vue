@@ -35,33 +35,18 @@ const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
 const media = computed(() => mediumStore.media)
 
-const uploadOne = async () => {
-  console.log("let's upload")
-  if (!mediumToUpload.value) return console.log('photos is undefined or null')
-  if ((mediumToUpload.value as Array<File>).length)
-    return console.log('this is an array')
-  console.log('everything seems ok')
-  const photoFile = mediumToUpload.value as File
-
-  await mediumStore.uploadMedium(photoFile)
-  downloadAll()
-}
-
 const uploadMany = async () => {
-
-  if (!mediumToUpload.value) return console.log('photos is undefined or null')
+  const notificationStore = useNotificationStore()
+  if (!mediumToUpload.value) notificationStore.notifyError("Something went wrong when selecting the photo(s).")
   if (!Array.isArray(mediumToUpload.value)) {
-    console.log('this is not an array')
     return await mediumStore.uploadMedia([mediumToUpload.value as File])
   }
   if ((mediumToUpload.value as File[]).length) {
-    console.log('this is an array')
     return await mediumStore.uploadMedia(mediumToUpload.value as File[])
   }
 }
 
 const downloadAll = async () => {
-  console.log('lets download')
   mediumStore.fetchMedia()
 }
 

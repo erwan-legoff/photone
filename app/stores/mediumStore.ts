@@ -14,30 +14,9 @@ export const useMediumStore = defineStore("medium-store", {
     };
   },
   actions: {
-    /**
-     * Upload a file to the backend
-     * @param medium - the file to upload
-     */
-    async uploadMedium(medium: File): Promise<void> {
-      const notificationStore = useNotificationStore();
-      const { $api } = useNuxtApp();
-
-      try {
-        const formData = new FormData();
-        formData.append("medium", medium);
-
-        await $api("/medium", {
-          method: "POST",
-          body: formData,
-        });
-
-        notificationStore.notifySuccess("File uploaded successfully!");
-      } catch (error) {
-        notificationStore.handleError(error, "uploadMedium");
-      }
-    },
     async uploadMedia(media: File[]): Promise<void> {
       const notificationStore = useNotificationStore();
+      notificationStore.notifyInfo("uploading" + media.length + "photos");
       const { $api } = useNuxtApp();
       try {
         const formData = new FormData();
@@ -50,6 +29,7 @@ export const useMediumStore = defineStore("medium-store", {
           method: "POST",
           body: formData,
         });
+        notificationStore.notifySuccess(media.length + "photos uploaded !");
       } catch (error) {
         notificationStore.handleError(error, "getMedium");
       }
@@ -57,6 +37,7 @@ export const useMediumStore = defineStore("medium-store", {
 
     async fetchMedium(getMediumDto: GetMediumDto): Promise<File | null> {
       const notificationStore = useNotificationStore();
+
       const { $api } = useNuxtApp();
 
       try {
@@ -91,6 +72,7 @@ export const useMediumStore = defineStore("medium-store", {
      */
     async fetchMedia(): Promise<void> {
       const notificationStore = useNotificationStore();
+      notificationStore.notifyInfo("downloading photos...");
       const { $api } = useNuxtApp();
 
       try {
