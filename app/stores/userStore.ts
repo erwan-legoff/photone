@@ -59,9 +59,5 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.handleError(error, "logout");
       }
     },
-
-    isUserAuthenticated(): boolean {
-      return this.isAuthenticated;
-    },
   },
 });
