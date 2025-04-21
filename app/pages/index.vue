@@ -7,7 +7,7 @@
         <div>
           <v-row>
             <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" :multiple="true" />
-            <v-btn @click="uploadMany"> upload </v-btn>
+            <v-btn @click="uploadMany" :disabled="!canUpload"> upload </v-btn>
           </v-row>
         </div>
         <v-row>
@@ -33,6 +33,13 @@ import { useMediumStore } from '~/stores/mediumStore'
 
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
+const canUpload = computed(() => {
+  if (!mediumToUpload.value) return false
+  if (Array.isArray(mediumToUpload.value)) {
+    return mediumToUpload.value.length > 0
+  }
+  return true
+})
 const media = computed(() => mediumStore.media)
 
 const uploadMany = async () => {
