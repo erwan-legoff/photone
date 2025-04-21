@@ -1,6 +1,7 @@
 <template>
   <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
     <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
+      <h1 class="mb-6">Create your account</h1>
       <v-form @submit.prevent="submit">
         <v-row dense>
           <v-col cols="6">
