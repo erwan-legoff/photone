@@ -37,7 +37,7 @@ const media = computed(() => mediumStore.media)
 
 const uploadMany = async () => {
   const notificationStore = useNotificationStore()
-  if (!mediumToUpload.value) notificationStore.notifyError("Something went wrong when selecting the photo(s).")
+  if (!mediumToUpload.value) return notificationStore.notifyError("Something went wrong when selecting the photo(s).")
   if (!Array.isArray(mediumToUpload.value)) {
     return await mediumStore.uploadMedia([mediumToUpload.value as File])
   }
