@@ -30,6 +30,7 @@ export const useMediumStore = defineStore("medium-store", {
           body: formData,
         });
         notificationStore.notifySuccess(media.length + "photos uploaded !");
+        await this.fetchMedia();
       } catch (error) {
         notificationStore.handleError(error, "getMedium");
       }
