@@ -7,7 +7,7 @@ import { useNotificationStore } from "@/stores/notificationStore";
 export const useUserStore = defineStore("user-store", {
   state: () => {
     return {
-      isAuthenticated: false as boolean,
+      isLogged: false,
     };
   },
   actions: {
@@ -20,10 +20,10 @@ export const useUserStore = defineStore("user-store", {
           method: "POST",
           body: loginDto,
         });
-        this.isAuthenticated = true;
+        this.isLogged = true;
         notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
-        this.isAuthenticated = false;
+        this.isLogged = false;
         notificationStore.handleError(error, "login");
       }
     },
@@ -53,7 +53,7 @@ export const useUserStore = defineStore("user-store", {
         await $api("/logout", {
           method: "POST",
         });
-        this.isAuthenticated = false;
+        this.isLogged = false;
         notificationStore.notifyInfo("Successfully logged out!");
       } catch (error) {
         notificationStore.handleError(error, "logout");
