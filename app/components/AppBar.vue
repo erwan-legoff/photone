@@ -33,7 +33,6 @@
 </template>
 <script setup lang="ts">
 const userStore = useUserStore()
-const notificationStore = useNotificationStore()
 
 
 const logout = () => {
