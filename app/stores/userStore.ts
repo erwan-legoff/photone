@@ -54,10 +54,11 @@ export const useUserStore = defineStore("user-store", {
           method: "POST",
         });
         this.isAuthenticated = false;
-        notificationStore.notifySuccess("Successfully logged out!");
+        notificationStore.notifyInfo("Successfully logged out!");
       } catch (error) {
         notificationStore.handleError(error, "logout");
       }
     },
   },
+  persist: true,
 });
