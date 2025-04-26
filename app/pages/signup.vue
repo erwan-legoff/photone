@@ -56,7 +56,9 @@ const createUserDto = computed<CreateUserRequestDto>(() => ({
 }))
 const userStore = useUserStore()
 const submit = async () => {
-  userStore.createUser(createUserDto.value)
+  const isUserCreated: boolean = await userStore.createUser(createUserDto.value)
+  if (isUserCreated) userStore.sendValidationEmail()
+
 }
 
 </script>

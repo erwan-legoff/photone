@@ -7,6 +7,7 @@ import { useNotificationStore } from "@/stores/notificationStore";
 export const useUserStore = defineStore("user-store", {
   state: () => {
     return {
+      email: "",
       isLogged: false,
     };
   },
@@ -22,6 +23,7 @@ export const useUserStore = defineStore("user-store", {
         });
         this.isLogged = true;
         notificationStore.notifySuccess("Successfully logged in!");
+        this.email = loginDto.email;
       } catch (error) {
         this.isLogged = false;
         notificationStore.handleError(error, "login");
@@ -30,7 +32,7 @@ export const useUserStore = defineStore("user-store", {
 
     async createUser(
       createUserRequestDto: CreateUserRequestDto
-    ): Promise<void> {
+    ): Promise<boolean> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
 
@@ -40,8 +42,11 @@ export const useUserStore = defineStore("user-store", {
           body: createUserRequestDto,
         });
         notificationStore.notifySuccess("Account created successfully!");
+        this.email = createUserRequestDto.email;
+        return true;
       } catch (error) {
         notificationStore.handleError(error, "createUser");
+        return false;
       }
     },
 
@@ -57,6 +62,26 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.notifyInfo("Successfully logged out!");
       } catch (error) {
         notificationStore.handleError(error, "logout");
+      }
+    },
+    async sendValidationEmail(): Promise<void> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        if (!this.email) {
+          notificationStore.notifyError("Email Required !");
+          return;
+        }
+        await $api("/api/auth/send-verification-email", {
+          method: "GET",
+          params: {
+            email: this.email,
+          },
+        });
+        notificationStore.notifySuccess("Verification email sent!");
+      } catch (error) {
+        notificationStore.handleError(error, "sendValidationEmail");
       }
     },
   },
