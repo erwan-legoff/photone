@@ -39,7 +39,8 @@ const loginDto = computed<LoginDto>(() => ({
 }))
 const userStore = useUserStore()
 const submit = async () => {
-    userStore.login(loginDto.value)
+    await userStore.login(loginDto.value)
+    navigateTo("/photos")
 }
 
 </script>
