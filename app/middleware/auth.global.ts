@@ -1,6 +1,12 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const userStore = useUserStore();
-  if (to.name === "login" || to.name === "signup") return;
+  const whiteList = [
+    "login",
+    "signup",
+    "mail-verification",
+    "account-validated",
+  ];
+  if (whiteList.includes(to.name?.toString() || "undefined")) return;
   if (!userStore.isLogged) {
     return navigateTo({ name: "login" });
   }
