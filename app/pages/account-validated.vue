@@ -1,7 +1,7 @@
 <template>
     <v-container class="py-10">
         <v-sheet class="text-center mx-auto pa-6" elevation="12" max-width="600" rounded="lg" width="100%">
-            <!-- === ÉTAT : LOADING === -->
+            <!-- LOADING  -->
             <template v-if="status === 'loading'">
                 <v-progress-circular indeterminate color="primary" size="64" class="mb-6" />
                 <h2 class="text-h5 mb-4">Checking your validation link…</h2>
@@ -10,7 +10,7 @@
                 </p>
             </template>
 
-            <!-- === ÉTAT : SUCCESS === -->
+            <!-- SUCCESS -->
             <template v-else-if="status === 'success'">
                 <v-icon class="mb-6" icon="mdi-check-circle" size="112" color="success" />
                 <h2 class="text-h5 font-weight-bold mb-4">Account validated!</h2>
@@ -18,7 +18,7 @@
                 <v-btn color="primary" @click="navigateTo('/login')">Log in</v-btn>
             </template>
 
-            <!-- === ÉTAT : ERROR === -->
+            <!-- ERROR -->
             <template v-else>
                 <v-icon class="mb-6" icon="mdi-alert" size="112" color="error" />
                 <h2 class="text-h5 font-weight-bold mb-4">Oops… something went wrong</h2>
