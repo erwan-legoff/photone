@@ -57,7 +57,7 @@ const createUserDto = computed<CreateUserRequestDto>(() => ({
 const userStore = useUserStore()
 const submit = async () => {
   const isUserCreated: boolean = await userStore.createUser(createUserDto.value)
-  if (isUserCreated) userStore.sendValidationEmail()
+  if (isUserCreated) navigateTo("/mail-verification")
 
 }
 

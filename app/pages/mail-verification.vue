@@ -2,15 +2,13 @@
     <v-container class="py-8">
         <v-sheet class="text-center mx-auto pa-6" elevation="10" max-width="500" rounded="xl" width="100%">
 
-            <!-- Icon -->
+
             <v-icon class="mb-6" color="secondary" size="96" icon="mdi-email-alert" />
 
-            <!-- Title -->
             <h2 class="text-h5 font-weight-bold mb-4">
                 Confirm your email address
             </h2>
 
-            <!-- Short instruction -->
             <p :class="['text-body-1', 'mb-8']">
                 We sent you a confirmation email. Please click the link inside.
             </p>
@@ -21,7 +19,6 @@
                 {{ secondCounter }}
             </h1>
 
-            <!-- Please wait (only when countdown > 0) -->
             <h4 v-if="secondCounter" :class="[
                 'text-body-1 font-weight-medium mb-6',
                 { 'shake text-error': showError }
@@ -95,7 +92,8 @@ watch(secondCounter, () => {
 })
 
 
-onMounted(() => {
+onMounted(async () => {
+    await sendMail()
     startCountdown()
 })
 onUnmounted(() => {

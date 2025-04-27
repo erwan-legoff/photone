@@ -84,6 +84,22 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.handleError(error, "sendValidationEmail");
       }
     },
+    async verifyToken(token: string): Promise<boolean> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        await $api("/api/auth/verify", {
+          method: "GET",
+          params: { token },
+        });
+        notificationStore.notifySuccess("Your account is now validated!");
+        return true;
+      } catch (error) {
+        notificationStore.handleError(error, "verifyToken");
+        return false;
+      }
+    },
   },
   persist: true,
 });
