@@ -1,33 +1,42 @@
 <template>
-    <v-container>
-        <v-sheet class="pa-4 text-center mx-auto" elevation="12" max-width="600" rounded="lg" width="100%">
-            <v-icon class="mb-5" color="secondary" icon="mdi-email-alert" size="112"></v-icon>
+    <v-container class="py-8">
+        <v-sheet class="text-center mx-auto pa-6" elevation="10" max-width="500" rounded="xl" width="100%">
 
-            <h2 class="text-h5 mb-6">Please check your mail inbox to validate your account</h2>
-            <h1 :class="{ counter: true, animate: animateCounter }">{{ secondCounter }}</h1>
-            <h4 v-if="secondCounter"> Wait before you can send a new email validation</h4>
-            <v-btn color="primary" :disabled="!!secondCounter" @click="sendMail">
-                Send a new mail
-            </v-btn>
-            <p class="mb-4 text-medium-emphasis text-body-2">
-                In order to verify your email address, you must click on the link we sent to your email address.
-                <br>
-                The link will expire in 10 minutes.
-                <br>
+            <!-- Icon -->
+            <v-icon class="mb-6" color="secondary" size="96" icon="mdi-email-alert" />
 
-                If you don't find it, please check your spams or wait a few minutes.
-                <br>
-                If you didn't receive it, you can wait the end of the countdown to resend an email.
+            <!-- Title -->
+            <h2 class="text-h5 font-weight-bold mb-4">
+                Confirm your email address
+            </h2>
+
+            <!-- Short instruction -->
+            <p :class="['text-body-1', 'mb-8', { 'shake text-error': showError }]">
+                We sent you a confirmation email. Please click the link inside.
             </p>
 
-            <v-divider class="mb-4"></v-divider>
+            <!-- Countdown -->
+            <h1 class="text-h2 font-weight-bold mb-2">{{ secondCounter }}</h1>
 
+            <h4 v-if="secondCounter" class="text-body-2 mb-6 text-medium-emphasis">
+                Please wait before resending
+            </h4>
 
-            <div class="text-end">
-
+            <!-- Capture click on wrapper -->
+            <div @click="handleClick">
+                <v-btn color="primary" size="large" :disabled="!!secondCounter" class="mb-8">
+                    Send a new email
+                </v-btn>
             </div>
+
+            <!-- Helper -->
+            <p class="text-body-2 text-medium-emphasis">
+                Didn't get it? Check your spam folder, or resend it once the timer ends.
+            </p>
+
         </v-sheet>
     </v-container>
+
 </template>
 
 <script setup lang="ts">
@@ -56,6 +65,20 @@ const sendMail = async () => {
     startCountdown()
 }
 
+const showError = ref(false)
+
+const handleClick = () => {
+    if (secondCounter.value > 0) {
+        showError.value = true
+        setTimeout(() => {
+            showError.value = false
+        }, 600) // durée de l'animation
+        return
+    }
+
+    sendMail()
+}
+
 const animateCounter = ref(false)
 
 watch(secondCounter, () => {
@@ -75,12 +98,35 @@ onUnmounted(() => {
 
 </script>
 
-<style>
-.counter {
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+<style scoped>
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
-.counter.animate {
-    transform: translateY(-1px);
+.shake {
+    animation: shake 0.6s;
+}
+
+.text-error {
+    color: #f44336;
+    /* rouge classique Material Design */
 }
 </style>
