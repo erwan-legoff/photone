@@ -11,16 +11,24 @@
             </h2>
 
             <!-- Short instruction -->
-            <p :class="['text-body-1', 'mb-8', { 'shake text-error': showError }]">
+            <p :class="['text-body-1', 'mb-8']">
                 We sent you a confirmation email. Please click the link inside.
             </p>
 
-            <!-- Countdown -->
-            <h1 class="text-h2 font-weight-bold mb-2">{{ secondCounter }}</h1>
 
-            <h4 v-if="secondCounter" class="text-body-2 mb-6 text-medium-emphasis">
+            <!-- Countdown -->
+            <h1 :class="['text-h2 font-weight-bold mb-2', { 'shake text-error': showError }]">
+                {{ secondCounter }}
+            </h1>
+
+            <!-- Please wait (only when countdown > 0) -->
+            <h4 v-if="secondCounter" :class="[
+                'text-body-1 font-weight-medium mb-6',
+                { 'shake text-error': showError }
+            ]">
                 Please wait before resending
             </h4>
+
 
             <!-- Capture click on wrapper -->
             <div @click="handleClick">
@@ -92,7 +100,6 @@ onMounted(() => {
 })
 onUnmounted(() => {
     stopCountDown()
-
 })
 
 
