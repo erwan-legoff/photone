@@ -53,12 +53,12 @@ export const useUserStore = defineStore("user-store", {
     async logout(): Promise<void> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
-
+      this.isLogged = false;
       try {
         await $api("/logout", {
           method: "POST",
         });
-        this.isLogged = false;
+
         notificationStore.notifyInfo("Successfully logged out!");
       } catch (error) {
         notificationStore.handleError(error, "logout");
