@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "Spricture",
+    "subtitle": "Una aplicación de fotos segura centrada en la privacidad.",
+    "note": "Nota:",
+    "noteContent": "Este proyecto es una demostración técnica personal destinada a profundizar mis habilidades en desarrollo full-stack, especialmente con Spring Boot y Nuxt 3. Está en desarrollo activo.",
+    "projectTitle": "Presentación del Proyecto",
+    "projectDesc1": "El objetivo principal de Spricture es permitirte almacenar tus fotos personales de forma segura. La innovación clave reside en el cifrado de las fotos directamente en tu dispositivo (lado cliente) antes de enviarlas al servidor. Esto garantiza el máximo nivel de privacidad, ya que el servidor nunca tiene acceso a tus fotos en claro.",
+    "projectDesc2": "En el futuro, podrás organizar tus fotos por álbumes, compartirlas en grupos (Familia, Amigos, Trabajo...), añadir etiquetas para facilitar la búsqueda y, potencialmente, beneficiarte de un análisis local por IA para extraer automáticamente metadatos relevantes, siempre respetando tu privacidad.",
+    "techTitle": "Tecnologías Utilizadas",
+    "techSpring": "Spring Boot",
+    "techNuxt": "Nuxt 3",
+    "techVuetify": "Vuetify",
+    "techTailwind": "Tailwind CSS",
+    "techJWT": "JWT (Autenticación)",
+    "featuresTitle": "Funcionalidades",
+    "featuresDone": "Ya implementadas (MVP)",
+    "featuresPlanned": "Funcionalidades Previstas",
+    "featureUpload": "Subida de fotos",
+    "featureStorage": "Almacenamiento seguro (base)",
+    "featureDisplay": "Visualización de fotos",
+    "featureApi": "API Backend para medios",
+    "featureSignup": "Registro de usuario",
+    "featureAuth": "Autenticación JWT",
+    "featureReset": "Restablecimiento de contraseña",
+    "featureMail": "Validación de registro por correo",
+    "featureEncrypt": "Cifrado completo lado cliente",
+    "featureAlbums": "Gestión de álbumes",
+    "featureGroups": "Gestión de grupos de usuarios",
+    "featureShare": "Compartir fotos/álbumes",
+    "featureTags": "Sistema de etiquetas",
+    "featureSync": "Sincronización en segundo plano",
+    "featureDesktop": "Aplicación de escritorio (Objetivo v2.0)",
+    "contactTitle": "¿Interesado(a)? ¡Contáctame!",
+    "sendMail": "Enviar un correo"
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Entrar"
+  }
+}
