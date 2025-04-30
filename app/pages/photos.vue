@@ -2,27 +2,42 @@
   <div class="full-page-background">
     <v-container>
       <div>
-        <h1 class="text-h2">Photos</h1>
-        <p class="text-subtitle-1 mb-5">Choose a file to upload to your private space</p>
-        <div>
+        <div v-if="isMediumOpen">
+          <v-dialog v-model="isMediumOpen" fullscreen hide-overlay transition="dialog-bottom-transition" persistent>
+            <v-carousel v-model="openedMedium" height="100vh" show-arrows-on-hover>
+              <v-carousel-item v-for="(medium, i) in media" :key="medium.name" :value="i" :src="createURL(medium)" />
+            </v-carousel>
+
+            <!-- Bouton fermer en haut à droite -->
+            <v-btn icon @click="isMediumOpen = false" absolute top right class="ma-2">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-dialog>
+
+        </div>
+        <div v-else>
+          <h1 class="text-h2">Photos</h1>
+          <p class="text-subtitle-1 mb-5">Choose a file to upload to your private space</p>
+          <div>
+            <v-row>
+              <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" :multiple="true" />
+              <v-btn @click="uploadMany" :disabled="!canUpload"> upload </v-btn>
+            </v-row>
+          </div>
           <v-row>
-            <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" :multiple="true" />
-            <v-btn @click="uploadMany" :disabled="!canUpload"> upload </v-btn>
+            <v-col v-for="(medium, i) in media" :key="medium.name" cols="12" sm="6" md="4">
+              <v-card tile>
+                <v-img :src="createURL(medium)" @click="() => { openMedium(i) }">
+                  <template #placeholder>
+                    <div class="d-flex align-center justify-center fill-height">
+                      <v-progress-circular color="grey-lighten-4" indeterminate />
+                    </div>
+                  </template>
+                </v-img>
+              </v-card>
+            </v-col>
           </v-row>
         </div>
-        <v-row>
-          <v-col v-for="medium in media" :key="medium.name" cols="12" sm="6" md="4">
-            <v-card tile>
-              <v-img :src="createURL(medium)">
-                <template #placeholder>
-                  <div class="d-flex align-center justify-center fill-height">
-                    <v-progress-circular color="grey-lighten-4" indeterminate />
-                  </div>
-                </template>
-              </v-img>
-            </v-card>
-          </v-col>
-        </v-row>
       </div>
     </v-container>
   </div>
@@ -41,7 +56,12 @@ const canUpload = computed(() => {
   return true
 })
 const media = computed(() => mediumStore.media)
-
+const isMediumOpen = ref(false)
+const openedMedium = ref(0)
+const openMedium = (mediumNumber: number) => {
+  openedMedium.value = mediumNumber
+  isMediumOpen.value = true
+}
 const uploadMany = async () => {
   const notificationStore = useNotificationStore()
   if (!mediumToUpload.value) return notificationStore.notifyError("Something went wrong when selecting the photo(s).")
