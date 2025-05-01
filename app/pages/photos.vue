@@ -3,18 +3,8 @@
     <v-container>
       <div>
         <div v-if="isMediumOpen">
-          <v-dialog v-model="isMediumOpen" fullscreen transition="dialog-bottom-transition" :scrim="false"
-            content-class="bg-black pa-0" persistent>
-            <v-btn icon @click="isMediumOpen = false" class="position-absolute top-0 right-0 mx-8 my-8"
-              style="z-index: 10; color: white;">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-            <v-carousel v-model="openedMedium" height="100vh" class="bg-black" show-arrows-on-hover hide-delimiters>
-              <v-carousel-item v-for="(medium, i) in media" :key="medium.name" :value="i" :src="createURL(medium)" />
-            </v-carousel>
-
-
-          </v-dialog>
+          <MediaViewer v-model="isMediumOpen" :media="media" :modelIndex="openedMediumIndex"
+            @close="isMediumOpen = false" @delete="deleteMedium" />
 
         </div>
         <div v-else>
@@ -27,9 +17,9 @@
             </v-row>
           </div>
           <v-row>
-            <v-col v-for="(medium, i) in media" :key="medium.name" cols="12" sm="6" md="4">
+            <v-col v-for="(medium, i) in media" :key="medium.id" cols="12" sm="6" md="4">
               <v-card tile>
-                <v-img :src="createURL(medium)" @click="() => { openMedium(i) }">
+                <v-img :src="createURL(medium.file)" @click="() => { openMedium(i) }">
                   <template #placeholder>
                     <div class="d-flex align-center justify-center fill-height">
                       <v-progress-circular color="grey-lighten-4" indeterminate />
@@ -47,6 +37,7 @@
 
 <script setup lang="ts">
 import { useMediumStore } from '~/stores/mediumStore'
+import type { Medium } from '~/stores/types/Medium'
 
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
@@ -57,12 +48,20 @@ const canUpload = computed(() => {
   }
   return true
 })
+
+
 const media = computed(() => mediumStore.media)
 const isMediumOpen = ref(false)
-const openedMedium = ref(0)
+const openedMediumIndex = ref(0)
+const openedMedium = computed(() => media.value[openedMediumIndex.value])
 const openMedium = (mediumNumber: number) => {
-  openedMedium.value = mediumNumber
+  openedMediumIndex.value = mediumNumber
   isMediumOpen.value = true
+}
+const deleteMedium = () => {
+  const notificationStore = useNotificationStore()
+  if (!openedMedium.value) return notificationStore.notifyError("Something went wrong when deleting the photo(s).")
+  mediumStore.deleteMedium(openedMedium.value)
 }
 const uploadMany = async () => {
   const notificationStore = useNotificationStore()

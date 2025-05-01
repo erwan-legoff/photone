@@ -1,15 +1,17 @@
 import { defineStore } from "pinia";
 import type { GetMediumDto } from "./types/GetMediumDto";
+import type { SoftDeleteMediumDto } from "./types/SoftDeleteMediumDto";
+import type { Medium } from "./types/Medium";
 
 export interface MediumState {
-  media: File[];
+  media: Medium[];
   mediaAreLoading: boolean;
 }
 
 export const useMediumStore = defineStore("medium-store", {
   state: (): MediumState => {
     return {
-      media: [] as File[],
+      media: [],
       mediaAreLoading: false as boolean,
     };
   },
@@ -53,6 +55,27 @@ export const useMediumStore = defineStore("medium-store", {
       }
     },
 
+    async deleteMedium(
+      softDeleteMediumDto: SoftDeleteMediumDto
+    ): Promise<void> {
+      const notificationStore = useNotificationStore();
+
+      const { $api } = useNuxtApp();
+
+      try {
+        const response = await $api<void>("/medium", {
+          method: "DELETE",
+          body: softDeleteMediumDto,
+        });
+        this.media = this.media.filter(
+          (medium) => medium.id != softDeleteMediumDto.id
+        );
+        notificationStore.notifySuccess("Photo Successfully deleted !");
+      } catch (error: unknown) {
+        notificationStore.handleError(error, "deleteMedium");
+      }
+    },
+
     async fetchMediumUrls(): Promise<Array<string>> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
@@ -79,10 +102,16 @@ export const useMediumStore = defineStore("medium-store", {
       try {
         // We start by fetching all URLS
         const mediumUrls = await this.fetchMediumUrls();
+
         // We then fetch all images at once in parallel
-        const fetchPromises = mediumUrls.map((url) =>
-          $api<File>(url, { method: "GET" })
-        );
+        const fetchPromises = mediumUrls.map(async (url) => {
+          const uuidMatch = url.match(/id=([0-9a-fA-F-]+)/);
+          if (!uuidMatch) throw new Error("Invalid medium URL: " + url);
+          const uuid = uuidMatch[1];
+          const blob = await $api<File>(url, { method: "GET" });
+          const file = new File([blob], `${uuid}.jpg`, { type: blob.type });
+          return { id: uuid as string, file };
+        });
         const files = await Promise.all(fetchPromises);
         this.media = files;
       } catch (error: unknown) {
