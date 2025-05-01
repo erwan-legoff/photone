@@ -4,14 +4,15 @@
       <div>
         <div v-if="isMediumOpen">
           <v-dialog v-model="isMediumOpen" fullscreen hide-overlay transition="dialog-bottom-transition" persistent>
+            <v-btn icon @click="isMediumOpen = false" class="ma-2">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
             <v-carousel v-model="openedMedium" height="100vh" show-arrows-on-hover>
               <v-carousel-item v-for="(medium, i) in media" :key="medium.name" :value="i" :src="createURL(medium)" />
             </v-carousel>
 
             <!-- Bouton fermer en haut à droite -->
-            <v-btn icon @click="isMediumOpen = false" absolute top right class="ma-2">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
+
           </v-dialog>
 
         </div>
