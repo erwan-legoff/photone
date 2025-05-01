@@ -3,15 +3,16 @@
     <v-container>
       <div>
         <div v-if="isMediumOpen">
-          <v-dialog v-model="isMediumOpen" fullscreen hide-overlay transition="dialog-bottom-transition" persistent>
-            <v-btn icon @click="isMediumOpen = false" class="ma-2">
+          <v-dialog v-model="isMediumOpen" fullscreen transition="dialog-bottom-transition" :scrim="false"
+            content-class="bg-black pa-0" persistent>
+            <!-- bouton fermer, coin haut-droit -->
+            <v-btn icon @click="isMediumOpen = false" class="top-0 right-0 ma-4">
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            <v-carousel v-model="openedMedium" height="100vh" show-arrows-on-hover>
+            <v-carousel v-model="openedMedium" height="100vh" class="bg-black" show-arrows-on-hover hide-delimiters>
               <v-carousel-item v-for="(medium, i) in media" :key="medium.name" :value="i" :src="createURL(medium)" />
             </v-carousel>
 
-            <!-- Bouton fermer en haut à droite -->
 
           </v-dialog>
 
