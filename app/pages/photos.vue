@@ -5,8 +5,8 @@
         <div v-if="isMediumOpen">
           <v-dialog v-model="isMediumOpen" fullscreen transition="dialog-bottom-transition" :scrim="false"
             content-class="bg-black pa-0" persistent>
-            <!-- bouton fermer, coin haut-droit -->
-            <v-btn icon @click="isMediumOpen = false" class="top-0 right-0 ma-4">
+            <v-btn icon @click="isMediumOpen = false" class="position-absolute top-0 right-0 mx-8 my-8"
+              style="z-index: 10; color: white;">
               <v-icon>mdi-close</v-icon>
             </v-btn>
             <v-carousel v-model="openedMedium" height="100vh" class="bg-black" show-arrows-on-hover hide-delimiters>
