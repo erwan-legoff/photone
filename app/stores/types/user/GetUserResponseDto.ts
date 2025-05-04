@@ -10,7 +10,6 @@ export interface GetUserResponseDto {
   name: string;
   lastName: string;
   email: string;
-  isEmailValidated: boolean;
   role: UserRole;
   status: UserStatus;
   createdAt: string;
