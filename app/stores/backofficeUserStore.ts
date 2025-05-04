@@ -23,5 +23,44 @@ export const useBackofficeUserStore = defineStore("backoffice-user-store", {
         notificationStore.handleError(error, "getUsers");
       }
     },
+    async validateUserAccount(id: number): Promise<void> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        await $api(`/user/${id}/validate`, {
+          method: "PUT",
+        });
+        notificationStore.notifySuccess("User account validated.");
+      } catch (error) {
+        notificationStore.handleError(error, "validateUserAccount");
+      }
+    },
+    async blockUser(id: number): Promise<void> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        await $api(`/user/${id}/block`, {
+          method: "PUT",
+        });
+        notificationStore.notifySuccess("User account blocked.");
+      } catch (error) {
+        notificationStore.handleError(error, "blockUser");
+      }
+    },
+    async unblockUser(id: number): Promise<void> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        await $api(`/user/${id}/unblock`, {
+          method: "PUT",
+        });
+        notificationStore.notifySuccess("User account unblocked.");
+      } catch (error) {
+        notificationStore.handleError(error, "unblockUser");
+      }
+    },
   },
 });

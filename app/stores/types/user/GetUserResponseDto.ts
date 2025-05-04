@@ -6,6 +6,7 @@ export type UserStatus =
   | "VALIDATED_BY_ADMIN";
 
 export interface GetUserResponseDto {
+  id: number;
   pseudo: string;
   name: string;
   lastName: string;
