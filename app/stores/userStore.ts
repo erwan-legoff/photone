@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { CreateUserRequestDto } from "./types/CreateUserRequestDto";
+import type { CreateUserRequestDto } from "./types/user/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";
 import type { JwtLoginResponseDto } from "./types/responses/JwtLoginResponseDto";
 import { useNotificationStore } from "@/stores/notificationStore";

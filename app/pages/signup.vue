@@ -37,7 +37,7 @@
   </v-container>
 </template>
 <script setup lang="ts">
-import type { CreateUserRequestDto } from '~/stores/types/CreateUserRequestDto'
+import type { CreateUserRequestDto } from '~/stores/types/user/CreateUserRequestDto'
 import { useUserStore } from '~/stores/userStore'
 
 const firstName = ref('')
