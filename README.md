@@ -1,2 +1,4 @@
-# photone
-ALPHA : a personnal project to host photos in order to learn Nuxt
+# Photone
+
+The FRONTEND of Photone, an application to store and manage photos in the Cloud.
+This application is in active development.
