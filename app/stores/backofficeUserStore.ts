@@ -62,5 +62,18 @@ export const useBackofficeUserStore = defineStore("backoffice-user-store", {
         notificationStore.handleError(error, "unblockUser");
       }
     },
+    async sendVerifyEmailUser(id: number): Promise<void> {
+      const notificationStore = useNotificationStore();
+      const { $api } = useNuxtApp();
+
+      try {
+        await $api(`/user/${id}/send-email-validation`, {
+          method: "PUT",
+        });
+        notificationStore.notifySuccess("Email sent.");
+      } catch (error) {
+        notificationStore.handleError(error, "sendVerifyEmailUser");
+      }
+    },
   },
 });

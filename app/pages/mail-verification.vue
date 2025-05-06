@@ -47,10 +47,24 @@
 <script setup lang="ts">
 
 import { useIntervalFn } from '@vueuse/core'
-
+const route = useRoute()
 const SECONDS_BEFORE_SENDING_MAIL = 200;
 const userStore = useUserStore()
+const emailRegex = /^[^\s@]{1,64}@[^\s@]+\.[^\s@]+$/;
 
+
+const validateAndAssignEmail = () => {
+    const email = route.query.email
+    if (typeof email === 'string') {
+        const trimmed = email.trim()
+        const lengthOk = trimmed.length >= 8 && trimmed.length <= 60
+        if (lengthOk && emailRegex.test(trimmed)) {
+            if (!userStore.email) {
+                userStore.email = trimmed
+            }
+        }
+    }
+}
 
 let secondCounter: Ref<number> = ref(SECONDS_BEFORE_SENDING_MAIL)
 
@@ -93,6 +107,7 @@ watch(secondCounter, () => {
 
 
 onMounted(async () => {
+    validateAndAssignEmail()
     await sendMail()
     startCountdown()
 })

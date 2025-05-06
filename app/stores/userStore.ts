@@ -51,6 +51,7 @@ export const useUserStore = defineStore("user-store", {
     },
 
     async logout(): Promise<void> {
+      this.email = "";
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
       this.isLogged = false;
@@ -74,7 +75,7 @@ export const useUserStore = defineStore("user-store", {
           return;
         }
         await $api("/api/auth/send-verification-email", {
-          method: "GET",
+          method: "POST",
           params: {
             email: this.email,
           },
@@ -82,6 +83,8 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.notifySuccess("Verification email sent!");
       } catch (error) {
         notificationStore.handleError(error, "sendValidationEmail");
+
+        this.logout;
       }
     },
     async verifyToken(token: string): Promise<boolean> {
