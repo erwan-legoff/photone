@@ -16,11 +16,11 @@ export async function deriveKeyFromPassword(
     keyFormat,
     encoder.encode(password),
     algorithmIdentifier,
-    isExtractable,
+    isExtractable, // We don't need to use the keyMaterial outside this scope
     ['deriveKey']
   )
   const derivationAlgorithm: Pbkdf2Params = {
-    name: 'PBKBF2',
+    name: 'PBKDF2',
     salt: salt,
     iterations: 250000,
     hash: 'SHA-256',
@@ -33,7 +33,7 @@ export async function deriveKeyFromPassword(
     derivationAlgorithm,
     keyMaterial,
     encryptionAlgorithm,
-    true,
+    true, // We potentially want to manipulate this derived key
     ['encrypt', 'decrypt']
   )
 }
