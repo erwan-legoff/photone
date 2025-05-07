@@ -2,6 +2,10 @@ import { defineStore } from "pinia";
 import type { GetMediumDto } from "./types/GetMediumDto";
 import type { SoftDeleteMediumDto } from "./types/SoftDeleteMediumDto";
 import type { Medium } from "./types/Medium";
+import { encryptFile } from "~/tools/security/encryption/encryptFile";
+import { useKeyStore } from "./keyStore";
+import { encryptFileBinary } from "~/tools/security/encryption/encryptFileBinary";
+import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
 
 export interface MediumState {
   media: Medium[];
@@ -12,20 +16,26 @@ export const useMediumStore = defineStore("medium-store", {
   state: (): MediumState => {
     return {
       media: [],
-      mediaAreLoading: false as boolean,
+      mediaAreLoading: false,
     };
   },
   actions: {
     async uploadMedia(media: File[]): Promise<void> {
       const notificationStore = useNotificationStore();
+      const keyStore = useKeyStore();
       notificationStore.notifyInfo("uploading" + media.length + "photos");
+
       const { $api } = useNuxtApp();
       try {
         const formData = new FormData();
+        const key = keyStore.getKey();
+        if (!key) return notificationStore.notifyError("No Key found !");
+        notificationStore.notifyInfo("Appending...");
+        for (const file of media) {
+          const encryptedFile = await encryptFileBinary(file, key);
 
-        media.forEach((file) => {
-          formData.append("media", file);
-        });
+          formData.append("media", encryptedFile);
+        }
 
         await $api("/media", {
           method: "POST",
@@ -96,6 +106,7 @@ export const useMediumStore = defineStore("medium-store", {
      */
     async fetchMedia(): Promise<void> {
       const notificationStore = useNotificationStore();
+      const keyStore = useKeyStore();
       notificationStore.notifyInfo("downloading photos...");
       const { $api } = useNuxtApp();
 
@@ -105,17 +116,23 @@ export const useMediumStore = defineStore("medium-store", {
 
         // We then fetch all images at once in parallel
         const fetchPromises = mediumUrls.map(async (url) => {
-          const uuidMatch = url.match(/id=([0-9a-fA-F-]+)/);
-          if (!uuidMatch) throw new Error("Invalid medium URL: " + url);
-          const uuid = uuidMatch[1];
-          const blob = await $api<File>(url, { method: "GET" });
-          const file = new File([blob], `${uuid}.jpg`, { type: blob.type });
-          return { id: uuid as string, file };
+          return await fetchMediaURL(url);
         });
         const files = await Promise.all(fetchPromises);
         this.media = files;
       } catch (error: unknown) {
         notificationStore.handleError(error, "getMedia");
+      }
+
+      async function fetchMediaURL(url: string): Promise<Medium> {
+        const uuidMatch = url.match(/id=([0-9a-fA-F-]+)/);
+        if (!uuidMatch) throw new Error("Invalid medium URL: " + url);
+        const uuid = uuidMatch[1];
+        const blob = await $api<File>(url, { method: "GET" });
+        const key = keyStore.getKey();
+        if (!key) throw new Error("No key found !");
+        const decrypedFile = await decryptFileBinary(blob, key);
+        return { id: uuid as string, file: decrypedFile };
       }
     },
 

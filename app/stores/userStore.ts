@@ -3,9 +3,15 @@ import type { CreateUserRequestDto } from "./types/user/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";
 import type { JwtLoginResponseDto } from "./types/responses/JwtLoginResponseDto";
 import { useNotificationStore } from "@/stores/notificationStore";
+import { deriveKeyFromPassword } from "~/tools/security/encryption/deriveKeyFromPassword";
+import { useKeyStore } from "./keyStore";
 
+export interface UserState {
+  email: string;
+  isLogged: boolean;
+}
 export const useUserStore = defineStore("user-store", {
-  state: () => {
+  state: (): UserState => {
     return {
       email: "",
       isLogged: false,
@@ -14,7 +20,11 @@ export const useUserStore = defineStore("user-store", {
   actions: {
     async login(loginDto: LoginDto): Promise<void> {
       const notificationStore = useNotificationStore();
+      const keyStore = useKeyStore();
       const { $api } = useNuxtApp();
+
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      await keyStore.deriveAndStoreKey(loginDto.password, salt);
 
       try {
         const response = await $api<JwtLoginResponseDto>("api/auth/login", {
@@ -35,7 +45,8 @@ export const useUserStore = defineStore("user-store", {
     ): Promise<boolean> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
-
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      await deriveKeyFromPassword(createUserRequestDto.rawPassword, salt);
       try {
         await $api("/user", {
           method: "POST",
