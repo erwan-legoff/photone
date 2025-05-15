@@ -1,4 +1,5 @@
 <template>
+    <PinPopup :needsPin="needsToCreatePin" :loading="loading"></PinPopup>
     <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
         <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
             <h1 class="mb-5">Log in</h1>
@@ -26,12 +27,14 @@
     </v-container>
 </template>
 <script setup lang="ts">
+import PinPopup from '~/components/PinPopup.vue'
 import type { LoginDto } from '~/stores/types/LoginDto'
 import { useUserStore } from '~/stores/userStore'
 
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
+const loading = ref(false)
 
 const loginDto = computed<LoginDto>(() => ({
     email: email.value,
@@ -40,7 +43,13 @@ const loginDto = computed<LoginDto>(() => ({
 const userStore = useUserStore()
 const submit = async () => {
     await userStore.login(loginDto.value)
-    navigateTo("/photos")
+    if (await keyStore.hasWrappedKey()) {
+        navigateTo("/photos")
+    }
+
 }
+
+const keyStore = useKeyStore()
+const needsToCreatePin = ref(userStore.isLogged && !(await keyStore.hasWrappedKey()))
 
 </script>

@@ -2,8 +2,9 @@
   <div class="full-page-background">
     <v-container>
       <div>
+        <PinPopup :needsPin="keyStore.needPIN" :loading="pinLoading" @submit:pin="unwrapKey"></PinPopup>
         <div v-if="isMediumOpen">
-          <MediaViewer v-model="isMediumOpen" :media="media" :modelIndex="openedMediumIndex"
+          <MediaViewer v-model="isMediumOpen" :media="media" :model-index="openedMediumIndex"
             @close="isMediumOpen = false" @delete="deleteMedium" />
 
         </div>
@@ -13,7 +14,7 @@
           <div>
             <v-row>
               <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" :multiple="true" />
-              <v-btn @click="uploadMany" :disabled="!canUpload"> upload </v-btn>
+              <v-btn :disabled="!canUpload" @click="uploadMany"> upload </v-btn>
             </v-row>
           </div>
           <v-row>
@@ -37,8 +38,11 @@
 
 <script setup lang="ts">
 import { useMediumStore } from '~/stores/mediumStore'
-import type { Medium } from '~/stores/types/Medium'
-
+const keyStore = useKeyStore()
+const pinLoading = ref(false)
+const unwrapKey = async (pin: string) => {
+  keyStore.unwrapKeyWithPIN(pin)
+}
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
 const canUpload = computed(() => {
