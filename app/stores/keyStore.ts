@@ -6,7 +6,7 @@ import { deriveKeyFromPassword } from '~/tools/security/encryption/deriveKeyFrom
 // In-memory key only
 let inMemoryKey: CryptoKey | undefined
 export interface KeyState {
-  needPIN: boolean
+  needsPIN: boolean
 }
 // Constants for IndexedDB
 const IDB_KEYS = {
@@ -16,7 +16,7 @@ const IDB_KEYS = {
 export const useKeyStore = defineStore('key-store', {
   state: (): KeyState => {
     return {
-      needPIN: false,
+      needsPIN: false,
     }
   },
   actions: {

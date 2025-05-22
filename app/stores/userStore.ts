@@ -38,8 +38,7 @@ export const useUserStore = defineStore('user-store', {
         const salt = Uint8Array.from(atob(getMeResponse.salt), (c) =>
           c.charCodeAt(0)
         )
-
-        await keyStore.deriveAndStoreKey(loginDto.password, salt)
+        keyStore.needsPIN = this.isLogged && !(await keyStore.hasWrappedKey())
 
         notificationStore.notifySuccess('Successfully logged in!')
       } catch (error) {

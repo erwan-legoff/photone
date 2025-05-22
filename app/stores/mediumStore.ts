@@ -30,7 +30,7 @@ export const useMediumStore = defineStore('medium-store', {
         const formData = new FormData()
         const key = await keyStore.getKey()
         if (!key) {
-          keyStore.needPIN = true
+          keyStore.needsPIN = true
           return notificationStore.notifyWarning(
             'Please put your PIN to encrypt your data'
           )

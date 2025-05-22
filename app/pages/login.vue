@@ -1,5 +1,5 @@
 <template>
-    <PinPopup :needsPin="needsToCreatePin" :loading="loading"></PinPopup>
+    <PinPopup :needsPin="keyStore.needsPIN" :loading="loading"></PinPopup>
     <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
         <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
             <h1 class="mb-5">Log in</h1>
@@ -50,6 +50,5 @@ const submit = async () => {
 }
 
 const keyStore = useKeyStore()
-const needsToCreatePin = ref(userStore.isLogged && !(await keyStore.hasWrappedKey()))
 
 </script>
