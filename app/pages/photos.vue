@@ -40,9 +40,7 @@
 import { useMediumStore } from '~/stores/mediumStore'
 const keyStore = useKeyStore()
 const pinLoading = ref(false)
-const unwrapKey = async (pin: string) => {
-  keyStore.unwrapKeyWithPIN(pin)
-}
+
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
 const canUpload = computed(() => {
@@ -81,7 +79,10 @@ const uploadMany = async () => {
 const downloadAll = async () => {
   mediumStore.fetchMedia()
 }
-
+const unwrapKey = async (pin: string) => {
+  await keyStore.unwrapKeyWithPIN(pin)
+  downloadAll()
+}
 const createURL = (file: File) => {
   return URL.createObjectURL(file)
 }

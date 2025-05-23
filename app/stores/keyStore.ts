@@ -98,7 +98,7 @@ export const useKeyStore = defineStore("key-store", {
 
     async unwrapKeyWithPIN(pin: string): Promise<CryptoKey | undefined> {
       const idb = useIdb();
-
+      const notificationStore = useNotificationStore()
       // Retrieve stored data
       let wrappedKeyData = (await idb.getItem(IDB_KEYS.wrappedKeyData)) as any;
       if (!wrappedKeyData) {
@@ -148,6 +148,7 @@ export const useKeyStore = defineStore("key-store", {
           ["encrypt", "decrypt"]
         );
         inMemoryKey = unwrappedKey;
+        this.needsPinVerification = false;
         return unwrappedKey;
       } catch (error) {
         console.error("Failed to unwrap key:", error);
