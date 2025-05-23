@@ -28,13 +28,12 @@ export const useMediumStore = defineStore('medium-store', {
       const { $api } = useNuxtApp()
       try {
         const formData = new FormData()
-        const key = await keyStore.getKey()
-        if (!key) {
-          keyStore.needsPIN = true
-          return notificationStore.notifyWarning(
-            'Please put your PIN to encrypt your data'
-          )
+        
+        if (await keyStore.shouldPromptForPin()) {
+          return
         }
+
+        const key = await keyStore.getKey() as CryptoKey
         for (const file of media) {
           const encryptedFile = await encryptFileBinary(file, key)
 
@@ -109,8 +108,10 @@ export const useMediumStore = defineStore('medium-store', {
      * Will fetch all media
      */
     async fetchMedia(): Promise<void> {
-      const notificationStore = useNotificationStore()
       const keyStore = useKeyStore()
+      if (await keyStore.shouldPromptForPin()) throw new Error('Please enter your key to unlock your key !')
+      const notificationStore = useNotificationStore()
+      
       notificationStore.notifyInfo('downloading photos...')
       const { $api } = useNuxtApp()
 
@@ -133,10 +134,8 @@ export const useMediumStore = defineStore('medium-store', {
         if (!uuidMatch) throw new Error('Invalid medium URL: ' + url)
         const uuid = uuidMatch[1]
         const blob = await $api<File>(url, { method: 'GET' })
-        const key = await keyStore.getKey()
-        if (!key) throw new Error('No key found !')
-        const decrypedFile = await decryptFileBinary(blob, key)
-        return { id: uuid as string, file: decrypedFile }
+        const decryptedFile = await keyStore.decryptFile(blob)
+        return { id: uuid as string, file: decryptedFile }
       }
     },
 

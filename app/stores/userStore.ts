@@ -87,10 +87,13 @@ export const useUserStore = defineStore("user-store", {
 
     async logout(): Promise<void> {
       const notificationStore = useNotificationStore();
+      const keyStore = useKeyStore();
       const { $api } = useNuxtApp();
+      const router = useRouter();
 
       this.email = "";
       this.isLogged = false;
+      keyStore.clearAll()
 
       try {
         await $api("/logout", {
@@ -100,6 +103,7 @@ export const useUserStore = defineStore("user-store", {
       } catch (error) {
         notificationStore.handleError(error, "logout");
       }
+      router.push("/login");
     },
 
     async sendValidationEmail(): Promise<void> {

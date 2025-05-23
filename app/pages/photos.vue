@@ -2,7 +2,7 @@
   <div class="full-page-background">
     <v-container>
       <div>
-        <PinPopup :needsPin="keyStore.needsPIN" :loading="pinLoading" @submit:pin="unwrapKey"></PinPopup>
+        <PinPopup :needsPin="keyStore.needsPinVerification" :loading="pinLoading" @submit:pin="unwrapKey"></PinPopup>
         <div v-if="isMediumOpen">
           <MediaViewer v-model="isMediumOpen" :media="media" :model-index="openedMediumIndex"
             @close="isMediumOpen = false" @delete="deleteMedium" />

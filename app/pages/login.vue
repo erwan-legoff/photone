@@ -1,5 +1,5 @@
 <template>
-    <PinPopup :needsPin="keyStore.needsPIN" :loading="loading" @submit:pin="handlePinCreation"></PinPopup>
+    <PinPopup :needsPin="keyStore.needsPinInitialization" :loading="loading" @submit:pin="handlePinCreation"></PinPopup>
     <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
         <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
             <h1 class="mb-5">Log in</h1>
@@ -43,7 +43,7 @@ const loginDto = computed<LoginDto>(() => ({
 const userStore = useUserStore()
 const handleLogin = async () => {
     await userStore.login(loginDto.value)
-    if (!await keyStore.checkIfNeedsPin()) {
+    if (!await keyStore.requiresPinInitialization()) {
         navigateTo("/photos")
     }
 }
