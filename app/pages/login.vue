@@ -1,5 +1,5 @@
 <template>
-    <PinPopup :needsPin="keyStore.needsPIN" :loading="loading"></PinPopup>
+    <PinPopup :needsPin="keyStore.needsPIN" :loading="loading" @submit:pin="handlePinCreation"></PinPopup>
     <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
         <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
             <h1 class="mb-5">Log in</h1>
@@ -48,9 +48,14 @@ const handleLogin = async () => {
     }
 }
 
-// const handlePinSubmit = async () => {
-//     keyStore.wrapKeyWithPIN()
-// }
+const handlePinCreation = async (pin: string) => {
+    const wrapSucceeded = await keyStore.wrapKeyWithPIN(pin)
+
+    if (wrapSucceeded) {
+        navigateTo("/photos")
+    }
+
+}
 
 
 

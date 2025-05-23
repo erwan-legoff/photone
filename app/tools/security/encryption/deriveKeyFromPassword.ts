@@ -2,38 +2,51 @@
  * Creates the master key to encrypt photo from the password
  * @param password
  * @param salt
+ * @param extractable (optional) - whether the key is extractable
+ * @param keyUsages (optional) - usages for the derived key
  */
 export async function deriveKeyFromPassword(
   password: string,
-  salt: Uint8Array
+  salt: Uint8Array,
+  extractable: boolean = true,
+  keyUsages: KeyUsage[] = ["encrypt", "decrypt"]
 ): Promise<CryptoKey> {
-  const encoder = new TextEncoder()
-  const keyFormat = 'raw'
-  const algorithmIdentifier: AlgorithmIdentifier = { name: 'PBKDF2' }
-  const isExtractable = false
+  const encoder = new TextEncoder();
+  const keyFormat = "raw";
+  const algorithmIdentifier: AlgorithmIdentifier = { name: "PBKDF2" };
+  const isExtractable = false;
 
   const keyMaterial = await crypto.subtle.importKey(
     keyFormat,
     encoder.encode(password),
     algorithmIdentifier,
     isExtractable, // We don't need to use the keyMaterial outside this scope
-    ['deriveKey']
-  )
+    ["deriveKey"]
+  );
   const derivationAlgorithm: Pbkdf2Params = {
-    name: 'PBKDF2',
+    name: "PBKDF2",
     salt: salt,
     iterations: 250000,
-    hash: 'SHA-256',
-  }
+    hash: "SHA-256",
+  };
   const encryptionAlgorithm: AesDerivedKeyParams = {
-    name: 'AES-GCM',
+    name: "AES-GCM",
     length: 256,
-  }
-  return crypto.subtle.deriveKey(
+  };
+  const derivedKey = await crypto.subtle.deriveKey(
     derivationAlgorithm,
     keyMaterial,
     encryptionAlgorithm,
-    true, // We potentially want to manipulate this derived key
-    ['encrypt', 'decrypt']
-  )
+    extractable,
+    keyUsages
+  );
+
+  // Runtime check for extractability (for debugging)
+  if (!extractable) {
+    console.warn(
+      "[deriveKeyFromPassword] Warning: Key is not extractable. Wrapping will fail."
+    );
+  }
+
+  return derivedKey;
 }
