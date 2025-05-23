@@ -43,7 +43,7 @@ const loginDto = computed<LoginDto>(() => ({
 const userStore = useUserStore()
 const handleLogin = async () => {
     await userStore.login(loginDto.value)
-    if (await keyStore.hasWrappedKey()) {
+    if (!await keyStore.checkIfNeedsPin()) {
         navigateTo("/photos")
     }
 }

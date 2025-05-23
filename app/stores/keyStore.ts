@@ -74,18 +74,11 @@ export const useKeyStore = defineStore("key-store", {
         notificationStore.notifyInfo("Stockage de la clé wrap dans l'idb...");
         await idb.setItem(IDB_KEYS.wrappedKeyData, wrappedKeyData);
         this.needsPIN = false;
-        const retrievedWrappedKey = await idb.getItem(IDB_KEYS.wrappedKeyData);
-        if (!retrievedWrappedKey) {
+        if (!await this.hasWrappedKey()) {
           notificationStore.notifyError("No wrapped key stored");
           return false;
         }
-        notificationStore.notifyInfo(
-          "What's stored ? : " + JSON.stringify(wrappedKeyData)
-        );
-        if (!(retrievedWrappedKey as any).wrappedKey) {
-          notificationStore.notifyError("No wrapped key stored");
-          return false;
-        }
+
 
         notificationStore.notifySuccess("Key successfully wrapped !");
         console.log("Key successfully wrapped.");
@@ -173,6 +166,19 @@ export const useKeyStore = defineStore("key-store", {
       const idb = useIdb();
       const wrappedKeyData = await idb.getItem(IDB_KEYS.wrappedKeyData);
       return !!wrappedKeyData;
+    },
+
+    async checkIfNeedsPin(): Promise<boolean> {
+      const userStore = useUserStore()
+      const hasWrappedKey = await this.hasWrappedKey()
+      const needsPin = hasWrappedKey && userStore.isLogged
+      this.needsPIN = needsPin
+      return needsPin
+    },
+
+    async checkIfNeedsToRelogin(): Promise<boolean> {
+      const needsPIN = await this.checkIfNeedsPin()
+      return needsPIN && !this.getKey()
     },
 
     // Cleanup function

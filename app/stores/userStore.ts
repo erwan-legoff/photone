@@ -40,8 +40,6 @@ export const useUserStore = defineStore("user-store", {
         );
 
         keyStore.deriveAndStoreKey(loginDto.password, salt);
-        keyStore.needsPIN = this.isLogged && !(await keyStore.hasWrappedKey());
-
         notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
         this.isLogged = false;
