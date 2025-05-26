@@ -6,11 +6,11 @@
             <v-icon class="mb-6" color="secondary" size="96" icon="mdi-email-alert" />
 
             <h2 class="text-h5 font-weight-bold mb-4">
-                Confirm your email address
+                {{ $t("mail_verification.title") }}
             </h2>
 
             <p :class="['text-body-1', 'mb-8']">
-                We sent you a confirmation email. Please click the link inside.
+                {{ $t("mail_verification.email_explanation") }}
             </p>
 
 
@@ -23,21 +23,20 @@
                 'text-body-1 font-weight-medium mb-6',
                 { 'shake text-error': showError }
             ]">
-                Please wait before resending
+                {{ $t("mail_verification.please_wait") }}
             </h4>
 
 
             <!-- Capture click on wrapper -->
             <div @click="handleClick">
                 <v-btn color="primary" size="large" :disabled="!!secondCounter" class="mb-8">
-                    Send a new email
+                    {{ $t("mail_verification.send_new_mail") }}
                 </v-btn>
             </div>
 
             <!-- Helper -->
             <p class="text-body-2 text-medium-emphasis">
-                Didn't get it? Check your spam folder, or resend it once the timer ends.
-            </p>
+                {{ $t("mail_verification.no_mail") }} </p>
 
         </v-sheet>
     </v-container>
@@ -47,6 +46,13 @@
 <script setup lang="ts">
 definePageMeta({
     public: true
+})
+
+defineI18nRoute({
+    paths: {
+        fr: '/verification-mail',
+        en: '/mail-verification'
+    }
 })
 
 import { useIntervalFn } from '@vueuse/core'

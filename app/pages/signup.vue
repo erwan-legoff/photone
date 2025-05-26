@@ -66,7 +66,8 @@ const createUserDto = computed<CreateUserRequestDto>(() => ({
 const userStore = useUserStore()
 const submit = async () => {
   const isUserCreated: boolean = await userStore.createUser(createUserDto.value)
-  if (isUserCreated) navigateTo("/mail-verification")
+  const localePath = useLocalePath();
+  if (isUserCreated) navigateTo(localePath({ name: 'mail-verification' }))
 
 }
 

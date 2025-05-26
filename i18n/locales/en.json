@@ -23,6 +23,13 @@
     "last_name" : "Last Name",
     "email" : "Email"
   },
+  "mail_verification":{
+    "title":"Confirm your email address",
+    "email_explanation":"We sent you a confirmation email. Please click the link inside.",
+    "please_wait":"Please wait before resending",
+    "send_new_mail":"Send a new email",
+    "no_mail":"Didn't get it? Check your spam folder, or resend it once the timer ends."
+  },
   "home_page": {
     "title": "Spricture",
     "subtitle": "A secure photo app focused on privacy.",

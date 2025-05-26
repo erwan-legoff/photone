@@ -24,6 +24,13 @@
     "last_name" : "Nom de famille",
     "email" : "Email"
   },
+  "mail_verification":{
+    "title":"Confirmez votre adresse mail",
+    "email_explanation":"Nous vous avons envoyé un mail de confirmation, veuillez cliquer sur le lien présent dans le mail.",
+    "please_wait":"Veuillez patienter avant une nouvelle tentative",
+    "send_new_mail":"Renvoyer un mail",
+    "no_mail":"Vous ne trouvez pas le mail ? Vérifiez votre dossier spam, ou alors demandez un nouveau mail à la fin du compte à rebours."
+  },
   "home_page": {
     "title": "Spricture",
     "subtitle": "Une application photo sécurisée axée sur la confidentialité.",
