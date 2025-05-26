@@ -4,7 +4,9 @@
     "email":"Email",
     "password":"Password",
     "login": "Log in",
-    "connexion": "Connexion"
+    "connexion": "Connexion",
+    "signup": "Sign up",
+    "logout": "Log out"
     
     
 }

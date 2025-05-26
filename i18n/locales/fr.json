@@ -3,6 +3,8 @@
     "email":"Email",
     "password":"Mot de passe",
     "login": "Se connecter",
-    "connexion": "Connexion"
+    "connexion": "Connexion",
+    "signup": "S'inscrire",
+    "logout": "Se déconnecter"
     
 }
