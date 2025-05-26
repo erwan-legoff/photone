@@ -1,12 +1,19 @@
 {
-    "upload_your_file":"Choisissez un fichier à importer dans votre espace privé.",
-    "email":"Email",
-    "password":"Mot de passe",
-    "login": "Se connecter",
-    "connexion": "Connexion",
-    "signup": "S'inscrire",
+  "login": {
+    "title": "Se connecter",
+    "email": "Email",
+    "password": "Mot de passe",
+    "submit": "Connexion"
+  },
+  "signup": {
+    "title": "S'inscrire"
+  },
+  "pin": {
+    "enter": "Entrez votre PIN",
+    "validate": "Valider"
+  },
+  "global": {
     "logout": "Se déconnecter",
-    "enter_your_pin":"Entrez votre PIN",
-    "validate":"valider"
-    
+    "upload_your_file": "Choisissez un fichier à importer dans votre espace privé."
+  }
 }

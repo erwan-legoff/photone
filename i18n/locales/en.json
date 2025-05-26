@@ -1,14 +1,19 @@
 {
-    
-    "upload_your_file":"Choose a file to upload to your private space",
-    "email":"Email",
-    "password":"Password",
-    "login": "Log in",
-    "connexion": "Connexion",
-    "signup": "Sign up",
+  "login": {
+    "title": "Log in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Connexion"
+  },
+  "signup": {
+    "title": "Sign up"
+  },
+  "pin": {
+    "enter": "Enter your PIN",
+    "validate": "Validate"
+  },
+  "global": {
     "logout": "Log out",
-    "enter_your_pin":"Enter your PIN",
-    "validate":"validate"
-    
-    
+    "upload_your_file": "Choose a file to upload to your private space"
+  }
 }

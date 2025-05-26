@@ -2,23 +2,23 @@
     <PinPopup :needsPin="keyStore.needsPinInitialization" :loading="loading" @submit:pin="handlePinCreation"></PinPopup>
     <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
         <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
-            <h1 class="mb-5">{{ $t("login") }}</h1>
+            <h1 class="mb-5">{{ $t("login.title") }}</h1>
             <v-form @submit.prevent="handleLogin">
                 <v-row dense>
                     <v-col cols="12">
-                        <v-text-field v-model="email" :label="$t('email')" variant="outlined" color="primary" />
+                        <v-text-field v-model="email" :label="$t('login.email')" variant="outlined" color="primary" />
                     </v-col>
 
                     <v-col cols="12">
                         <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'"
-                            :label="$t('password')" variant="outlined" color="primary"
+                            :label="$t('login.password')" variant="outlined" color="primary"
                             :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                             @click:append-inner="showPassword = !showPassword" />
                     </v-col>
 
                     <v-col cols="12">
                         <v-btn type="submit" block color="primary" class="mt-4" size="large">
-                            {{ $t("connexion") }}
+                            {{ $t("login.submit") }}
                         </v-btn>
                     </v-col>
                 </v-row>

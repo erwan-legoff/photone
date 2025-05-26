@@ -3,19 +3,19 @@
     <v-card>
       <v-card-title class="text-h5">
         <v-icon start icon="mdi-lock" />
-        {{ $t("enter_your_pin") }}
+        {{ $t("pin.enter") }}
       </v-card-title>
 
       <v-card-text>
         <v-text-field v-model="pin" :append-icon="showPin ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="showPin ? 'text' : 'password'" label="PIN" :placeholder="$t('enter_your_pin')"
+          :type="showPin ? 'text' : 'password'" label="PIN" :placeholder="$t('pin.enter')"
           @click:append="showPin = !showPin" @keyup.enter="submit" />
       </v-card-text>
 
       <v-card-actions>
         <v-spacer />
         <v-btn :disabled="!canSubmit" color="primary" :loading="props.loading" @click="submit">
-          {{ $t("validate") }}
+          {{ $t("pin.validate") }}
         </v-btn>
       </v-card-actions>
     </v-card>
