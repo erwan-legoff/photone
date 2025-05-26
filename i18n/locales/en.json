@@ -1,12 +1,15 @@
 {
   "login": {
     "title": "Log in",
-    "email": "Email",
+    "email": "@:global.email",
     "password": "Password",
     "submit": "Connexion"
   },
   "signup": {
-    "title": "Sign up"
+    "title": "Sign up",
+    "page_title": "Create your account",
+    "password": "@:login.password",
+    "submit": "Submit to admin approbation"
   },
   "pin": {
     "enter": "Enter your PIN",
@@ -14,7 +17,11 @@
   },
   "global": {
     "logout": "Log out",
-    "upload_your_file": "Choose a file to upload to your private space"
+    "upload_your_file": "Choose a file to upload to your private space",
+    "pseudo": "Pseudo",
+    "first_name" : "First Name",
+    "last_name" : "Last Name",
+    "email" : "Email"
   },
   "home_page": {
     "title": "Spricture",

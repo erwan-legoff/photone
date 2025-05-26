@@ -19,10 +19,10 @@
                         </v-list-item>
                     </div>
                     <div v-else>
-                        <v-list-item @click="navigateTo('/signup')">
+                        <v-list-item @click="navigateTo(localePath({ name: 'signup' }))">
                             <v-list-item-title> {{ $t("signup.title") }} </v-list-item-title>
                         </v-list-item>
-                        <v-list-item @click="navigateTo('/login')">
+                        <v-list-item @click="navigateTo(localePath({ name: 'login' }))">
                             <v-list-item-title> {{ $t("login.title") }} </v-list-item-title>
                         </v-list-item>
                     </div>
@@ -33,7 +33,7 @@
 </template>
 <script setup lang="ts">
 const userStore = useUserStore()
-
+const localePath = useLocalePath();
 
 const logout = () => {
     userStore.logout()

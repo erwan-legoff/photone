@@ -1,12 +1,16 @@
 {
   "login": {
     "title": "Se connecter",
-    "email": "Email",
+    "email" : "@:global.email",
     "password": "Mot de passe",
     "submit": "Connexion"
+    
   },
   "signup": {
-    "title": "S'inscrire"
+    "title": "S'inscrire",
+    "page_title": "Créez votre compte",
+    "password": "@:login.password",
+    "submit": "Soumettre à approbation"
   },
   "pin": {
     "enter": "Entrez votre PIN",
@@ -14,7 +18,11 @@
   },
   "global": {
     "logout": "Se déconnecter",
-    "upload_your_file": "Choisissez un fichier à importer dans votre espace privé."
+    "upload_your_file": "Choisissez un fichier à importer dans votre espace privé.",
+    "pseudo": "Pseudo",
+    "first_name" : "Prénom",
+    "last_name" : "Nom de famille",
+    "email" : "Email"
   },
   "home_page": {
     "title": "Spricture",

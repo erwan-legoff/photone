@@ -1,34 +1,34 @@
 <template>
   <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
     <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
-      <h1 class="mb-6">Create your account</h1>
+      <h1 class="mb-6">{{ $t("signup.page_title") }}</h1>
       <v-form @submit.prevent="submit">
         <v-row dense>
           <v-col cols="6">
-            <v-text-field v-model="firstName" label="First name" variant="outlined" color="primary" />
+            <v-text-field v-model="firstName" :label="$t('global.first_name')" variant="outlined" color="primary" />
           </v-col>
 
           <v-col cols="6">
-            <v-text-field v-model="lastName" label="Last name" variant="outlined" color="primary" />
+            <v-text-field v-model="lastName" :label="$t('global.last_name')" variant="outlined" color="primary" />
           </v-col>
 
           <v-col cols="12">
-            <v-text-field v-model="pseudo" label="Pseudo" variant="outlined" color="primary" />
+            <v-text-field v-model="pseudo" :label="$t('global.pseudo')" variant="outlined" color="primary" />
           </v-col>
 
           <v-col cols="12">
-            <v-text-field v-model="email" label="Email" variant="outlined" color="primary" clearable />
+            <v-text-field v-model="email" :label="$t('global.email')" variant="outlined" color="primary" clearable />
           </v-col>
 
           <v-col cols="12">
-            <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" label="Password"
+            <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" :label="$t('signup.password')"
               variant="outlined" color="primary" :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               @click:append-inner="showPassword = !showPassword" />
           </v-col>
 
           <v-col cols="12">
             <v-btn block color="primary" class="mt-4" size="large" type="submit">
-              Submit
+              {{ $t('signup.submit') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -39,6 +39,12 @@
 <script setup lang="ts">
 definePageMeta({
   public: true
+})
+defineI18nRoute({
+  paths: {
+    fr: '/inscription',
+    en: '/signup'
+  }
 })
 import type { CreateUserRequestDto } from '~/stores/types/user/CreateUserRequestDto'
 import { useUserStore } from '~/stores/userStore'
