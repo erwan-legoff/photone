@@ -18,6 +18,8 @@
   "global": {
     "logout": "Log out",
     "upload_your_file": "Choose a file to upload to your private space",
+    "choose_a_file":"Clique to explore",
+    "upload":"upload",
     "pseudo": "Pseudo",
     "first_name" : "First Name",
     "last_name" : "Last Name",

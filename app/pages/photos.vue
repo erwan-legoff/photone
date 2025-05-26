@@ -10,11 +10,12 @@
         </div>
         <div v-else>
           <h1 class="text-h2">Photos</h1>
-          <p class="text-subtitle-1 mb-5">{{$t("upload_your_file")}}</p>
+          <p class="text-subtitle-1 mb-5">{{ $t("global.upload_your_file") }}</p>
           <div>
             <v-row>
-              <v-file-input v-model="mediumToUpload" label="File input" accept="image/*" :multiple="true" />
-              <v-btn :disabled="!canUpload" @click="uploadMany"> upload </v-btn>
+              <v-file-input v-model="mediumToUpload" :label="$t('global.choose_a_file')" accept="image/*"
+                :multiple="true" />
+              <v-btn :disabled="!canUpload" @click="uploadMany"> {{ $t("global.upload") }} </v-btn>
             </v-row>
           </div>
           <v-row>
