@@ -5,6 +5,8 @@
     "login": "Se connecter",
     "connexion": "Connexion",
     "signup": "S'inscrire",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "enter_your_pin":"Entrez votre PIN",
+    "validate":"valider"
     
 }

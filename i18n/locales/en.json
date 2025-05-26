@@ -6,7 +6,9 @@
     "login": "Log in",
     "connexion": "Connexion",
     "signup": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "enter_your_pin":"Enter your PIN",
+    "validate":"validate"
     
     
 }
