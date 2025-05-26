@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
     "@vueuse/nuxt",
+    "@nuxtjs/i18n",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error it's for vuetify
@@ -38,6 +39,13 @@ export default defineNuxtConfig({
         transformAssetUrls,
       },
     },
+  },
+  i18n: {
+    defaultLocale: 'fr',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'fr', name: 'Français', file: 'fr.json' }
+    ]
   },
 
   compatibilityDate: "2024-11-11",
