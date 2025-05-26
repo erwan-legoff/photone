@@ -15,7 +15,7 @@
                 <v-icon class="mb-6" icon="mdi-check-circle" size="112" color="success" />
                 <h2 class="text-h5 font-weight-bold mb-4">Account validated!</h2>
                 <p class="text-body-2 mb-8">Your email has been successfully confirmed.</p>
-                <v-btn color="primary" @click="navigateTo('/login')">Log in</v-btn>
+                <v-btn color="primary" @click="navigateTo(localePath({ name: 'login' }))">Log in</v-btn>
             </template>
 
             <!-- ERROR -->
@@ -38,6 +38,7 @@ definePageMeta({
 })
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
+const localePath = useLocalePath()
 
 type Status = 'loading' | 'success' | 'error'
 const status = ref<Status>('loading')

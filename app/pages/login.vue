@@ -45,6 +45,7 @@ const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const loading = ref(false)
+const localePath = useLocalePath()
 
 const loginDto = computed<LoginDto>(() => ({
     email: email.value,
@@ -54,7 +55,7 @@ const userStore = useUserStore()
 const handleLogin = async () => {
     await userStore.login(loginDto.value)
     if (!await keyStore.requiresPinInitialization()) {
-        navigateTo("/photos")
+        navigateTo(localePath({ name: 'photos' }))
     }
 }
 
@@ -62,7 +63,7 @@ const handlePinCreation = async (pin: string) => {
     const wrapSucceeded = await keyStore.wrapKeyWithPIN(pin)
 
     if (wrapSucceeded) {
-        navigateTo("/photos")
+        navigateTo(localePath({ name: 'photos' }))
     }
 
 }
