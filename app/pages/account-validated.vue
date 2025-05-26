@@ -33,6 +33,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+    public: true
+})
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 

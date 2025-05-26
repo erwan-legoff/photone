@@ -37,6 +37,9 @@
   </v-container>
 </template>
 <script setup lang="ts">
+definePageMeta({
+  public: true
+})
 import type { CreateUserRequestDto } from '~/stores/types/user/CreateUserRequestDto'
 import { useUserStore } from '~/stores/userStore'
 

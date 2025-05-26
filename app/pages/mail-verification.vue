@@ -45,6 +45,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+    public: true
+})
 
 import { useIntervalFn } from '@vueuse/core'
 const route = useRoute()

@@ -1,13 +1,13 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+import { useLocalePath } from "#i18n";
+
+export default defineNuxtRouteMiddleware((to) => {
   const userStore = useUserStore();
-  const whiteList = [
-    "login",
-    "signup",
-    "mail-verification",
-    "account-validated",
-  ];
-  if (whiteList.includes(to.name?.toString() || "undefined")) return;
+  const localePath = useLocalePath();
+
+  if (to.meta?.public === true) return;
+
+
   if (!userStore.isLogged) {
-    return navigateTo({ name: "login" });
+    return navigateTo(localePath({ name: "login" }));
   }
 });

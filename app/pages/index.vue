@@ -116,6 +116,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  public: true
+})
 </script>
 
 <style scoped>

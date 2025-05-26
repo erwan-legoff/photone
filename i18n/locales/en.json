@@ -1,3 +1,10 @@
 {
-    "upload_your_file":"Choose a file to upload to your private space"
+    
+    "upload_your_file":"Choose a file to upload to your private space",
+    "email":"Email",
+    "password":"Password",
+    "login": "Log in",
+    "connexion": "Connexion"
+    
+    
 }
