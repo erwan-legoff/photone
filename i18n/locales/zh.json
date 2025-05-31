@@ -1,0 +1,70 @@
+{
+  "login": {
+    "title": "登录",
+    "email": "@:global.email",
+    "password": "密码",
+    "submit": "登录"
+  },
+  "signup": {
+    "title": "注册",
+    "page_title": "创建你的账户",
+    "password": "@:login.password",
+    "submit": "申请访问权限"
+  },
+  "pin": {
+    "enter": "请输入您的 PIN 码",
+    "validate": "确认"
+  },
+  "global": {
+    "logout": "退出登录",
+    "upload_your_file": "上传文件到你的私人空间",
+    "choose_a_file": "点击浏览",
+    "upload": "上传",
+    "pseudo": "昵称",
+    "first_name": "名字",
+    "last_name": "姓氏",
+    "email": "电子邮件"
+  },
+  "mail_verification": {
+    "title": "确认你的邮箱地址",
+    "email_explanation": "我们已向你发送了一封确认邮件，请点击其中的链接。",
+    "please_wait": "请稍候再尝试重新发送",
+    "send_new_mail": "发送新邮件",
+    "no_mail": "没收到邮件？请检查垃圾邮件文件夹，或等待倒计时结束后重新发送。"
+  },
+  "home_page": {
+    "title": "Spricture",
+    "subtitle": "一款注重隐私的安全照片应用",
+    "note": "注意：",
+    "noteContent": "该项目是我用于深入学习全栈开发 (特别是 Spring Boot 和 Nuxt 3)的个人技术演示，当前正在积极开发中。",
+    "projectTitle": "项目概览",
+    "projectDesc1": "Spricture 的主要目标是让你安全地存储个人照片。其关键创新在于：照片在上传前会在你的设备 (客户端)上进行加密，从而确保服务器永远无法访问你的原始照片，实现最大限度的隐私保护。",
+    "projectDesc2": "未来，你将能够通过相册组织照片、在群组中 (如家庭、朋友、工作)分享照片、添加标签以便搜索，并可能通过本地 AI 自动提取相关元数据——始终在尊重你隐私的前提下。",
+    "techTitle": "所用技术",
+    "techSpring": "Spring Boot",
+    "techNuxt": "Nuxt 3",
+    "techVuetify": "Vuetify",
+    "techTailwind": "Tailwind CSS",
+    "techJWT": "JWT (认证)",
+    "featuresTitle": "功能",
+    "featuresDone": "已实现功能 (MVP)",
+    "featuresPlanned": "计划中的功能",
+    "featureUpload": "照片上传",
+    "featureStorage": "安全存储 (基础版)",
+    "featureDisplay": "照片展示",
+    "featureApi": "媒体后端 API",
+    "featureSignup": "用户注册",
+    "featureAuth": "JWT 用户认证",
+    "featureReset": "密码重置",
+    "featureMail": "邮箱注册验证",
+    "featureEncrypt": "客户端全加密",
+    "featureAlbums": "相册管理",
+    "featureGroups": "用户分组管理",
+    "featureShare": "照片/相册共享",
+    "featureTags": "标签系统",
+    "featureSync": "后台同步",
+    "featureDesktop": "桌面应用 (目标版本 2.0)",
+    "contactTitle": "感兴趣？欢迎联系我！",
+    "sendMail": "发送电子邮件"
+  }
+}

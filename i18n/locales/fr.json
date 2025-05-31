@@ -10,7 +10,7 @@
     "title": "S'inscrire",
     "page_title": "Créez votre compte",
     "password": "@:login.password",
-    "submit": "Soumettre à approbation"
+    "submit": "Demander l'accès"
   },
   "pin": {
     "enter": "Entrez votre PIN",
