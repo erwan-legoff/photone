@@ -8,8 +8,20 @@
                 Photone
             </NuxtLink>
         </v-app-bar-title>
+        <v-btn>
+            {{ locale }}
 
+            <v-menu activator="parent" location="bottom" transition="slide-y-transition">
+                <v-list>
+                    <v-list-item v-for="locale in locales" @click="setLocale(locale.code)">
+                        <v-list-item-title>{{ locale.name }}</v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
+
+        </v-btn>
         <v-btn icon>
+
             <v-icon>mdi-account</v-icon>
             <v-menu activator="parent" location="bottom" transition="slide-x-reverse-transition">
                 <v-list>
@@ -34,7 +46,7 @@
 <script setup lang="ts">
 const userStore = useUserStore()
 const localePath = useLocalePath();
-
+const { locales, setLocale, locale } = useI18n()
 const logout = () => {
     userStore.logout()
     navigateTo(localePath({ name: 'login' }))
