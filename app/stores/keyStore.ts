@@ -7,7 +7,7 @@ import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary
 // In-memory key only
 let inMemoryKey: CryptoKey | undefined;
 export interface KeyState {
-  hasAlreadyWrappedTheKey: boolean
+  hasAlreadyWrappedTheKey: boolean;
   needsPinVerification: boolean;
   needsPinInitialization: boolean;
 }
@@ -19,7 +19,7 @@ const IDB_KEYS = {
 export const useKeyStore = defineStore("key-store", {
   state: (): KeyState => {
     return {
-      hasAlreadyWrappedTheKey:false,
+      hasAlreadyWrappedTheKey: false,
       needsPinVerification: false,
       needsPinInitialization: false,
     };
@@ -79,15 +79,14 @@ export const useKeyStore = defineStore("key-store", {
         notificationStore.notifyInfo("Stockage de la clé wrap dans l'idb...");
         await idb.setItem(IDB_KEYS.wrappedKeyData, wrappedKeyData);
         this.needsPinVerification = false;
-        if (!await this.hasWrappedKey()) {
+        if (!(await this.hasWrappedKey())) {
           notificationStore.notifyError("No wrapped key stored");
           return false;
         }
 
-
         notificationStore.notifySuccess("Key successfully wrapped !");
         console.log("Key successfully wrapped.");
-        this.hasAlreadyWrappedTheKey = true
+        this.hasAlreadyWrappedTheKey = true;
         return true;
       } catch (error: any) {
         console.error("Failed to wrap key:", error);
@@ -98,7 +97,7 @@ export const useKeyStore = defineStore("key-store", {
 
     async unwrapKeyWithPIN(pin: string): Promise<CryptoKey | undefined> {
       const idb = useIdb();
-      const notificationStore = useNotificationStore()
+      const notificationStore = useNotificationStore();
       // Retrieve stored data
       let wrappedKeyData = (await idb.getItem(IDB_KEYS.wrappedKeyData)) as any;
       if (!wrappedKeyData) {
@@ -171,63 +170,67 @@ export const useKeyStore = defineStore("key-store", {
     // Function to check if a wrapped key exists
     async hasWrappedKey(): Promise<boolean> {
       const idb = useIdb();
-      const notificationStore = useNotificationStore()
+      const notificationStore = useNotificationStore();
       const wrappedKeyData = await idb.getItem(IDB_KEYS.wrappedKeyData);
       return !!wrappedKeyData;
     },
     async requiresPinInitialization(): Promise<boolean> {
-      const userStore = useUserStore()
-      const notificationStore = useNotificationStore()
-      const hasNoWrappedKey = !(await this.hasWrappedKey())
-      const needsPin = hasNoWrappedKey && userStore.isLogged
-      this.needsPinInitialization = needsPin
-      if(needsPin){
-        notificationStore.notifyInfo("Please create your PIN.")
+      const userStore = useUserStore();
+      const notificationStore = useNotificationStore();
+      const hasNoWrappedKey = !(await this.hasWrappedKey());
+      const needsPin = hasNoWrappedKey && userStore.isLogged;
+      this.needsPinInitialization = needsPin;
+      if (needsPin) {
+        notificationStore.notifyInfo("Please create your PIN.");
       }
-      return needsPin
+      return needsPin;
     },
 
     async shouldPromptForPin(): Promise<boolean> {
-      if(await this.requiresAuthentication()){
-        this.needsPinVerification = false 
-        return false
-      }
-
-      if(!!(await this.getKey())){
-        this.needsPinVerification = false 
+      if (await this.requiresAuthentication()) {
+        this.needsPinVerification = false;
         return false;
       }
-      this.needsPinVerification = true
-      return true
+
+      if (!!(await this.getKey())) {
+        this.needsPinVerification = false;
+        return false;
+      }
+      this.needsPinVerification = true;
+      return true;
     },
 
     async requiresAuthentication(): Promise<boolean> {
-      const userStore = useUserStore()
-      const notificationStore = useNotificationStore()
-      
-      const hasNoWrappedKey = !(await this.hasWrappedKey())
-      const requiresAuthentication = hasNoWrappedKey && !this.getKey()
-      if(requiresAuthentication || !userStore.isLogged){
-        userStore.logout()
-        notificationStore.notifyWarning("Oups... A problem occured, please connect you again.")
+      const userStore = useUserStore();
+      const notificationStore = useNotificationStore();
+
+      const hasNoWrappedKey = !(await this.hasWrappedKey());
+      const requiresAuthentication = hasNoWrappedKey && !this.getKey();
+      if (requiresAuthentication || !userStore.isLogged) {
+        userStore.logout();
+        notificationStore.notifyWarning(
+          "Oups... A problem occured, please connect you again."
+        );
         return true;
       }
-      
+
       return false;
     },
 
     async decryptFile(file: File): Promise<File> {
-
-      if (await this.shouldPromptForPin()) throw new Error("Veuillez rentrer un nouveau mdp");
+      if (await this.shouldPromptForPin())
+        throw new Error("Veuillez rentrer un nouveau mdp");
       const notificationStore = useNotificationStore();
       const userStore = useUserStore();
-      const key = await this.getKey()
-      if(!key) throw new Error("Aucune clé disponible pour le déchiffrement");
+      const key = await this.getKey();
+      if (!key) throw new Error("Aucune clé disponible pour le déchiffrement");
       try {
         return await decryptFileBinary(file, key);
       } catch (error: any) {
-        notificationStore.notifyError("Erreur lors du déchiffrement du fichier : " + (error?.message || error));
-        userStore.logout();
+        notificationStore.notifyError(
+          "Erreur lors du déchiffrement du fichier : " +
+            (error?.message || error)
+        );
         throw error;
       }
     },
