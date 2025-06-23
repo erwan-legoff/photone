@@ -49,6 +49,11 @@ export default defineNuxtConfig({
       { code: "zh", name: "中文 (简体)", file: "zh.json" },
     ],
   },
+  runtimeConfig: {
+    public: {
+      mediumServiceRoute: process.env.NUXT_PUBLIC_MEDIUM_SERVICE_ROOT,
+    },
+  },
 
   compatibilityDate: "2024-11-11",
 });
