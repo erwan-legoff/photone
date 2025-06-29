@@ -64,7 +64,8 @@
     "featureTags": "Sistema de etiquetas",
     "featureSync": "Sincronización en segundo plano",
     "featureDesktop": "App de escritorio (objetivo v2.0)",
-    "contactTitle": "¿Interesado/a? ¡Contáctame!",
-    "sendMail": "Enviar un correo"
-  }
+  "contactTitle": "¿Interesado/a? ¡Contáctame!",
+  "sendMail": "Enviar un correo",
+  "goToPhotos": "Acceder a las fotos"
+}
 }

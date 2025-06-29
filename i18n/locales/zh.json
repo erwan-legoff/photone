@@ -64,7 +64,8 @@
     "featureTags": "标签系统",
     "featureSync": "后台同步",
     "featureDesktop": "桌面应用 (目标版本 2.0)",
-    "contactTitle": "感兴趣？欢迎联系我！",
-    "sendMail": "发送电子邮件"
-  }
+  "contactTitle": "感兴趣？欢迎联系我！",
+  "sendMail": "发送电子邮件",
+  "goToPhotos": "查看照片"
+}
 }

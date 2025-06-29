@@ -65,7 +65,8 @@
     "featureTags": "Système de tags",
     "featureSync": "Synchronisation en arrière-plan",
     "featureDesktop": "Application de bureau (Objectif v2.0)",
-    "contactTitle": "Intéressé(e) ? Contactez-moi !",
-    "sendMail": "Envoyer un email"
-  }
+  "contactTitle": "Intéressé(e) ? Contactez-moi !",
+  "sendMail": "Envoyer un email",
+  "goToPhotos": "Accéder aux photos"
+}
 }

@@ -16,6 +16,20 @@
             <span class="font-weight-medium">{{ $t('home_page.note') }}</span> {{ $t('home_page.noteContent') }}
           </v-alert>
 
+          <section class="text-center mb-10">
+            <h2 class="text-h5 font-weight-semibold mb-6">
+              {{ $t('home_page.contactTitle') }}
+            </h2>
+            <div class="d-flex justify-center flex-wrap ga-4">
+              <v-btn to="/photos" color="primary" size="large" rounded="lg" class="text-none">
+                {{ $t('home_page.goToPhotos') }}
+              </v-btn>
+              <v-btn href="mailto:rw4nit0@gmail.com" color="secondary" size="large" rounded="lg" class="text-none" prepend-icon="mdi-email-fast">
+                {{ $t('home_page.sendMail') }}
+              </v-btn>
+            </div>
+          </section>
+
           <section class="mb-10">
             <h2 class="text-h5 font-weight-semibold mb-4 border-b pb-2">
               <v-icon start icon="mdi-account-eye" />
@@ -87,16 +101,6 @@
                 </v-list>
               </v-col>
             </v-row>
-          </section>
-
-          <section class="text-center mt-12">
-            <h2 class="text-h5 font-weight-semibold mb-6">
-              {{ $t('home_page.contactTitle') }}
-            </h2>
-            <v-btn href="mailto:rw4nit0@gmail.com" color="secondary" size="large" rounded="lg" class="text-none"
-              prepend-icon="mdi-email-fast">
-              {{ $t('home_page.sendMail') }}
-            </v-btn>
           </section>
 
         </v-card>
