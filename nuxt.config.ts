@@ -54,6 +54,7 @@ export default defineNuxtConfig({
       mediumServiceRoute: process.env.NUXT_PUBLIC_MEDIUM_SERVICE_ROOT,
     },
   },
+  css: ["vuetify/styles", "@mdi/font/css/materialdesignicons.css"],
 
   compatibilityDate: "2024-11-11",
 });
