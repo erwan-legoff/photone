@@ -41,13 +41,46 @@
     "projectDesc1": "El objetivo principal de Spricture es permitirte almacenar tus fotos personales de forma segura. La innovación clave es cifrar las fotos directamente en tu dispositivo (del lado del cliente) antes de subirlas al servidor. Esto garantiza la máxima privacidad, ya que el servidor nunca tiene acceso a tus fotos sin cifrar.",
     "projectDesc2": "Próximamente, podrás organizar tus fotos en álbumes, compartirlas en grupos (Familia, Amigos, Trabajo...), añadir etiquetas para facilitar la búsqueda, y posiblemente aprovechar el análisis local por IA para extraer automáticamente metadatos relevantes, siempre respetando tu privacidad.",
     "tech": {
-      "title": "Tecnologías Utilizadas",
+    "title": "Tecnologías Utilizadas",
+    "frameworks": {
+      "title": "Frameworks",
       "spring": "Spring Boot",
-      "nuxt": "Nuxt 3",
-      "vuetify": "Vuetify",
-      "tailwind": "Tailwind CSS",
-      "jwt": "JWT (Autenticación)"
+      "nuxt": "Nuxt 3"
     },
+    "styling": {
+      "title": "Apariencia",
+      "vuetify": "Vuetify",
+      "tailwind": "Tailwind CSS"
+    },
+    "security": {
+      "title": "Seguridad",
+      "jwt": "JWT (Autenticación)",
+      "bcrypt": "BCRYPT (Cifrado de Fotos)",
+      "roleMgmt": "Gestión de Roles",
+      "webCryptoApi": "API Web Crypto"
+    },
+    "languages": {
+      "title": "Lenguajes",
+      "java": "Java 21",
+      "typescript": "TypeScript"
+    },
+    "otherBack": {
+      "title": "Backend Diverso",
+      "springDataJpa": "Spring Data JPA",
+      "lombok": "Lombok",
+      "awsS3": "AWS S3"
+    },
+    "otherFrontend": {
+      "title": "Frontend Diverso",
+      "pinia": "Pinia (Gestión de Estado)",
+      "i18n": "i18n (Internacionalización)"
+    },
+    "testing": {
+      "title": "Pruebas",
+      "mockito": "Mockito (Mocking)",
+      "junit": "JUNIT (Pruebas Unitarias)"
+    }
+  },
     "features": {
       "title": "Funciones",
       "done": "Ya implementadas (MVP)",

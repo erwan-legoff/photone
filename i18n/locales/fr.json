@@ -41,14 +41,47 @@
     "projectTitle": "Présentation du Projet",
     "projectDesc1": "Spricture a pour objectif principal de vous permettre de stocker vos photos personnelles de manière sécurisée. L'innovation clé réside dans le chiffrement des photos directement sur votre appareil (côté client) avant même leur envoi vers le serveur. Cela garantit un niveau de confidentialité maximal, le serveur n'ayant jamais accès à vos photos en clair.",
     "projectDesc2": "À terme, vous pourrez organiser vos photos par albums, les partager au sein de groupes (Famille, Amis, Travail...), ajouter des tags pour faciliter la recherche, et potentiellement bénéficier d'une analyse locale par IA pour extraire automatiquement des métadonnées pertinentes, toujours dans le respect de votre vie privée.",
-    "tech": {
-      "title": "Technologies Utilisées",
+     "tech": {
+    "title": "Technologies Utilisées",
+    "frameworks": {
+      "title": "Frameworks",
       "spring": "Spring Boot",
-      "nuxt": "Nuxt 3",
-      "vuetify": "Vuetify",
-      "tailwind": "Tailwind CSS",
-      "jwt": "JWT (Authentification)"
+      "nuxt": "Nuxt 3"
     },
+    "styling": {
+      "title": "Apparence",
+      "vuetify": "Vuetify",
+      "tailwind": "Tailwind CSS"
+    },
+    "security": {
+      "title": "Sécurité",
+      "jwt": "JWT (Authentification)",
+      "bcrypt": "BCRYPT (Chiffrement Photos)",
+      "roleMgmt": "Gestion de Rôles",
+      "webCryptoApi": "API Web Crypto"
+    },
+    "languages": {
+      "title": "Langages",
+      "java": "Java 21",
+      "typescript": "TypeScript"
+    },
+    "otherBack": {
+      "title": "Divers Backend",
+      "springDataJpa": "Spring Data JPA",
+      "lombok": "Lombok",
+      "awsS3": "AWS S3"
+    },
+    "otherFrontend": {
+      "title": "Divers Frontend",
+      "pinia": "Pinia (Gestion d'état)",
+      "i18n": "i18n (Internationalisation)"
+    },
+    "testing": {
+      "title": "Tests",
+      "mockito": "Mockito (Mocking)",
+      "junit": "JUNIT (Tests unitaires)"
+    }
+  },
     "features": {
       "title": "Fonctionnalités",
       "done": "Déjà implémentées (MVP)",

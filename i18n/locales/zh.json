@@ -41,13 +41,46 @@
     "projectDesc1": "Spricture 的主要目标是让你安全地存储个人照片。其关键创新在于：照片在上传前会在你的设备 (客户端)上进行加密，从而确保服务器永远无法访问你的原始照片，实现最大限度的隐私保护。",
     "projectDesc2": "未来，你将能够通过相册组织照片、在群组中 (如家庭、朋友、工作)分享照片、添加标签以便搜索，并可能通过本地 AI 自动提取相关元数据——始终在尊重你隐私的前提下。",
     "tech": {
-      "title": "所用技术",
+    "title": "所用技术",
+    "frameworks": {
+      "title": "框架",
       "spring": "Spring Boot",
-      "nuxt": "Nuxt 3",
-      "vuetify": "Vuetify",
-      "tailwind": "Tailwind CSS",
-      "jwt": "JWT (认证)"
+      "nuxt": "Nuxt 3"
     },
+    "styling": {
+      "title": "外观",
+      "vuetify": "Vuetify",
+      "tailwind": "Tailwind CSS"
+    },
+    "security": {
+      "title": "安全",
+      "jwt": "JWT (认证)",
+      "bcrypt": "BCRYPT (照片加密)",
+      "roleMgmt": "角色管理",
+      "webCryptoApi": "Web Crypto API"
+    },
+    "languages": {
+      "title": "语言",
+      "java": "Java 21",
+      "typescript": "TypeScript"
+    },
+    "otherBack": {
+      "title": "后端其他",
+      "springDataJpa": "Spring Data JPA",
+      "lombok": "Lombok",
+      "awsS3": "AWS S3"
+    },
+    "otherFrontend": {
+      "title": "前端其他",
+      "pinia": "Pinia (状态管理)",
+      "i18n": "i18n (国际化)"
+    },
+    "testing": {
+      "title": "测试",
+      "mockito": "Mockito (Mocking)",
+      "junit": "JUNIT（单元测试）"
+    }
+  },
     "features": {
       "title": "功能",
       "done": "已实现功能 (MVP)",
