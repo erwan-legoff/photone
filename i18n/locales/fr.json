@@ -33,7 +33,7 @@
     "send_new_mail":"Renvoyer un mail",
     "no_mail":"Vous ne trouvez pas le mail ? Vérifiez votre dossier spam, ou alors demandez un nouveau mail à la fin du compte à rebours."
   },
-  "home_page": {
+ "home_page": {
     "title": "Spricture",
     "subtitle": "Une application photo sécurisée axée sur la confidentialité.",
     "note": "Note :",
@@ -41,32 +41,36 @@
     "projectTitle": "Présentation du Projet",
     "projectDesc1": "Spricture a pour objectif principal de vous permettre de stocker vos photos personnelles de manière sécurisée. L'innovation clé réside dans le chiffrement des photos directement sur votre appareil (côté client) avant même leur envoi vers le serveur. Cela garantit un niveau de confidentialité maximal, le serveur n'ayant jamais accès à vos photos en clair.",
     "projectDesc2": "À terme, vous pourrez organiser vos photos par albums, les partager au sein de groupes (Famille, Amis, Travail...), ajouter des tags pour faciliter la recherche, et potentiellement bénéficier d'une analyse locale par IA pour extraire automatiquement des métadonnées pertinentes, toujours dans le respect de votre vie privée.",
-    "techTitle": "Technologies Utilisées",
-    "techSpring": "Spring Boot",
-    "techNuxt": "Nuxt 3",
-    "techVuetify": "Vuetify",
-    "techTailwind": "Tailwind CSS",
-    "techJWT": "JWT (Authentification)",
-    "featuresTitle": "Fonctionnalités",
-    "featuresDone": "Déjà implémentées (MVP)",
-    "featuresPlanned": "Fonctionnalités Prévues",
-    "featureUpload": "Upload de photos",
-    "featureStorage": "Stockage sécurisé (base)",
-    "featureDisplay": "Affichage des photos",
-    "featureApi": "API Back-end pour les médias",
-    "featureSignup": "Inscription utilisateur",
-    "featureAuth": "Authentification JWT",
-    "featureReset": "Réinitialisation de mot de passe",
-    "featureMail": "Validation d'inscription par email",
-    "featureEncrypt": "Chiffrement complet côté client",
-    "featureAlbums": "Gestion d'albums",
-    "featureGroups": "Gestion de groupes utilisateurs",
-    "featureShare": "Partage de photos/albums",
-    "featureTags": "Système de tags",
-    "featureSync": "Synchronisation en arrière-plan",
-    "featureDesktop": "Application de bureau (Objectif v2.0)",
-  "contactTitle": "Intéressé(e) ? Contactez-moi !",
-  "sendMail": "Envoyer un email",
-  "goToPhotos": "Accéder aux photos"
-}
+    "tech": {
+      "title": "Technologies Utilisées",
+      "spring": "Spring Boot",
+      "nuxt": "Nuxt 3",
+      "vuetify": "Vuetify",
+      "tailwind": "Tailwind CSS",
+      "jwt": "JWT (Authentification)"
+    },
+    "features": {
+      "title": "Fonctionnalités",
+      "done": "Déjà implémentées (MVP)",
+      "planned": "Fonctionnalités Prévues",
+      "upload": "Upload de photos",
+      "storage": "Stockage sécurisé (base)",
+      "display": "Affichage des photos",
+      "api": "API Back-end pour les médias",
+      "signup": "Inscription utilisateur",
+      "auth": "Authentification JWT",
+      "reset": "Réinitialisation de mot de passe",
+      "mail": "Validation d'inscription par email",
+      "encrypt": "Chiffrement complet côté client",
+      "albums": "Gestion d'albums",
+      "groups": "Gestion de groupes utilisateurs",
+      "share": "Partage de photos/albums",
+      "tags": "Système de tags",
+      "sync": "Synchronisation en arrière-plan",
+      "desktop": "Application de bureau (Objectif v2.0)"
+    },
+    "contactTitle": "Intéressé(e) ? Contactez-moi !",
+    "sendMail": "Envoyer un email",
+    "openApplication": "Essayer l'application"
+  }
 }
