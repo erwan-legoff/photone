@@ -25,8 +25,8 @@
         <v-btn to="/photos" color="primary" size="large" rounded="lg" class="cta-btn text-none">
           {{ $t('home_page.openApplication') }}
         </v-btn>
-        <v-btn href="mailto:rw4nit0@gmail.com" color="secondary" size="large" rounded="lg" class="cta-btn text-none"
-          prepend-icon="mdi-email-fast">
+        <v-btn color="secondary" size="large" rounded="lg" class="cta-btn text-none" prepend-icon="mdi-email-fast"
+          @click="copyEmail()">
           {{ $t('home_page.sendMail') }}
         </v-btn>
       </div>
@@ -52,7 +52,6 @@
         <v-icon start icon="mdi-code-tags" />
         {{ $t('home_page.tech.title') }}
       </h2>
-
       <div class="tech-grid">
         <div v-for="cat in categories" :key="cat.key" class="tile" :style="tileStyles[cat.key]"
           @mousemove="(e) => throttledMove(e, cat.key)" @mouseleave="() => onTileLeave(cat.key)">
@@ -109,16 +108,45 @@
         </v-col>
       </v-row>
     </section>
+
+    <!-- Snackbar pour confirmation -->
+    <v-snackbar v-model="snackbar" timeout="6000" class="snackbar-lg" location="top">
+      {{ snackbarText }}
+    </v-snackbar>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+
+import { ref, reactive } from 'vue'
 import { useMouse, useThrottleFn } from '@vueuse/core'
 
-// basic mouse position
+// email à copier
+const email = 'rw4nit0@gmail.com'
+
+// snackbar de confirmation
+const snackbar = ref(false)
+const snackbarText = ref('')
+
+// copier dans le presse-papiers
+function copyEmail() {
+  navigator.clipboard.writeText(email)
+    .then(() => {
+      snackbarText.value = `${t('home_page.mailCopied')} : ${email}`
+      snackbar.value = true
+    })
+    .catch(() => {
+      snackbarText.value = 'Échec de la copie'
+      snackbar.value = true
+    })
+}
+
+
+// gestion du hover sur les tuiles
 const { x, y } = useMouse()
-// wrap move handler in throttle to reduce CPU
 const throttledMove = useThrottleFn(onTileMove, 50)
 
 const categories = [
@@ -223,5 +251,12 @@ definePageMeta({ public: true })
 .cta-btn:hover {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 6px 18px rgba(3, 218, 198, 0.5);
+}
+
+.snackbar-lg {
+  font-size: 1.25rem;
+  /* texte plus gros */
+  padding: 1rem 1.5rem;
+  /* plus d’espace interne */
 }
 </style>

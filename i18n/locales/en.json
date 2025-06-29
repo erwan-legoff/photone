@@ -40,7 +40,8 @@
     "projectTitle": "Project Overview",
     "projectDesc1": "Spricture's main goal is to let you store your personal photos securely. The key innovation is encrypting photos directly on your device (client-side) before uploading them to the server. This ensures maximum privacy, as the server never has access to your unencrypted photos.",
     "projectDesc2": "Soon, you'll be able to organize your photos by albums, share them in groups (Family, Friends, Work...), add tags for easier searching, and potentially benefit from local AI analysis to automatically extract relevant metadata, always respecting your privacy.",
-     "tech": {
+    "mailCopied": "Email address copied to clipboard", 
+    "tech": {
     "title": "Technologies Used",
     "frameworks": {
       "title": "Frameworks",
