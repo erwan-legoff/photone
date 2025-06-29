@@ -1,137 +1,170 @@
 <template>
   <v-container fluid class="pa-8 min-h-screen">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">
-        {{ $t('home_page.title') }}
-      </h1>
-      <p class="text-h6 font-weight-regular">
-        {{ $t('home_page.subtitle') }}
-      </p>
-    </div>
-
-    <!-- Dev note -->
-    <v-alert type="info" variant="tonal" border="start" density="compact" class="mb-8 rounded" icon="mdi-wrench">
-      <span class="font-weight-medium">{{ $t('home_page.note') }}</span>
-      {{ $t('home_page.noteContent') }}
-    </v-alert>
-
-    <!-- CTA -->
-    <section class="text-center mb-10">
-      <h2 class="text-h5 font-weight-semibold mb-6">
-        {{ $t('home_page.contactTitle') }}
-      </h2>
-      <div class="d-flex justify-center flex-wrap ga-4">
-        <v-btn to="/photos" color="primary" size="large" rounded="lg" class="cta-btn text-none">
-          {{ $t('home_page.openApplication') }}
-        </v-btn>
-        <v-btn color="secondary" size="large" rounded="lg" class="cta-btn text-none" prepend-icon="mdi-email-fast"
-          @click="copyEmail()">
-          {{ $t('home_page.sendMail') }}
-        </v-btn>
-      </div>
-    </section>
-
-    <!-- Project overview -->
-    <section class="mb-10">
-      <h2 class="text-h5 font-weight-semibold mb-4 border-b pb-2">
-        <v-icon start icon="mdi-account-eye" />
-        {{ $t('home_page.projectTitle') }}
-      </h2>
-      <p class="text-body-1 leading-relaxed">
-        {{ $t('home_page.projectDesc1') }}
-      </p>
-      <p class="text-body-1 mt-3 leading-relaxed">
-        {{ $t('home_page.projectDesc2') }}
-      </p>
-    </section>
-
-    <!-- Tech stack (GRID) -->
-    <section class="mb-12">
-      <h2 class="text-h5 font-weight-semibold mb-6 border-b pb-2 d-flex align-center">
-        <v-icon start icon="mdi-code-tags" />
-        {{ $t('home_page.tech.title') }}
-      </h2>
-      <div class="tech-grid">
-        <div v-for="cat in categories" :key="cat.key" class="tile" :style="tileStyles[cat.key]"
-          @mousemove="(e) => throttledMove(e, cat.key)" @mouseleave="() => onTileLeave(cat.key)">
-          <v-icon :icon="cat.icon" size="42" class="mb-3" />
-          <h3 class="text-h6 font-weight-medium mb-4">
-            {{ $t(`home_page.tech.${cat.key}.title`) }}
-          </h3>
-          <div class="d-flex flex-wrap justify-center ga-3">
-            <v-chip v-for="item in cat.items" :key="item.key" size="large" color="primary" variant="flat"
-              :prepend-icon="item.icon" class="tech-chip px-5 py-3">
-              {{ $t(`home_page.tech.${cat.key}.${item.key}`) }}
-            </v-chip>
+    <v-row justify="center">
+      <v-col cols="12" md="10" lg="8">
+        <v-card class="pa-6 pa-md-10 rounded-lg " color="surface">
+          <!-- Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">
+              {{ $t('home_page.title') }}
+            </h1>
+            <p class="text-h6 font-weight-regular">
+              {{ $t('home_page.subtitle') }}
+            </p>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Features -->
-    <section class="mb-10">
-      <h2 class="text-h5 font-weight-semibold mb-4 border-b pb-2">
-        <v-icon start icon="mdi-cogs" />
-        {{ $t('home_page.features.title') }}
-      </h2>
-      <v-row>
-        <v-col cols="12" md="6">
-          <h3 class="text-h6 font-weight-medium mb-3">
-            <v-icon start icon="mdi-check-circle" color="success" />
-            {{ $t('home_page.features.done') }}
-          </h3>
-          <v-list density="compact" class="bg-transparent">
-            <v-list-item prepend-icon="mdi-upload">{{ $t('home_page.features.upload') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-database-lock">{{ $t('home_page.features.storage') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-image-multiple">{{ $t('home_page.features.display') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-api">{{ $t('home_page.features.api') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-account-plus">{{ $t('home_page.features.signup') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-security">{{ $t('home_page.features.auth') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-email-check">{{ $t('home_page.features.mail') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-shield-lock">{{ $t('home_page.features.encrypt') }}</v-list-item>
-          </v-list>
-        </v-col>
-        <v-col cols="12" md="6">
-          <h3 class="text-h6 font-weight-medium mb-3">
-            <v-icon start icon="mdi-progress-wrench" color="warning" />
-            {{ $t('home_page.features.planned') }}
-          </h3>
-          <v-list density="compact" class="bg-transparent">
-            <v-list-item prepend-icon="mdi-folder-multiple-image">{{ $t('home_page.features.albums') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-account-group">{{ $t('home_page.features.groups') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-share-variant">{{ $t('home_page.features.share') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-tag-multiple">{{ $t('home_page.features.tags') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-sync">{{ $t('home_page.features.sync') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-desktop-classic">{{ $t('home_page.features.desktop') }}</v-list-item>
-          </v-list>
-        </v-col>
-      </v-row>
-    </section>
+          <!-- Dev note -->
+          <v-alert type="info" variant="tonal" border="start" density="compact" class="mb-8 rounded" icon="mdi-wrench">
+            <span class="font-weight-medium">
+              {{ $t('home_page.note') }}
+            </span>
+            {{ $t('home_page.noteContent') }}
+          </v-alert>
 
-    <!-- Snackbar pour confirmation -->
-    <v-snackbar v-model="snackbar" timeout="6000" class="snackbar-lg" location="top">
-      {{ snackbarText }}
-    </v-snackbar>
+          <!-- CTA -->
+          <section class="text-center mb-10">
+            <h2 class="text-h5 font-weight-semibold mb-6">
+              {{ $t('home_page.contactTitle') }}
+            </h2>
+            <div class="d-flex justify-center flex-wrap ga-4">
+              <v-btn to="/photos" color="primary" size="large" rounded="lg" class="cta-btn text-none">
+                {{ $t('home_page.openApplication') }}
+              </v-btn>
+              <v-btn color="secondary" size="large" rounded="lg" class="cta-btn text-none" prepend-icon="mdi-email-fast"
+                @click="copyEmail()">
+                {{ $t('home_page.sendMail') }}
+              </v-btn>
+            </div>
+          </section>
+
+          <!-- Project overview -->
+          <section class="mb-10">
+            <h2 class="text-h5 font-weight-semibold mb-4 border-b pb-2">
+              <v-icon start icon="mdi-account-eye" />
+              {{ $t('home_page.projectTitle') }}
+            </h2>
+            <p class="text-body-1 leading-relaxed">
+              {{ $t('home_page.projectDesc1') }}
+            </p>
+            <p class="text-body-1 mt-3 leading-relaxed">
+              {{ $t('home_page.projectDesc2') }}
+            </p>
+          </section>
+
+          <!-- Tech stack (GRID) -->
+          <section class="mb-12">
+            <h2 class="text-h5 font-weight-semibold mb-6 border-b pb-2 d-flex align-center">
+              <v-icon start icon="mdi-code-tags" />
+              {{ $t('home_page.tech.title') }}
+            </h2>
+            <div class="tech-grid">
+              <div v-for="cat in categories" :key="cat.key" class="tile" :style="tileStyles[cat.key]"
+                @mousemove="(e) => throttledMove(e, cat.key)" @mouseleave="() => onTileLeave(cat.key)">
+                <v-icon :icon="cat.icon" size="42" class="mb-3" />
+                <h3 class="text-h6 font-weight-medium mb-4">
+                  {{ $t(`home_page.tech.${cat.key}.title`) }}
+                </h3>
+                <div class="d-flex flex-wrap justify-center ga-3">
+                  <v-chip v-for="item in cat.items" :key="item.key" size="large" color="primary" variant="flat"
+                    :prepend-icon="item.icon" class="tech-chip px-5 py-3">
+                    {{ $t(`home_page.tech.${cat.key}.${item.key}`) }}
+                  </v-chip>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Features -->
+          <section class="mb-10">
+            <h2 class="text-h5 font-weight-semibold mb-4 border-b pb-2">
+              <v-icon start icon="mdi-cogs" />
+              {{ $t('home_page.features.title') }}
+            </h2>
+            <v-row>
+              <v-col cols="12" md="6">
+                <h3 class="text-h6 font-weight-medium mb-3">
+                  <v-icon start icon="mdi-check-circle" color="success" />
+                  {{ $t('home_page.features.done') }}
+                </h3>
+                <v-list density="compact" class="bg-transparent">
+                  <v-list-item prepend-icon="mdi-upload">
+                    {{ $t('home_page.features.upload') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-database-lock">
+                    {{ $t('home_page.features.storage') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-image-multiple">
+                    {{ $t('home_page.features.display') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-api">
+                    {{ $t('home_page.features.api') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-account-plus">
+                    {{ $t('home_page.features.signup') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-security">
+                    {{ $t('home_page.features.auth') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-email-check">
+                    {{ $t('home_page.features.mail') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-shield-lock">
+                    {{ $t('home_page.features.encrypt') }}
+                  </v-list-item>
+                </v-list>
+              </v-col>
+
+              <v-col cols="12" md="6">
+                <h3 class="text-h6 font-weight-medium mb-3">
+                  <v-icon start icon="mdi-progress-wrench" color="warning" />
+                  {{ $t('home_page.features.planned') }}
+                </h3>
+                <v-list density="compact" class="bg-transparent">
+                  <v-list-item prepend-icon="mdi-folder-multiple-image">
+                    {{ $t('home_page.features.albums') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-account-group">
+                    {{ $t('home_page.features.groups') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-share-variant">
+                    {{ $t('home_page.features.share') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-tag-multiple">
+                    {{ $t('home_page.features.tags') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-sync">
+                    {{ $t('home_page.features.sync') }}
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-desktop-classic">
+                    {{ $t('home_page.features.desktop') }}
+                  </v-list-item>
+                </v-list>
+              </v-col>
+            </v-row>
+          </section>
+
+          <!-- Snackbar -->
+          <v-snackbar v-model="snackbar" timeout="6000" class="snackbar-lg" location="top">
+            {{ snackbarText }}
+          </v-snackbar>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
-
-
 import { ref, reactive } from 'vue'
 import { useMouse, useThrottleFn } from '@vueuse/core'
 
-// email à copier
+const { t } = useI18n()
+
 const email = 'rw4nit0@gmail.com'
 
-// snackbar de confirmation
 const snackbar = ref(false)
 const snackbarText = ref('')
 
-// copier dans le presse-papiers
 function copyEmail() {
   navigator.clipboard.writeText(email)
     .then(() => {
@@ -144,8 +177,6 @@ function copyEmail() {
     })
 }
 
-
-// gestion du hover sur les tuiles
 const { x, y } = useMouse()
 const throttledMove = useThrottleFn(onTileMove, 50)
 
@@ -188,6 +219,10 @@ definePageMeta({ public: true })
 <style scoped>
 .min-h-screen {
   min-height: 100vh;
+  background: var(--v-theme-surface);
+}
+
+.v-card {
   background: var(--v-theme-surface);
 }
 
@@ -255,8 +290,6 @@ definePageMeta({ public: true })
 
 .snackbar-lg {
   font-size: 1.25rem;
-  /* texte plus gros */
   padding: 1rem 1.5rem;
-  /* plus d’espace interne */
 }
 </style>
