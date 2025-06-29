@@ -54,14 +54,14 @@
       </h2>
 
       <div class="tech-grid">
-        <div v-for="cat in categories" :key="cat.key" class="tile" @mousemove="onTileMove($event, cat.key)"
-          @mouseleave="onTileLeave(cat.key)" :style="tileStyles[cat.key]">
+        <div v-for="cat in categories" :key="cat.key" class="tile" :style="tileStyles[cat.key]"
+          @mousemove="(e) => throttledMove(e, cat.key)" @mouseleave="() => onTileLeave(cat.key)">
           <v-icon :icon="cat.icon" size="42" class="mb-3" />
           <h3 class="text-h6 font-weight-medium mb-4">
             {{ $t(`home_page.tech.${cat.key}.title`) }}
           </h3>
           <div class="d-flex flex-wrap justify-center ga-3">
-            <v-chip size="large" v-for="item in cat.items" :key="item.key" color="primary" variant="flat"
+            <v-chip v-for="item in cat.items" :key="item.key" size="large" color="primary" variant="flat"
               :prepend-icon="item.icon" class="tech-chip px-5 py-3">
               {{ $t(`home_page.tech.${cat.key}.${item.key}`) }}
             </v-chip>
@@ -83,24 +83,12 @@
             {{ $t('home_page.features.done') }}
           </h3>
           <v-list density="compact" class="bg-transparent">
-            <v-list-item prepend-icon="mdi-upload">
-              {{ $t('home_page.features.upload') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-database-lock">
-              {{ $t('home_page.features.storage') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-image-multiple">
-              {{ $t('home_page.features.display') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-api">
-              {{ $t('home_page.features.api') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-account-plus">
-              {{ $t('home_page.features.signup') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-security">
-              {{ $t('home_page.features.auth') }}
-            </v-list-item>
+            <v-list-item prepend-icon="mdi-upload">{{ $t('home_page.features.upload') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-database-lock">{{ $t('home_page.features.storage') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-image-multiple">{{ $t('home_page.features.display') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-api">{{ $t('home_page.features.api') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-account-plus">{{ $t('home_page.features.signup') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-security">{{ $t('home_page.features.auth') }}</v-list-item>
           </v-list>
         </v-col>
         <v-col cols="12" md="6">
@@ -109,33 +97,15 @@
             {{ $t('home_page.features.planned') }}
           </h3>
           <v-list density="compact" class="bg-transparent">
-            <v-list-item prepend-icon="mdi-key-variant">
-              {{ $t('home_page.features.reset') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-email-check">
-              {{ $t('home_page.features.mail') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-shield-lock">
-              {{ $t('home_page.features.encrypt') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-folder-multiple-image">
-              {{ $t('home_page.features.albums') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-account-group">
-              {{ $t('home_page.features.groups') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-share-variant">
-              {{ $t('home_page.features.share') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-tag-multiple">
-              {{ $t('home_page.features.tags') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-sync">
-              {{ $t('home_page.features.sync') }}
-            </v-list-item>
-            <v-list-item prepend-icon="mdi-desktop-mac-dashboard">
-              {{ $t('home_page.features.desktop') }}
-            </v-list-item>
+            <v-list-item prepend-icon="mdi-key-variant">{{ $t('home_page.features.reset') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-email-check">{{ $t('home_page.features.mail') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-shield-lock">{{ $t('home_page.features.encrypt') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-folder-multiple-image">{{ $t('home_page.features.albums') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-account-group">{{ $t('home_page.features.groups') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-share-variant">{{ $t('home_page.features.share') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-tag-multiple">{{ $t('home_page.features.tags') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-sync">{{ $t('home_page.features.sync') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-desktop-mac-dashboard">{{ $t('home_page.features.desktop') }}</v-list-item>
           </v-list>
         </v-col>
       </v-row>
@@ -143,74 +113,40 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive } from 'vue'
+import { useMouse, useThrottleFn } from '@vueuse/core'
+
+// basic mouse position
+const { x, y } = useMouse()
+// wrap move handler in throttle to reduce CPU
+const throttledMove = useThrottleFn(onTileMove, 50)
 
 const categories = [
-  {
-    key: 'frameworks', icon: 'mdi-cube-outline', items: [
-      { key: 'spring', icon: 'mdi-language-java' },
-      { key: 'nuxt', icon: 'mdi-nuxt' }
-    ]
-  },
-  {
-    key: 'security', icon: 'mdi-shield-lock', items: [
-      { key: 'jwt', icon: 'mdi-security' },
-      { key: 'bcrypt', icon: 'mdi-lock-reset' },
-      { key: 'roleMgmt', icon: 'mdi-account-key' },
-      { key: 'webCryptoApi', icon: 'mdi-web' }
-    ]
-  },
-  {
-    key: 'languages', icon: 'mdi-code-tags', items: [
-      { key: 'java', icon: 'mdi-language-java' },
-      { key: 'typescript', icon: 'mdi-language-typescript' }
-    ]
-  },
-  {
-    key: 'otherBack', icon: 'mdi-server', items: [
-      { key: 'springDataJpa', icon: 'mdi-database' },
-      { key: 'lombok', icon: 'mdi-file-code' },
-      { key: 'awsS3', icon: 'mdi-cloud' }
-    ]
-  },
-  {
-    key: 'otherFrontend', icon: 'mdi-web', items: [
-      { key: 'pinia', icon: 'mdi-pin' },
-      { key: 'i18n', icon: 'mdi-translate' },
-      { key: 'vuetify', icon: 'mdi-vuetify' },
-      { key: 'tailwind', icon: 'mdi-tailwind' }
-    ]
-  },
-  {
-    key: 'testing', icon: 'mdi-flask', items: [
-      { key: 'mockito', icon: 'mdi-flask-outline' },
-      { key: 'junit', icon: 'mdi-test-tube' }
-    ]
-  }
+  { key: 'frameworks', icon: 'mdi-cube-outline', items: [{ key: 'spring', icon: 'mdi-language-java' }, { key: 'nuxt', icon: 'mdi-nuxt' }] },
+  { key: 'styling', icon: 'mdi-palette', items: [{ key: 'vuetify', icon: 'mdi-vuetify' }, { key: 'tailwind', icon: 'mdi-tailwind' }] },
+  { key: 'security', icon: 'mdi-shield-lock', items: [{ key: 'jwt', icon: 'mdi-security' }, { key: 'bcrypt', icon: 'mdi-lock-reset' }, { key: 'roleMgmt', icon: 'mdi-account-key' }, { key: 'webCryptoApi', icon: 'mdi-web' }] },
+  { key: 'languages', icon: 'mdi-code-tags', items: [{ key: 'java', icon: 'mdi-language-java' }, { key: 'typescript', icon: 'mdi-language-typescript' }] },
+  { key: 'otherBack', icon: 'mdi-server', items: [{ key: 'springDataJpa', icon: 'mdi-database' }, { key: 'lombok', icon: 'mdi-file-code' }, { key: 'awsS3', icon: 'mdi-cloud' }] },
+  { key: 'otherFrontend', icon: 'mdi-web', items: [{ key: 'pinia', icon: 'mdi-pin' }, { key: 'i18n', icon: 'mdi-translate' }] },
+  { key: 'testing', icon: 'mdi-flask', items: [{ key: 'mockito', icon: 'mdi-flask-outline' }, { key: 'junit', icon: 'mdi-test-tube' }] }
 ]
 
-// Styles dynamiques pour l’effet reflet
-const tileStyles = reactive({})
-categories.forEach(c => (tileStyles[c.key] = {}))
+const tileStyles = reactive(
+  Object.fromEntries(categories.map(c => [c.key, { '--rfl-x': '-75%', '--rfl-y': '-50%' }]))
+)
 
-let lastTime = 0
-const THROTTLE = 200 // throttle interval en ms
-
-function onTileMove(e, key) {
-  const now = performance.now()
-  if (now - lastTime < THROTTLE) return
-  lastTime = now
-
-  const rect = e.currentTarget.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-
-  tileStyles[key] = { '--rfl-x': `${x}px`, '--rfl-y': `${y}px` }
+function onTileMove(e: MouseEvent, key: string) {
+  const target = e.currentTarget as HTMLElement
+  const rect = target.getBoundingClientRect()
+  tileStyles[key] = {
+    '--rfl-x': `${x.value - rect.left}px`,
+    '--rfl-y': `${y.value - rect.top}px`
+  }
 }
 
-function onTileLeave(key) {
-  tileStyles[key] = {}
+function onTileLeave(key: string) {
+  tileStyles[key] = { '--rfl-x': '-75%', '--rfl-y': '-50%' }
 }
 
 definePageMeta({ public: true })
@@ -222,14 +158,12 @@ definePageMeta({ public: true })
   background: var(--v-theme-surface);
 }
 
-/* Tech grid */
 .tech-grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
-/* Tile style */
 .tile {
   position: relative;
   padding: 2rem;
@@ -251,7 +185,7 @@ definePageMeta({ public: true })
   height: 100%;
   transform: translateX(-50%) skewX(-25deg);
   background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-  transition: left 0.65s ease-out;
+  transition: left 0.6s ease;
 }
 
 .tile::after {
@@ -263,11 +197,10 @@ definePageMeta({ public: true })
   width: 200%;
   height: 200%;
   background: radial-gradient(circle at center, rgba(var(--v-theme-primary), 0.18), transparent 70%);
-  transition: top 0.85s ease-out, left 1s ease-out;
+  transition: top 0.2s ease, left 0.2s ease;
   pointer-events: none;
 }
 
-/* Chips */
 .tech-chip {
   font-size: 0.9rem;
   transition: transform 0.2s, background-color 0.2s;
@@ -278,7 +211,6 @@ definePageMeta({ public: true })
   background-color: rgba(var(--v-theme-accent), 0.15) !important;
 }
 
-/* CTA buttons */
 .cta-btn {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
