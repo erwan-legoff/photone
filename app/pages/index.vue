@@ -126,7 +126,14 @@ const categories = [
   { key: 'security', icon: 'mdi-shield-lock', items: [{ key: 'jwt', icon: 'mdi-security' }, { key: 'bcrypt', icon: 'mdi-lock-reset' }, { key: 'roleMgmt', icon: 'mdi-account-key' }, { key: 'webCryptoApi', icon: 'mdi-web' }] },
   { key: 'languages', icon: 'mdi-code-tags', items: [{ key: 'java', icon: 'mdi-language-java' }, { key: 'typescript', icon: 'mdi-language-typescript' }] },
   { key: 'otherBack', icon: 'mdi-server', items: [{ key: 'springDataJpa', icon: 'mdi-database' }, { key: 'lombok', icon: 'mdi-file-code' }, { key: 'awsS3', icon: 'mdi-cloud' }] },
-  { key: 'otherFrontend', icon: 'mdi-web', items: [{ key: 'pinia', icon: 'mdi-pin' }, { key: 'i18n', icon: 'mdi-translate' }] },
+  {
+    key: 'otherFrontend', icon: 'mdi-web', items: [
+      { key: 'pinia', icon: 'mdi-pin' },
+      { key: 'i18n', icon: 'mdi-translate' },
+      { key: 'vuetify', icon: 'mdi-vuetify' },
+      { key: 'tailwind', icon: 'mdi-language-css3' }
+    ]
+  },
   { key: 'testing', icon: 'mdi-flask', items: [{ key: 'mockito', icon: 'mdi-flask-outline' }, { key: 'junit', icon: 'mdi-test-tube' }] }
 ]
 
