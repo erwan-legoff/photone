@@ -48,9 +48,8 @@
       "nuxt": "Nuxt 3"
     },
     "styling": {
-      "title": "Apariencia",
-      "vuetify": "Vuetify",
-      "tailwind": "Tailwind CSS"
+      "title": "Apariencia"
+
     },
     "security": {
       "title": "Seguridad",
@@ -73,7 +72,9 @@
     "otherFrontend": {
       "title": "Frontend Diverso",
       "pinia": "Pinia (Gestión de Estado)",
-      "i18n": "i18n (Internacionalización)"
+      "i18n": "i18n (Internacionalización)",
+      "vuetify": "Vuetify",
+      "tailwind": "Tailwind CSS"
     },
     "testing": {
       "title": "Pruebas",
