@@ -89,6 +89,8 @@
             <v-list-item prepend-icon="mdi-api">{{ $t('home_page.features.api') }}</v-list-item>
             <v-list-item prepend-icon="mdi-account-plus">{{ $t('home_page.features.signup') }}</v-list-item>
             <v-list-item prepend-icon="mdi-security">{{ $t('home_page.features.auth') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-email-check">{{ $t('home_page.features.mail') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-shield-lock">{{ $t('home_page.features.encrypt') }}</v-list-item>
           </v-list>
         </v-col>
         <v-col cols="12" md="6">
@@ -97,15 +99,12 @@
             {{ $t('home_page.features.planned') }}
           </h3>
           <v-list density="compact" class="bg-transparent">
-            <v-list-item prepend-icon="mdi-key-variant">{{ $t('home_page.features.reset') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-email-check">{{ $t('home_page.features.mail') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-shield-lock">{{ $t('home_page.features.encrypt') }}</v-list-item>
             <v-list-item prepend-icon="mdi-folder-multiple-image">{{ $t('home_page.features.albums') }}</v-list-item>
             <v-list-item prepend-icon="mdi-account-group">{{ $t('home_page.features.groups') }}</v-list-item>
             <v-list-item prepend-icon="mdi-share-variant">{{ $t('home_page.features.share') }}</v-list-item>
             <v-list-item prepend-icon="mdi-tag-multiple">{{ $t('home_page.features.tags') }}</v-list-item>
             <v-list-item prepend-icon="mdi-sync">{{ $t('home_page.features.sync') }}</v-list-item>
-            <v-list-item prepend-icon="mdi-desktop-mac-dashboard">{{ $t('home_page.features.desktop') }}</v-list-item>
+            <v-list-item prepend-icon="mdi-desktop-classic">{{ $t('home_page.features.desktop') }}</v-list-item>
           </v-list>
         </v-col>
       </v-row>
@@ -124,7 +123,6 @@ const throttledMove = useThrottleFn(onTileMove, 50)
 
 const categories = [
   { key: 'frameworks', icon: 'mdi-cube-outline', items: [{ key: 'spring', icon: 'mdi-language-java' }, { key: 'nuxt', icon: 'mdi-nuxt' }] },
-  { key: 'styling', icon: 'mdi-palette', items: [{ key: 'vuetify', icon: 'mdi-vuetify' }, { key: 'tailwind', icon: 'mdi-tailwind' }] },
   { key: 'security', icon: 'mdi-shield-lock', items: [{ key: 'jwt', icon: 'mdi-security' }, { key: 'bcrypt', icon: 'mdi-lock-reset' }, { key: 'roleMgmt', icon: 'mdi-account-key' }, { key: 'webCryptoApi', icon: 'mdi-web' }] },
   { key: 'languages', icon: 'mdi-code-tags', items: [{ key: 'java', icon: 'mdi-language-java' }, { key: 'typescript', icon: 'mdi-language-typescript' }] },
   { key: 'otherBack', icon: 'mdi-server', items: [{ key: 'springDataJpa', icon: 'mdi-database' }, { key: 'lombok', icon: 'mdi-file-code' }, { key: 'awsS3', icon: 'mdi-cloud' }] },
