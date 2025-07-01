@@ -27,7 +27,7 @@
     "@nuxt/eslint": "^1.4.1",
     "@nuxtjs/i18n": "^9.5.4",
     "@vueuse/nuxt": "^13.4.0",
-    "nuxt": "^3.17.4",
+    "nuxt": "^3.17.6",
     "typescript": "^5.8.3",
     "vite-plugin-vuetify": "^2.1.1",
     "vuetify": "^3.8.6"
