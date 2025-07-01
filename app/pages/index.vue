@@ -225,12 +225,25 @@ definePageMeta({ public: true })
 .v-card {
   background: var(--v-theme-surface);
 }
-
+/*Responsive grid for mobile*/
 .tech-grid {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: 1fr;
 }
+/* Tablet */
+@media (min-width: 540px) {
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* pc */
+@media (min-width: 900px) {
+  .tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 
 .tile {
   position: relative;
