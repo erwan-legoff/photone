@@ -36,7 +36,7 @@
     "title": "Spricture",
     "subtitle": "Una app de fotos segura centrada en la privacidad.",
     "note": "Nota:",
-    "noteContent": "Este proyecto es una demostración técnica personal para profundizar mis habilidades en desarrollo full-stack, especialmente con Spring Boot y Nuxt 3. Está en desarrollo activo.",
+    "noteContent": "Este proyecto es una demostración técnica personal para profundizar mis habilidades en desarrollo full-stack, especialmente con Spring Boot y Nuxt 3. Está en desarrollo activo, así que utiliza esta aplicación solo con fines de prueba, ya que tus fotos podrían perderse. ¡Ten en cuenta también que tendrás que esperar a que valide tu cuenta!",
     "projectTitle": "Resumen del Proyecto",
     "projectDesc1": "El objetivo principal de Spricture es permitirte almacenar tus fotos personales de forma segura. La innovación clave es cifrar las fotos directamente en tu dispositivo (del lado del cliente) antes de subirlas al servidor. Esto garantiza la máxima privacidad, ya que el servidor nunca tiene acceso a tus fotos sin cifrar.",
     "projectDesc2": "Próximamente, podrás organizar tus fotos en álbumes, compartirlas en grupos (Familia, Amigos, Trabajo...), añadir etiquetas para facilitar la búsqueda, y posiblemente aprovechar el análisis local por IA para extraer automáticamente metadatos relevantes, siempre respetando tu privacidad.",
