@@ -93,10 +93,10 @@ export const useUserStore = defineStore("user-store", {
 
       this.email = "";
       this.isLogged = false;
-      keyStore.clearAll()
+      keyStore.clearAll();
 
       try {
-        await $api("/logout", {
+        await $api("/api/auth/logout", {
           method: "POST",
         });
         notificationStore.notifyInfo("Successfully logged out!");
