@@ -82,7 +82,7 @@
       "title": "Sécurité",
       "jwt": "JWT (Authentification)",
       "bcrypt": "BCRYPT (Chiffrement Photos)",
-      "roleMgmt": "Gestion de Rôles",
+      "roleMgmt": "Gestion de Rôles ",
       "webCryptoApi": "API Web Crypto"
     },
     "languages": {
