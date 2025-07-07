@@ -16,6 +16,7 @@
     "validate": "确认"
   },
   "global": {
+    "photos": "照片",
     "logout": "退出登录",
     "upload_your_file": "上传文件到你的私人空间",
     "choose_a_file": "点击浏览",

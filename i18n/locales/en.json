@@ -16,6 +16,7 @@
     "validate": "Validate"
   },
   "global": {
+    "photos": "Photos",
     "logout": "Log out",
     "upload_your_file": "Upload a file to your private space",
     "choose_a_file": "Click to browse",

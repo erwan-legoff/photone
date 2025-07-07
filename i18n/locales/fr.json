@@ -17,6 +17,7 @@
     "validate": "Valider"
   },
   "global": {
+    "photos":"Photos",
     "logout": "Se déconnecter",
     "upload_your_file": "Choisissez un fichier à importer dans votre espace privé.",
     "choose_a_file":"Cliquez pour choisir",

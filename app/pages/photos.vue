@@ -9,7 +9,7 @@
 
         </div>
         <div v-else>
-          <h1 class="text-h2">Photos</h1>
+          <h1 class="text-h2">{{ $t("global.photos") }}</h1>
           <p class="text-subtitle-1 mb-5">{{ $t("global.upload_your_file") }}</p>
           <div>
             <v-row>
@@ -19,7 +19,7 @@
             </v-row>
           </div>
           <v-row class="photo-grid" dense>
-            <v-col v-for="(medium, i) in media" :key="medium.id" cols="12" sm="6" md="4" xl="2" >
+            <v-col v-for="(medium, i) in media" :key="medium.id" cols="12" sm="6" md="4" xl="2">
               <v-card class="overflow-hidden rounded-lg" elevation="2">
                 <v-img :src="createURL(medium.file)" height="200" cover @click="() => { openMedium(i) }">
                   <template #placeholder>

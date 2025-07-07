@@ -16,6 +16,7 @@
     "validate": "Validar"
   },
   "global": {
+    "photos": "Fotos",
     "logout": "Cerrar sesión",
     "upload_your_file": "Sube un archivo a tu espacio privado",
     "choose_a_file": "Haz clic para explorar",
