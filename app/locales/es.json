@@ -1,11 +1,11 @@
 {
   "app": {
-    "title": "Spricture",
+    "title": "Photone",
     "subtitle": "Una aplicación de fotos segura centrada en la privacidad.",
     "note": "Nota:",
     "noteContent": "Este proyecto es una demostración técnica personal destinada a profundizar mis habilidades en desarrollo full-stack, especialmente con Spring Boot y Nuxt 3. Está en desarrollo activo.",
     "projectTitle": "Presentación del Proyecto",
-    "projectDesc1": "El objetivo principal de Spricture es permitirte almacenar tus fotos personales de forma segura. La innovación clave reside en el cifrado de las fotos directamente en tu dispositivo (lado cliente) antes de enviarlas al servidor. Esto garantiza el máximo nivel de privacidad, ya que el servidor nunca tiene acceso a tus fotos en claro.",
+    "projectDesc1": "El objetivo principal de Photone es permitirte almacenar tus fotos personales de forma segura. La innovación clave reside en el cifrado de las fotos directamente en tu dispositivo (lado cliente) antes de enviarlas al servidor. Esto garantiza el máximo nivel de privacidad, ya que el servidor nunca tiene acceso a tus fotos en claro.",
     "projectDesc2": "En el futuro, podrás organizar tus fotos por álbumes, compartirlas en grupos (Familia, Amigos, Trabajo...), añadir etiquetas para facilitar la búsqueda y, potencialmente, beneficiarte de un análisis local por IA para extraer automáticamente metadatos relevantes, siempre respetando tu privacidad.",
     "techTitle": "Tecnologías Utilizadas",
     "techSpring": "Spring Boot",

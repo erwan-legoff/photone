@@ -58,12 +58,12 @@
     "no_mail": "Sie haben die E-Mail nicht erhalten? Überprüfen Sie Ihren Spam-Ordner oder fordern Sie nach Ablauf des Countdowns eine neue E-Mail an."
   },
   "home_page": {
-    "title": "Spricture",
+    "title": "Photone",
     "subtitle": "Eine sichere Foto-App mit Fokus auf Privatsphäre.",
     "note": "Hinweis:",
     "noteContent": "Dieses Projekt ist eine persönliche technische Demonstration, um meine Full-Stack-Entwicklungsfähigkeiten, insbesondere mit Spring Boot und Nuxt 3, zu vertiefen. Es befindet sich in aktiver Entwicklung, daher nutzen Sie diese Anwendung bitte nur zu Testzwecken, da Ihre Fotos verloren gehen könnten. Bitte haben Sie auch Geduld, bis ich Ihr Konto freischalte!",
     "projectTitle": "Projektvorstellung",
-    "projectDesc1": "Das Hauptziel von Spricture ist es, Ihnen zu ermöglichen, Ihre persönlichen Fotos sicher zu speichern. Die Schlüsselinnovation besteht darin, dass die Fotos direkt auf Ihrem Gerät (Client-seitig) verschlüsselt werden, bevor sie an den Server gesendet werden. Dies gewährleistet maximale Vertraulichkeit, da der Server niemals Zugriff auf Ihre unverschlüsselten Fotos hat.",
+    "projectDesc1": "Das Hauptziel von Photone ist es, Ihnen zu ermöglichen, Ihre persönlichen Fotos sicher zu speichern. Die Schlüsselinnovation besteht darin, dass die Fotos direkt auf Ihrem Gerät (Client-seitig) verschlüsselt werden, bevor sie an den Server gesendet werden. Dies gewährleistet maximale Vertraulichkeit, da der Server niemals Zugriff auf Ihre unverschlüsselten Fotos hat.",
     "projectDesc2": "Zukünftig können Sie Ihre Fotos in Alben organisieren, sie in Gruppen (Familie, Freunde, Arbeit ...) teilen, Tags zur leichteren Suche hinzufügen und möglicherweise von einer lokalen KI-Analyse profitieren, um automatisch relevante Metadaten zu extrahieren – stets unter Wahrung Ihrer Privatsphäre.",
     "mailCopied": "E-Mail-Adresse in die Zwischenablage kopiert",
     "tech": {
