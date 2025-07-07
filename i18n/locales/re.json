@@ -1,0 +1,141 @@
+{
+  "login": {
+    "title": "Konèkt aou",
+    "email": "@:global.email",
+    "password": "Mot de pas",
+    "submit": "Konèksyon"
+  },
+  "signup": {
+    "title": "Enskri aou",
+    "page_title": "Kré out kont",
+    "password": "@:login.password",
+    "submit": "Domann laksé"
+  },
+  "pin": {
+    "enter": "Mèt out kod PIN",
+    "validate": "Validé"
+  },
+  "global": {
+    "encrypting_private_key": "Kriptaz out klé privé pou out bann foto...",
+    "no_key_to_wrap": "Néna pa okenn klé pou kripter, rkonèkt aou siouplé.",
+    "jwk_encrypted_success": "JWK la finn kripté komilfo.",
+    "error_encrypting_jwk": "Néna in lérèr pandan l kriptaz do JWK : ",
+    "storing_wrapped_key": "Stokaz la klé kripté dann l'idb...",
+    "no_wrapped_key_stored": "Néna pa okenn klé kripté ke lé stoké.",
+    "key_wrapped_success": "La klé la finn kripté komilfo !",
+    "failed_to_wrap_key": "Kriptaz la klé la foiré : ",
+    "no_wrapped_key_found": "Néna pa okenn klé kripté la été trouvé.",
+    "error_decrypting_jwk": "Néna in lérèr pandan l dékriptaz do JWK.",
+    "error_parsing_jwk": "Néna in lérèr pandan l analiz do JWK.",
+    "create_your_pin": "Kré out kod PIN siouplé.",
+    "pin_required": "Kod PIN lé obligatwar.",
+    "reauth_required": "Aya... Néna in problèm la parèt, rkonèkt aou siouplé.",
+    "uploading_photos": "Anvoi {count} foto...",
+    "photos_uploaded": "{count} foto la finn anvoyé !",
+    "photo_deleted": "Foto la finn éfasé komilfo !",
+    "success_logged_in": "Konèksyon la finn marché !",
+    "account_created_successfully": "Kont la finn kréé komilfo !",
+    "email_required": "Ladrès imèl lé obligatwar !",
+    "verification_email_sent": "Imèl pou vérifyé la finn anvoyé !",
+    "account_validated": "Out kont lé validé astèr !",
+    "info_logged_out": "Dékonèksyon la finn marché !",
+    "photos": "Foto",
+    "error_selecting_photos": "Néna in lérèr la parèt kan ou la shwazi out bann foto.",
+    "logout": "Dékonèkt aou",
+    "upload_your_file": "Shwazi in fisyé pou anvoyé dann out léspas privé.",
+    "choose_a_file": "Klik pou shwazi",
+    "pseudo": "Tinon",
+    "upload": "anvoyé",
+    "first_name": "Prénon",
+    "last_name": "Non d'fanmi",
+    "email": "Imèl"
+  },
+  "mail_verification": {
+    "title": "Konfirm out ladrès imèl",
+    "email_explanation": "Nou la anvoy aou in imèl pou konfirmé, klik siouplé si le lyin néna dann limèl.",
+    "please_wait": "Atann in pti kou siouplé avan r-éséyé.",
+    "send_new_mail": "Ranvoy in imèl",
+    "no_mail": "Ou trouv pa limèl ? Al gadé dann out fichyé spam, sinon domann in nouvo imèl kan l kont-a-rbour la fin fini."
+  },
+  "home_page": {
+    "title": "Photone",
+    "subtitle": "In laplikasyon foto an sékirité ki mèt laksan si la konfidansialité.",
+    "note": "Remark :",
+    "noteContent": "Projé-la lé in démonstrasyon tèknik personèl pou amélyor mon bann konpétans an dévlopman full-stack, sirtou èk Spring Boot é Nuxt 3. Li lé ankor an dévlopman, alor utiliz laplikasyon-la zis pou fèr bann test, parské ou risk de pèrd out bann foto. Atann in pti pé osi pou mwin valid out kont !",
+    "projectTitle": "Prézantasyon do projé",
+    "projectDesc1": "Lobjéktif prinsipal Photone sé d pèrmèt aou stoké out bann foto personèl an toute sékirité. Linovasyon prinsipal, sé l kriptaz out bann foto dirèkteman si out laparèy (koté kliyan) avan mèm anvoy sa si le sèrvèr. Sa i garan-ti aou in nivo d konfidansialité pli o, le sèrvèr la zamé laksé a out bann foto an klèr.",
+    "projectDesc2": "Pli tar, ou sra kapab organiz out bann foto par albom, partaz azot dann bann group (Fanmi, Zami, Travay...), azout bann tag pou trouv azot pli fasilman, é pètèt mèm profit in analiz lokal par in IA pou tiré otomatikman bann métadoné ki kont, toultan an réspéktan out vi privé.",
+    "mailCopied": "Ladrès imèl la finn kopyé dann prés-papyé",
+    "tech": {
+      "title": "Teknoloji la utilizé",
+      "frameworks": {
+        "title": "Frameworks",
+        "spring": "Spring Boot",
+        "nuxt": "Nuxt 3"
+      },
+      "styling": {
+        "title": "Laparans"
+      },
+      "security": {
+        "title": "Sékirité",
+        "jwt": "JWT (Otansifikasyon)",
+        "bcrypt": "BCRYPT (Kriptaz Foto)",
+        "roleMgmt": "Zéstyon bann Rol",
+        "webCryptoApi": "API Web Crypto"
+      },
+      "languages": {
+        "title": "Langaz",
+        "java": "Java 21",
+        "typescript": "TypeScript"
+      },
+      "otherBack": {
+        "title": "Lòt Zafèr Backend",
+        "springDataJpa": "Spring Data JPA",
+        "lombok": "Lombok",
+        "awsS3": "AWS S3"
+      },
+      "otherFrontend": {
+        "title": "Lòt Zafèr Frontend",
+        "pinia": "Pinia (Zéstyon léta)",
+        "i18n": "i18n (Internasyonalizasyon)",
+        "vuetify": "Vuetify",
+        "tailwind": "Tailwind CSS"
+      },
+      "testing": {
+        "title": "Test",
+        "mockito": "Mockito (Mocking)",
+        "junit": "JUNIT (Test initèr)"
+      }
+    },
+    "features": {
+      "title": "Fonksonalité",
+      "done": "Déza an plas (MVP)",
+      "planned": "Fonksonalité an prévizyon",
+      "upload": "Anvoi d' foto",
+      "storage": "Stokaz an sékirité (d'baz)",
+      "display": "Afisaz bann foto",
+      "api": "API Back-end pou bann média",
+      "signup": "Enskripsyon litilizatèr",
+      "auth": "Otansifikasyon JWT",
+      "reset": "Réinisializasyon mot de pas",
+      "mail": "Validasyon linskripsyon par imèl",
+      "encrypt": "Kriptaz konplé koté kliyan",
+      "albums": "Zéstyon dalbom",
+      "groups": "Zéstyon d'group litilizatèr",
+      "share": "Partaz foto/albom",
+      "tags": "Sistèm d'tag",
+      "sync": "Sinkronizasyon an aryèr-plan",
+      "desktop": "Laplikasyon d'biro (Objéktif v2.0)"
+    },
+    "contactTitle": "Ou lé intérésé ? Apèl a mwin !",
+    "sendMail": "Anvoy in imèl",
+    "openApplication": "Ésèy laplikasyon"
+  },
+  "backoffice": {
+    "users_loaded": "Litilizatèr la finn sarzé.",
+    "user_validated": "Kont litilizatèr la finn validé.",
+    "user_blocked": "Kont litilizatèr la finn bloké.",
+    "user_unblocked": "Kont litilizatèr la finn débloké.",
+    "email_sent": "Imèl la finn anvoyé."
+  }
+}

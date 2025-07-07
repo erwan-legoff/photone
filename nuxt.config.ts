@@ -48,6 +48,7 @@ export default defineNuxtConfig({
       { code: "es", name: "Español", file: "es.json" },
       { code: "zh", name: "中文 (简体)", file: "zh.json" },
       { code: "de", name: "Deutsch", file: "de.json" },
+      { code: "re", name: "Kréol Réyoné", file: "re.json" },
     ],
   },
   runtimeConfig: {
