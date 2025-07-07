@@ -4,7 +4,7 @@ import type { GetMediumDto } from "./types/GetMediumDto";
 import type { SoftDeleteMediumDto } from "./types/SoftDeleteMediumDto";
 import type { Medium } from "./types/Medium";
 import { encryptFile } from "~/tools/security/encryption/encryptFile";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { useKeyStore } from "./keyStore";
 import { encryptFileBinary } from "~/tools/security/encryption/encryptFileBinary";
 import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
@@ -22,7 +22,9 @@ export const useMediumStore = defineStore("medium-store", () => {
   // Actions
   async function uploadMedia(mediaFiles: File[]): Promise<void> {
     const { t } = useI18n();
-    notificationStore.notifyInfo(t('global.uploading_photos', { count: mediaFiles.length }));
+    notificationStore.notifyInfo(
+      t("global.uploading_photos", { count: mediaFiles.length })
+    );
 
     const { $api } = useNuxtApp();
     try {
@@ -42,7 +44,9 @@ export const useMediumStore = defineStore("medium-store", () => {
         method: "POST",
         body: formData,
       });
-      notificationStore.notifySuccess(t('global.photos_uploaded', { count: mediaFiles.length }));
+      notificationStore.notifySuccess(
+        t("global.photos_uploaded", { count: mediaFiles.length })
+      );
       await fetchMedia();
     } catch (error) {
       notificationStore.handleError(error, "getMedium");
@@ -63,7 +67,7 @@ export const useMediumStore = defineStore("medium-store", () => {
       media.value = media.value.filter(
         (medium) => medium.id !== softDeleteMediumDto.id
       );
-      notificationStore.notifySuccess(t('global.photo_deleted'));
+      notificationStore.notifySuccess(t("global.photo_deleted"));
     } catch (error: unknown) {
       notificationStore.handleError(error, "deleteMedium");
     }

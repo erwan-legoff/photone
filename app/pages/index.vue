@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="pa-8 min-h-screen">
-    <v-row justify="center">
-      <v-col cols="12" md="10" lg="8">
-        <v-card class="pa-6 pa-md-10 rounded-lg " color="surface">
+  <v-container fluid class="pa-0 pa-md-8 min-h-screen">
+    <v-row justify="center" class="ma-0">
+      <v-col cols="12" md="10" lg="8" class="pa-0 pa-md-3">
+        <v-card class="pa-6 pa-md-10 rounded-0 rounded-md-lg" color="surface">
           <!-- Header -->
           <div class="text-center mb-12">
             <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">
