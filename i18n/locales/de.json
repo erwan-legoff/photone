@@ -16,7 +16,31 @@
     "validate": "Bestätigen"
   },
   "global": {
+    "encrypting_private_key": "Verschlüssele deinen privaten Schlüssel für deine Fotos...",
+    "no_key_to_wrap": "Kein Schlüssel zum Verschlüsseln, bitte erneut anmelden.",
+    "jwk_encrypted_success": "JWK erfolgreich verschlüsselt.",
+    "error_encrypting_jwk": "Fehler beim Verschlüsseln des JWK: ",
+    "storing_wrapped_key": "Verschlüsselten Schlüssel in idb speichern...",
+    "no_wrapped_key_stored": "Kein verschlüsselter Schlüssel gespeichert.",
+    "key_wrapped_success": "Schlüssel erfolgreich verschlüsselt!",
+    "failed_to_wrap_key": "Fehler beim Verschlüsseln des Schlüssels: ",
+    "no_wrapped_key_found": "Kein verschlüsselter Schlüssel gefunden.",
+    "error_decrypting_jwk": "Fehler beim Entschlüsseln des JWK.",
+    "error_parsing_jwk": "Fehler beim Parsen des JWK.",
+    "create_your_pin": "Bitte erstelle deine PIN.",
+    "pin_required": "PIN erforderlich.",
+    "reauth_required": "Ups... Ein Problem ist aufgetreten, bitte erneut anmelden.",
+    "uploading_photos": "{count} Foto(s) werden hochgeladen...",
+    "photos_uploaded": "{count} Foto(s) hochgeladen!",
+    "photo_deleted": "Foto erfolgreich gelöscht!",
+    "success_logged_in": "Erfolgreich eingeloggt!",
+    "account_created_successfully": "Konto erfolgreich erstellt!",
+    "email_required": "E-Mail erforderlich!",
+    "verification_email_sent": "Bestätigungs-E-Mail gesendet!",
+    "account_validated": "Ihr Konto ist jetzt verifiziert!",
+    "info_logged_out": "Erfolgreich abgemeldet!",
     "photos": "Fotos",
+    "error_selecting_photos": "Beim Auswählen der Foto(s) ist ein Fehler aufgetreten.",
     "logout": "Abmelden",
     "upload_your_file": "Wählen Sie eine Datei zum Hochladen in Ihren privaten Bereich.",
     "choose_a_file": "Klicken Sie, um auszuwählen",
@@ -106,5 +130,13 @@
     "contactTitle": "Interessiert? Kontaktieren Sie mich!",
     "sendMail": "E-Mail senden",
     "openApplication": "App ausprobieren"
+  }
+  ,
+  "backoffice": {
+    "users_loaded": "Benutzer geladen.",
+    "user_validated": "Benutzerkonto validiert.",
+    "user_blocked": "Benutzerkonto gesperrt.",
+    "user_unblocked": "Benutzerkonto entsperrt.",
+    "email_sent": "E-Mail gesendet."
   }
 }

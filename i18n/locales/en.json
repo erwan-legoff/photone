@@ -16,7 +16,31 @@
     "validate": "Validate"
   },
   "global": {
+    "encrypting_private_key": "Encrypting your private key used for your photos...",
+    "no_key_to_wrap": "No key to wrap, please relogin.",
+    "jwk_encrypted_success": "JWK successfully encrypted.",
+    "error_encrypting_jwk": "Error encrypting JWK: ",
+    "storing_wrapped_key": "Storing wrapped key in idb...",
+    "no_wrapped_key_stored": "No wrapped key stored.",
+    "key_wrapped_success": "Key successfully wrapped!",
+    "failed_to_wrap_key": "Failed to wrap key: ",
+    "no_wrapped_key_found": "No wrapped key found.",
+    "error_decrypting_jwk": "Error decrypting JWK.",
+    "error_parsing_jwk": "Error parsing JWK.",
+    "create_your_pin": "Please create your PIN.",
+    "pin_required": "PIN required.",
+    "reauth_required": "Oops... A problem occurred, please log in again.",
+    "uploading_photos": "Uploading {count} photo(s)...",
+    "photos_uploaded": "{count} photo(s) uploaded!",
+    "photo_deleted": "Photo successfully deleted!",
+    "success_logged_in": "Successfully logged in!",
+    "account_created_successfully": "Account created successfully!",
+    "email_required": "Email required!",
+    "verification_email_sent": "Verification email sent!",
+    "account_validated": "Your account is now validated!",
+    "info_logged_out": "Successfully logged out!",
     "photos": "Photos",
+    "error_selecting_photos": "Something went wrong when selecting the photo(s).",
     "logout": "Log out",
     "upload_your_file": "Upload a file to your private space",
     "choose_a_file": "Click to browse",
@@ -109,4 +133,12 @@
     "openApplication": "Try the app"
   }
 
+  ,
+  "backoffice": {
+    "users_loaded": "Users loaded.",
+    "user_validated": "User account validated.",
+    "user_blocked": "User account blocked.",
+    "user_unblocked": "User account unblocked.",
+    "email_sent": "Email sent."
+  }
 }

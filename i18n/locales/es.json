@@ -16,7 +16,31 @@
     "validate": "Validar"
   },
   "global": {
+    "encrypting_private_key": "Cifrando tu clave privada para tus fotos...",
+    "no_key_to_wrap": "No hay clave para cifrar, vuelve a iniciar sesión.",
+    "jwk_encrypted_success": "JWK cifrado con éxito.",
+    "error_encrypting_jwk": "Error al cifrar el JWK: ",
+    "storing_wrapped_key": "Guardando la clave cifrada en idb...",
+    "no_wrapped_key_stored": "No hay clave cifrada almacenada.",
+    "key_wrapped_success": "¡Clave cifrada con éxito!",
+    "failed_to_wrap_key": "Error al cifrar la clave: ",
+    "no_wrapped_key_found": "No se encontró clave cifrada.",
+    "error_decrypting_jwk": "Error al descifrar el JWK.",
+    "error_parsing_jwk": "Error al analizar el JWK.",
+    "create_your_pin": "Por favor, crea tu PIN.",
+    "pin_required": "Se requiere PIN.",
+    "reauth_required": "Ups... Ocurrió un problema, vuelve a iniciar sesión.",
+    "uploading_photos": "Subiendo {count} foto(s)...",
+    "photos_uploaded": "¡{count} foto(s) subida(s)!",
+    "photo_deleted": "¡Foto eliminada con éxito!",
+    "success_logged_in": "¡Inicio de sesión exitoso!",
+    "account_created_successfully": "¡Cuenta creada con éxito!",
+    "email_required": "¡Correo electrónico requerido!",
+    "verification_email_sent": "¡Correo de verificación enviado!",
+    "account_validated": "¡Tu cuenta ha sido validada!",
+    "info_logged_out": "¡Cierre de sesión exitoso!",
     "photos": "Fotos",
+    "error_selecting_photos": "Ocurrió un error al seleccionar la(s) foto(s).",
     "logout": "Cerrar sesión",
     "upload_your_file": "Sube un archivo a tu espacio privado",
     "choose_a_file": "Haz clic para explorar",
@@ -107,5 +131,13 @@
     "contactTitle": "¿Interesado/a? ¡Contáctame!",
     "sendMail": "Enviar un correo",
     "openApplication": "Probar la aplicación"
+  }
+  ,
+  "backoffice": {
+    "users_loaded": "Usuarios cargados.",
+    "user_validated": "Cuenta de usuario validada.",
+    "user_blocked": "Cuenta de usuario bloqueada.",
+    "user_unblocked": "Cuenta de usuario desbloqueada.",
+    "email_sent": "Correo enviado."
   }
 }

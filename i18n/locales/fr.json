@@ -17,7 +17,31 @@
     "validate": "Valider"
   },
   "global": {
+    "encrypting_private_key": "Chiffrement de votre clé privée utilisée pour vos photos...",
+    "no_key_to_wrap": "Aucune clé à chiffrer, veuillez vous reconnecter.",
+    "jwk_encrypted_success": "JWK chiffré avec succès.",
+    "error_encrypting_jwk": "Erreur lors du chiffrement du JWK : ",
+    "storing_wrapped_key": "Stockage de la clé chiffrée dans l'idb...",
+    "no_wrapped_key_stored": "Aucune clé chiffrée stockée.",
+    "key_wrapped_success": "Clé chiffrée avec succès !",
+    "failed_to_wrap_key": "Échec du chiffrement de la clé : ",
+    "no_wrapped_key_found": "Aucune clé chiffrée trouvée.",
+    "error_decrypting_jwk": "Erreur lors du déchiffrement du JWK.",
+    "error_parsing_jwk": "Erreur lors du parsing du JWK.",
+    "create_your_pin": "Veuillez créer votre code PIN.",
+    "pin_required": "Le code PIN est requis.",
+    "reauth_required": "Oups... Un problème est survenu, veuillez vous reconnecter.",
+    "uploading_photos": "Import de {count} photo(s)...",
+    "photos_uploaded": "{count} photo(s) importée(s) !",
+    "photo_deleted": "Photo supprimée avec succès !",
+    "success_logged_in": "Connexion réussie !",
+    "account_created_successfully": "Compte créé avec succès !",
+    "email_required": "Email requis !",
+    "verification_email_sent": "Email de vérification envoyé !",
+    "account_validated": "Votre compte est maintenant validé !",
+    "info_logged_out": "Déconnexion réussie !",
     "photos":"Photos",
+    "error_selecting_photos": "Une erreur est survenue lors de la sélection de la/les photo(s).",
     "logout": "Se déconnecter",
     "upload_your_file": "Choisissez un fichier à importer dans votre espace privé.",
     "choose_a_file":"Cliquez pour choisir",
@@ -108,5 +132,13 @@
     "contactTitle": "Intéressé(e) ? Contactez-moi !",
     "sendMail": "Envoyer un email",
     "openApplication": "Essayer l'application"
+  }
+  ,
+  "backoffice": {
+    "users_loaded": "Utilisateurs chargés.",
+    "user_validated": "Compte utilisateur validé.",
+    "user_blocked": "Compte utilisateur bloqué.",
+    "user_unblocked": "Compte utilisateur débloqué.",
+    "email_sent": "Email envoyé."
   }
 }

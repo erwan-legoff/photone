@@ -16,7 +16,31 @@
     "validate": "确认"
   },
   "global": {
+    "encrypting_private_key": "正在加密用于照片的私钥...",
+    "no_key_to_wrap": "没有可加密的密钥，请重新登录。",
+    "jwk_encrypted_success": "JWK加密成功。",
+    "error_encrypting_jwk": "加密JWK时出错：",
+    "storing_wrapped_key": "正在idb中存储加密密钥...",
+    "no_wrapped_key_stored": "未存储加密密钥。",
+    "key_wrapped_success": "密钥加密成功！",
+    "failed_to_wrap_key": "加密密钥失败：",
+    "no_wrapped_key_found": "未找到加密密钥。",
+    "error_decrypting_jwk": "解密JWK时出错。",
+    "error_parsing_jwk": "解析JWK时出错。",
+    "create_your_pin": "请创建您的PIN码。",
+    "pin_required": "需要PIN码。",
+    "reauth_required": "哎呀... 出现问题，请重新登录。",
+    "uploading_photos": "正在上传{count}张照片...",
+    "photos_uploaded": "已上传{count}张照片！",
+    "photo_deleted": "照片删除成功！",
+    "success_logged_in": "登录成功！",
+    "account_created_successfully": "账户创建成功！",
+    "email_required": "需要邮箱！",
+    "verification_email_sent": "验证邮件已发送！",
+    "account_validated": "您的账户已验证！",
+    "info_logged_out": "成功登出！",
     "photos": "照片",
+    "error_selecting_photos": "选择照片时出错。",
     "logout": "退出登录",
     "upload_your_file": "上传文件到你的私人空间",
     "choose_a_file": "点击浏览",
@@ -107,5 +131,13 @@
     "contactTitle": "感兴趣？欢迎联系我！",
     "sendMail": "发送电子邮件",
     "openApplication": "试用应用程序"
+  }
+  ,
+  "backoffice": {
+    "users_loaded": "用户已加载。",
+    "user_validated": "用户账户已验证。",
+    "user_blocked": "用户账户已被封禁。",
+    "user_unblocked": "用户账户已解封。",
+    "email_sent": "邮件已发送。"
   }
 }
