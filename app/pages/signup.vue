@@ -37,6 +37,8 @@
   </v-container>
 </template>
 <script setup lang="ts">
+
+import { useLocalePath, navigateTo } from '#imports'
 definePageMeta({
   public: true
 })
