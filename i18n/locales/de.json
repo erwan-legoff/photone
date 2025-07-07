@@ -1,0 +1,110 @@
+{
+  "login": {
+    "title": "Anmelden",
+    "email": "@:global.email",
+    "password": "Passwort",
+    "submit": "Anmelden"
+  },
+  "signup": {
+    "title": "Registrieren",
+    "page_title": "Erstellen Sie Ihr Konto",
+    "password": "@:login.password",
+    "submit": "Zugang anfordern"
+  },
+  "pin": {
+    "enter": "PIN eingeben",
+    "validate": "Bestätigen"
+  },
+  "global": {
+    "photos": "Fotos",
+    "logout": "Abmelden",
+    "upload_your_file": "Wählen Sie eine Datei zum Hochladen in Ihren privaten Bereich.",
+    "choose_a_file": "Klicken Sie, um auszuwählen",
+    "pseudo": "Spitzname",
+    "upload": "Hochladen",
+    "first_name": "Vorname",
+    "last_name": "Nachname",
+    "email": "E-Mail"
+  },
+  "mail_verification": {
+    "title": "Bestätigen Sie Ihre E-Mail-Adresse",
+    "email_explanation": "Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte klicken Sie auf den Link in der E-Mail.",
+    "please_wait": "Bitte warten Sie, bevor Sie es erneut versuchen",
+    "send_new_mail": "Neue E-Mail senden",
+    "no_mail": "Sie haben die E-Mail nicht erhalten? Überprüfen Sie Ihren Spam-Ordner oder fordern Sie nach Ablauf des Countdowns eine neue E-Mail an."
+  },
+  "home_page": {
+    "title": "Spricture",
+    "subtitle": "Eine sichere Foto-App mit Fokus auf Privatsphäre.",
+    "note": "Hinweis:",
+    "noteContent": "Dieses Projekt ist eine persönliche technische Demonstration, um meine Full-Stack-Entwicklungsfähigkeiten, insbesondere mit Spring Boot und Nuxt 3, zu vertiefen. Es befindet sich in aktiver Entwicklung, daher nutzen Sie diese Anwendung bitte nur zu Testzwecken, da Ihre Fotos verloren gehen könnten. Bitte haben Sie auch Geduld, bis ich Ihr Konto freischalte!",
+    "projectTitle": "Projektvorstellung",
+    "projectDesc1": "Das Hauptziel von Spricture ist es, Ihnen zu ermöglichen, Ihre persönlichen Fotos sicher zu speichern. Die Schlüsselinnovation besteht darin, dass die Fotos direkt auf Ihrem Gerät (Client-seitig) verschlüsselt werden, bevor sie an den Server gesendet werden. Dies gewährleistet maximale Vertraulichkeit, da der Server niemals Zugriff auf Ihre unverschlüsselten Fotos hat.",
+    "projectDesc2": "Zukünftig können Sie Ihre Fotos in Alben organisieren, sie in Gruppen (Familie, Freunde, Arbeit ...) teilen, Tags zur leichteren Suche hinzufügen und möglicherweise von einer lokalen KI-Analyse profitieren, um automatisch relevante Metadaten zu extrahieren – stets unter Wahrung Ihrer Privatsphäre.",
+    "mailCopied": "E-Mail-Adresse in die Zwischenablage kopiert",
+    "tech": {
+      "title": "Verwendete Technologien",
+      "frameworks": {
+        "title": "Frameworks",
+        "spring": "Spring Boot",
+        "nuxt": "Nuxt 3"
+      },
+      "styling": {
+        "title": "Design"
+      },
+      "security": {
+        "title": "Sicherheit",
+        "jwt": "JWT (Authentifizierung)",
+        "bcrypt": "BCRYPT (Foto-Verschlüsselung)",
+        "roleMgmt": "Rollenverwaltung",
+        "webCryptoApi": "Web Crypto API"
+      },
+      "languages": {
+        "title": "Sprachen",
+        "java": "Java 21",
+        "typescript": "TypeScript"
+      },
+      "otherBack": {
+        "title": "Weitere Backend-Technologien",
+        "springDataJpa": "Spring Data JPA",
+        "lombok": "Lombok",
+        "awsS3": "AWS S3"
+      },
+      "otherFrontend": {
+        "title": "Weitere Frontend-Technologien",
+        "pinia": "Pinia (State Management)",
+        "i18n": "i18n (Internationalisierung)",
+        "vuetify": "Vuetify",
+        "tailwind": "Tailwind CSS"
+      },
+      "testing": {
+        "title": "Tests",
+        "mockito": "Mockito (Mocking)",
+        "junit": "JUNIT (Unit-Tests)"
+      }
+    },
+    "features": {
+      "title": "Funktionen",
+      "done": "Bereits implementiert (MVP)",
+      "planned": "Geplante Funktionen",
+      "upload": "Foto-Upload",
+      "storage": "Sichere Speicherung (Basis)",
+      "display": "Fotoanzeige",
+      "api": "Backend-API für Medien",
+      "signup": "Benutzerregistrierung",
+      "auth": "JWT-Authentifizierung",
+      "reset": "Passwort zurücksetzen",
+      "mail": "E-Mail-Bestätigung bei Registrierung",
+      "encrypt": "Komplette clientseitige Verschlüsselung",
+      "albums": "Albenverwaltung",
+      "groups": "Benutzergruppenverwaltung",
+      "share": "Teilen von Fotos/Alben",
+      "tags": "Tag-System",
+      "sync": "Hintergrundsynchronisierung",
+      "desktop": "Desktop-Anwendung (Ziel v2.0)"
+    },
+    "contactTitle": "Interessiert? Kontaktieren Sie mich!",
+    "sendMail": "E-Mail senden",
+    "openApplication": "App ausprobieren"
+  }
+}
