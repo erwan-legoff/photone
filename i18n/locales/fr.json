@@ -14,6 +14,7 @@
   },
   "pin": {
     "enter": "Entrez votre PIN",
+    "create": "Créez un nouveau PIN",
     "validate": "Valider"
   },
   "global": {
@@ -82,7 +83,7 @@
       "title": "Sécurité",
       "jwt": "JWT (Authentification)",
       "bcrypt": "BCRYPT (Chiffrement Photos)",
-      "roleMgmt": "Gestion de Rôles",
+      "roleMgmt": "Gestion de Rôles ",
       "webCryptoApi": "API Web Crypto"
     },
     "languages": {

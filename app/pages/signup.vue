@@ -37,6 +37,8 @@
   </v-container>
 </template>
 <script setup lang="ts">
+
+import { useLocalePath, navigateTo } from '#imports'
 definePageMeta({
   public: true
 })
@@ -65,10 +67,11 @@ const createUserDto = computed<CreateUserRequestDto>(() => ({
 }))
 const userStore = useUserStore()
 const submit = async () => {
+  console.log('createUserDto:', createUserDto.value)
   const isUserCreated: boolean = await userStore.createUser(createUserDto.value)
+  console.log('isUserCreated:', isUserCreated)
   const localePath = useLocalePath();
   if (isUserCreated) navigateTo(localePath({ name: 'mail-verification' }))
-
 }
 
 </script>

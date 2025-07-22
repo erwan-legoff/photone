@@ -13,6 +13,7 @@
   },
   "pin": {
     "enter": "Mèt out kod PIN",
+    "create": "Krè in nouvo kod PIN",
     "validate": "Validé"
   },
   "global": {

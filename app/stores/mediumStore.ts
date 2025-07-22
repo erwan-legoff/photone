@@ -9,6 +9,7 @@ import { useKeyStore } from "./keyStore";
 import { encryptFileBinary } from "~/tools/security/encryption/encryptFileBinary";
 import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
 import type { GetMediumLinkResponseDto } from "./types/GetMediumLinkResponseDto";
+import { useNotificationStore } from "./notificationStore";
 
 export const useMediumStore = defineStore("medium-store", () => {
   // State
@@ -21,9 +22,10 @@ export const useMediumStore = defineStore("medium-store", () => {
 
   // Actions
   async function uploadMedia(mediaFiles: File[]): Promise<void> {
-    const { t } = useI18n();
     notificationStore.notifyInfo(
-      t("global.uploading_photos", { count: mediaFiles.length })
+      `Uploading ${mediaFiles.length} photo${
+        mediaFiles.length > 1 ? "s" : ""
+      }...`
     );
 
     const { $api } = useNuxtApp();
@@ -45,7 +47,9 @@ export const useMediumStore = defineStore("medium-store", () => {
         body: formData,
       });
       notificationStore.notifySuccess(
-        t("global.photos_uploaded", { count: mediaFiles.length })
+        `${mediaFiles.length} photo${
+          mediaFiles.length > 1 ? "s" : ""
+        } uploaded!`
       );
       await fetchMedia();
     } catch (error) {
@@ -58,7 +62,7 @@ export const useMediumStore = defineStore("medium-store", () => {
   ): Promise<void> {
     const { $api } = useNuxtApp();
 
-    const { t } = useI18n();
+    //
     try {
       await $api<void>("/medium", {
         method: "DELETE",
@@ -67,7 +71,7 @@ export const useMediumStore = defineStore("medium-store", () => {
       media.value = media.value.filter(
         (medium) => medium.id !== softDeleteMediumDto.id
       );
-      notificationStore.notifySuccess(t("global.photo_deleted"));
+      notificationStore.notifySuccess("Photo deleted successfully!");
     } catch (error: unknown) {
       notificationStore.handleError(error, "deleteMedium");
     }
@@ -95,7 +99,7 @@ export const useMediumStore = defineStore("medium-store", () => {
       throw new Error("Please enter your key to unlock your key!");
     }
 
-    notificationStore.notifyInfo("downloading photos...");
+    notificationStore.notifyInfo("Downloading photos...");
     const { $api } = useNuxtApp();
 
     try {

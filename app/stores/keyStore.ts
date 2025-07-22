@@ -2,8 +2,10 @@ import { useIdb } from "#imports";
 import { defineStore } from "pinia";
 import type { WrappedKeyData } from "./types/WrappedKeyData";
 import { deriveKeyFromPassword } from "~/tools/security/encryption/deriveKeyFromPassword";
-import { useI18n } from 'vue-i18n';
+
 import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
+import { useNotificationStore } from "./notificationStore";
+import { useUserStore } from "./userStore";
 
 // In-memory key only
 let inMemoryKey: CryptoKey | undefined;
@@ -34,9 +36,7 @@ export const useKeyStore = defineStore("key-store", {
     async wrapKeyWithPIN(pin: string): Promise<boolean> {
       const notificationStore = useNotificationStore();
       const idb = useIdb();
-      const { t } = useI18n();
-
-      notificationStore.notifyInfo(t('global.encrypting_private_key'));
+      //
       try {
         // Generate a specific salt for the PIN
         const pinSalt = crypto.getRandomValues(new Uint8Array(16));
@@ -47,7 +47,7 @@ export const useKeyStore = defineStore("key-store", {
         ]);
 
         if (!inMemoryKey) {
-          notificationStore.notifyError(t('global.no_key_to_wrap'));
+          notificationStore.notifyError('No key to encrypt, please reconnect.');
           return false;
         }
 
@@ -62,10 +62,10 @@ export const useKeyStore = defineStore("key-store", {
             wrappingKey,
             jwkBuffer
           );
-          notificationStore.notifyInfo(t('global.jwk_encrypted_success'));
+
         } catch (wrapError) {
           notificationStore.notifyError(
-            t('global.error_encrypting_jwk') + (wrapError as any)?.message
+            'Error encrypting JWK: ' + (wrapError as any)?.message
           );
           throw wrapError;
         }
@@ -76,23 +76,21 @@ export const useKeyStore = defineStore("key-store", {
           pinSalt: uint8ToBase64(pinSalt),
           iv: uint8ToBase64(initializationVector),
         };
-        notificationStore.notifyInfo("Stockage de la clé wrap dans l'idb...");
-      notificationStore.notifyInfo(t('global.storing_wrapped_key'));
+
         await idb.setItem(IDB_KEYS.wrappedKeyData, wrappedKeyData);
         this.needsPinVerification = false;
         if (!(await this.hasWrappedKey())) {
-          notificationStore.notifyError(t('global.no_wrapped_key_stored'));
+          notificationStore.notifyError('No encrypted key is stored.');
           return false;
         }
 
-        notificationStore.notifySuccess("Key successfully wrapped !");
-      notificationStore.notifySuccess(t('global.key_wrapped_success'));
+
         console.log("Key successfully wrapped.");
         this.hasAlreadyWrappedTheKey = true;
         return true;
       } catch (error: any) {
         console.error("Failed to wrap key:", error);
-        notificationStore.notifyError(t('global.failed_to_wrap_key') + error.message);
+        notificationStore.notifyError('Failed to wrap key: ' + error.message);
         return false;
       }
     },
@@ -100,12 +98,12 @@ export const useKeyStore = defineStore("key-store", {
     async unwrapKeyWithPIN(pin: string): Promise<CryptoKey | undefined> {
       const idb = useIdb();
       const notificationStore = useNotificationStore();
-      const { t } = useI18n();
+      //
       // Retrieve stored data
       let wrappedKeyData = (await idb.getItem(IDB_KEYS.wrappedKeyData)) as any;
       if (!wrappedKeyData) {
         this.needsPinVerification = true;
-        notificationStore.notifyError(t('global.no_wrapped_key_found'));
+        notificationStore.notifyError('No encrypted key found.');
         return undefined;
       }
       // Désérialise les buffers
@@ -128,9 +126,9 @@ export const useKeyStore = defineStore("key-store", {
             wrappedKey
           );
         } catch (decryptError) {
-          console.error("Erreur lors du déchiffrement du JWK:", decryptError);
+          console.error("Error decrypting JWK:", decryptError);
           this.needsPinVerification = true;
-          notificationStore.notifyError(t('global.error_decrypting_jwk'));
+          notificationStore.notifyError('Error decrypting JWK.');
           return undefined;
         }
         const decoder = new TextDecoder();
@@ -139,9 +137,9 @@ export const useKeyStore = defineStore("key-store", {
         try {
           jwk = JSON.parse(jwkString);
         } catch (parseError) {
-          console.error("Erreur lors du parsing du JWK:", parseError);
+          console.error("Error parsing JWK:", parseError);
           this.needsPinVerification = true;
-          notificationStore.notifyError(t('global.error_parsing_jwk'));
+          notificationStore.notifyError('Error parsing JWK.');
           return undefined;
         }
         // Importe la clé maître à partir du JWK
@@ -183,12 +181,12 @@ export const useKeyStore = defineStore("key-store", {
     async requiresPinInitialization(): Promise<boolean> {
       const userStore = useUserStore();
       const notificationStore = useNotificationStore();
-      const { t } = useI18n();
+      //
       const hasNoWrappedKey = !(await this.hasWrappedKey());
       const needsPin = hasNoWrappedKey && userStore.isLogged;
       this.needsPinInitialization = needsPin;
       if (needsPin) {
-        notificationStore.notifyInfo(t('global.create_your_pin'));
+        notificationStore.notifyInfo('Please create your PIN.');
       }
       return needsPin;
     },
@@ -204,21 +202,21 @@ export const useKeyStore = defineStore("key-store", {
         return false;
       }
       this.needsPinVerification = true;
-      const { t } = useI18n();
-      useNotificationStore().notifyWarning(t('global.pin_required'));
+      //
+      useNotificationStore().notifyWarning('PIN code is required.');
       return true;
     },
 
     async requiresAuthentication(): Promise<boolean> {
       const userStore = useUserStore();
       const notificationStore = useNotificationStore();
-      const { t } = useI18n();
+      //
 
       const hasNoWrappedKey = !(await this.hasWrappedKey());
       const requiresAuthentication = hasNoWrappedKey && !this.getKey();
       if (requiresAuthentication || !userStore.isLogged) {
         userStore.logout();
-        notificationStore.notifyWarning(t('global.reauth_required'));
+        notificationStore.notifyWarning('A problem occurred, please reconnect.');
         return true;
       }
 

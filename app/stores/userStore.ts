@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
 import type { CreateUserRequestDto } from "./types/user/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";
-import type { JwtLoginResponseDto } from "./types/responses/JwtLoginResponseDto";
 import { useNotificationStore } from "@/stores/notificationStore";
-import { useI18n } from 'vue-i18n';
 import { deriveKeyFromPassword } from "~/tools/security/encryption/deriveKeyFromPassword";
 import { useKeyStore } from "./keyStore";
 import type { GetMeResponseDto } from "./types/responses/GetMeResponseDto";
@@ -24,17 +22,26 @@ export const useUserStore = defineStore("user-store", {
       const notificationStore = useNotificationStore();
       const keyStore = useKeyStore();
       const { $api } = useNuxtApp();
-      const { t } = useI18n();
 
       try {
-        const response = await $api<JwtLoginResponseDto>("api/auth/login", {
+        const response = await $api<string>("api/auth/login", {
           method: "POST",
           body: loginDto,
         });
 
+        localStorage.setItem("token", response);
+
         this.isLogged = true;
 
+        try {
+          const token =
+            localStorage.getItem("token") || sessionStorage.getItem("token");
+        } catch (e) {
+          // Ignore si storage désactivé
+        }
+
         const getMeResponse = await this.getMe(false);
+
         this.email = getMeResponse.email;
 
         const salt = Uint8Array.from(atob(getMeResponse.salt), (c) =>
@@ -42,7 +49,8 @@ export const useUserStore = defineStore("user-store", {
         );
 
         keyStore.deriveAndStoreKey(loginDto.password, salt);
-        notificationStore.notifySuccess(t('global.success_logged_in'));
+
+        notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
         this.isLogged = false;
         useNotificationStore().handleError(error, "login");
@@ -70,7 +78,6 @@ export const useUserStore = defineStore("user-store", {
     ): Promise<boolean> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
-      const { t } = useI18n();
       const salt = crypto.getRandomValues(new Uint8Array(16));
       await deriveKeyFromPassword(createUserRequestDto.rawPassword, salt);
 
@@ -79,7 +86,7 @@ export const useUserStore = defineStore("user-store", {
           method: "POST",
           body: createUserRequestDto,
         });
-        notificationStore.notifySuccess(t('global.account_created_successfully'));
+        notificationStore.notifySuccess("Your account has been created!");
         this.email = createUserRequestDto.email;
         return true;
       } catch (error) {
@@ -93,7 +100,6 @@ export const useUserStore = defineStore("user-store", {
       const keyStore = useKeyStore();
       const { $api } = useNuxtApp();
       const router = useRouter();
-      const { t } = useI18n();
 
       this.email = "";
       this.isLogged = false;
@@ -103,21 +109,21 @@ export const useUserStore = defineStore("user-store", {
         await $api("/api/auth/logout", {
           method: "POST",
         });
-        notificationStore.notifyInfo(t('global.info_logged_out'));
+        notificationStore.notifyInfo("Successfully logged out.");
       } catch (error) {
         notificationStore.handleError(error, "logout");
       }
+      localStorage.removeItem("token");
       router.push("/login");
     },
 
     async sendValidationEmail(): Promise<void> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
-      const { t } = useI18n();
 
       try {
         if (!this.email) {
-          notificationStore.notifyError(t('global.email_required'));
+          notificationStore.notifyError("Email address is required.");
           return;
         }
 
@@ -126,7 +132,7 @@ export const useUserStore = defineStore("user-store", {
           params: { email: this.email },
         });
 
-        notificationStore.notifySuccess(t('global.verification_email_sent'));
+        notificationStore.notifySuccess("Verification email sent.");
       } catch (error) {
         notificationStore.handleError(error, "sendValidationEmail");
         this.logout();
@@ -136,7 +142,6 @@ export const useUserStore = defineStore("user-store", {
     async verifyToken(token: string): Promise<boolean> {
       const notificationStore = useNotificationStore();
       const { $api } = useNuxtApp();
-      const { t } = useI18n();
 
       try {
         await $api("/api/auth/verify", {
@@ -144,7 +149,7 @@ export const useUserStore = defineStore("user-store", {
           params: { token },
         });
 
-        notificationStore.notifySuccess(t('global.account_validated'));
+        notificationStore.notifySuccess("Your account has been validated.");
         return true;
       } catch (error) {
         notificationStore.handleError(error, "verifyToken");

@@ -3,19 +3,19 @@
     <v-card>
       <v-card-title class="text-h5">
         <v-icon start icon="mdi-lock" />
-        {{ $t("pin.enter") }}
+        {{ title }}
       </v-card-title>
 
       <v-card-text>
         <v-text-field v-model="pin" :append-icon="showPin ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="showPin ? 'text' : 'password'" label="PIN" :placeholder="$t('pin.enter')"
+          :type="showPin ? 'text' : 'password'" label="PIN" :placeholder="t('pin.enter')"
           @click:append="showPin = !showPin" @keyup.enter="submit" />
       </v-card-text>
 
       <v-card-actions>
         <v-spacer />
         <v-btn :disabled="!canSubmit" color="primary" :loading="props.loading" @click="submit">
-          {{ $t("pin.validate") }}
+          {{ t("pin.validate") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -23,6 +23,9 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const pin = ref('')
 const showPin = ref(false)
@@ -40,6 +43,7 @@ const submit = () => {
 const props = defineProps<{
   needsPin: boolean
   loading: boolean
+  titleType?: 'CREATE_PIN' | 'ENTER_PIN'
 }>()
 
 const emit = defineEmits<{
@@ -51,5 +55,12 @@ const emit = defineEmits<{
 const dialogVisible = computed({
   get: () => props.needsPin,
   set: (value) => emit('update:needPin', value)
+})
+
+const title = computed(() => {
+  if (props.titleType === 'CREATE_PIN') {
+    return t('pin.create')
+  }
+  return t('pin.enter')
 })
 </script>
