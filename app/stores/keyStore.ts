@@ -4,6 +4,8 @@ import type { WrappedKeyData } from "./types/WrappedKeyData";
 import { deriveKeyFromPassword } from "~/tools/security/encryption/deriveKeyFromPassword";
 
 import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
+import { useNotificationStore } from "./notificationStore";
+import { useUserStore } from "./userStore";
 
 // In-memory key only
 let inMemoryKey: CryptoKey | undefined;

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useNotificationStore } from "@/stores/notificationStore";
+import type { GetUserResponseDto } from "./types/user/GetUserResponseDto";
 
 interface BackofficeUserState {
   users: GetUserResponseDto[];

@@ -9,6 +9,7 @@ import { useKeyStore } from "./keyStore";
 import { encryptFileBinary } from "~/tools/security/encryption/encryptFileBinary";
 import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
 import type { GetMediumLinkResponseDto } from "./types/GetMediumLinkResponseDto";
+import { useNotificationStore } from "./notificationStore";
 
 export const useMediumStore = defineStore("medium-store", () => {
   // State
