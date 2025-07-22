@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
 import type { CreateUserRequestDto } from "./types/user/CreateUserRequestDto";
 import type { LoginDto } from "./types/LoginDto";
-import type { JwtLoginResponseDto } from "./types/responses/JwtLoginResponseDto";
 import { useNotificationStore } from "@/stores/notificationStore";
-import { useI18n } from "vue-i18n";
 import { deriveKeyFromPassword } from "~/tools/security/encryption/deriveKeyFromPassword";
 import { useKeyStore } from "./keyStore";
 import type { GetMeResponseDto } from "./types/responses/GetMeResponseDto";
@@ -26,8 +24,6 @@ export const useUserStore = defineStore("user-store", {
       const { $api } = useNuxtApp();
 
       try {
-        console.info("[login] Sending POST api/auth/login with:", loginDto);
-
         const response = await $api<string>("api/auth/login", {
           method: "POST",
           body: loginDto,
@@ -35,48 +31,28 @@ export const useUserStore = defineStore("user-store", {
 
         localStorage.setItem("token", response);
 
-        console.info("[login] Login API response:", response);
-
         this.isLogged = true;
-        console.info("[login] isLogged set to true");
 
-        // Log token si stocké côté front (optionnel)
         try {
           const token =
             localStorage.getItem("token") || sessionStorage.getItem("token");
-          if (token) {
-            console.info(
-              "[login] Token found in localStorage/sessionStorage:",
-              token.slice(0, 20) + "..."
-            );
-          } else {
-            console.info("[login] No token in localStorage/sessionStorage");
-          }
         } catch (e) {
           // Ignore si storage désactivé
         }
 
         const getMeResponse = await this.getMe(false);
-        console.info("[login] getMe response:", getMeResponse);
 
         this.email = getMeResponse.email;
-        console.info("[login] Email set:", this.email);
 
         const salt = Uint8Array.from(atob(getMeResponse.salt), (c) =>
           c.charCodeAt(0)
         );
-        console.info("[login] Salt extracted (len):", salt.length);
 
         keyStore.deriveAndStoreKey(loginDto.password, salt);
-        console.info("[login] Key derived and stored");
 
         notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
         this.isLogged = false;
-        console.warn(
-          "[login] Login failed, isLogged set to false. Error:",
-          error
-        );
         useNotificationStore().handleError(error, "login");
       }
     },
@@ -86,14 +62,10 @@ export const useUserStore = defineStore("user-store", {
       const notificationStore = useNotificationStore();
 
       try {
-        console.info("[getMe] Calling user/me");
-        const result = await $api<GetMeResponseDto>("user/me", {
+        return await $api<GetMeResponseDto>("user/me", {
           method: "GET",
         });
-        console.info("[getMe] API response:", result);
-        return result;
       } catch (error) {
-        console.warn("[getMe] Error on user/me:", error);
         if (withNotification) {
           notificationStore.handleError(error, "getMe");
         }
