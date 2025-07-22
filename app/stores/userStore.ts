@@ -26,24 +26,55 @@ export const useUserStore = defineStore("user-store", {
       const { $api } = useNuxtApp();
 
       try {
+        console.info("[login] Sending POST api/auth/login with:", loginDto);
+
         const response = await $api<JwtLoginResponseDto>("api/auth/login", {
           method: "POST",
           body: loginDto,
         });
 
+        console.info("[login] Login API response:", response);
+
         this.isLogged = true;
+        console.info("[login] isLogged set to true");
+
+        // Log token si stocké côté front (optionnel)
+        try {
+          const token =
+            localStorage.getItem("token") || sessionStorage.getItem("token");
+          if (token) {
+            console.info(
+              "[login] Token found in localStorage/sessionStorage:",
+              token.slice(0, 20) + "..."
+            );
+          } else {
+            console.info("[login] No token in localStorage/sessionStorage");
+          }
+        } catch (e) {
+          // Ignore si storage désactivé
+        }
 
         const getMeResponse = await this.getMe(false);
+        console.info("[login] getMe response:", getMeResponse);
+
         this.email = getMeResponse.email;
+        console.info("[login] Email set:", this.email);
 
         const salt = Uint8Array.from(atob(getMeResponse.salt), (c) =>
           c.charCodeAt(0)
         );
+        console.info("[login] Salt extracted (len):", salt.length);
 
         keyStore.deriveAndStoreKey(loginDto.password, salt);
+        console.info("[login] Key derived and stored");
+
         notificationStore.notifySuccess("Successfully logged in!");
       } catch (error) {
         this.isLogged = false;
+        console.warn(
+          "[login] Login failed, isLogged set to false. Error:",
+          error
+        );
         useNotificationStore().handleError(error, "login");
       }
     },
@@ -53,10 +84,14 @@ export const useUserStore = defineStore("user-store", {
       const notificationStore = useNotificationStore();
 
       try {
-        return await $api<GetMeResponseDto>("user/me", {
+        console.info("[getMe] Calling user/me");
+        const result = await $api<GetMeResponseDto>("user/me", {
           method: "GET",
         });
+        console.info("[getMe] API response:", result);
+        return result;
       } catch (error) {
+        console.warn("[getMe] Error on user/me:", error);
         if (withNotification) {
           notificationStore.handleError(error, "getMe");
         }
