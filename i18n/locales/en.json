@@ -13,6 +13,7 @@
   },
   "pin": {
     "enter": "Enter your PIN",
+    "create": "Create a new PIN",
     "validate": "Validate"
   },
   "global": {

@@ -13,6 +13,7 @@
   },
   "pin": {
     "enter": "请输入您的 PIN 码",
+    "create": "请创建您的 PIN 码。",
     "validate": "确认"
   },
   "global": {
