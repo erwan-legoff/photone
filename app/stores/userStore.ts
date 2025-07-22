@@ -28,10 +28,12 @@ export const useUserStore = defineStore("user-store", {
       try {
         console.info("[login] Sending POST api/auth/login with:", loginDto);
 
-        const response = await $api<JwtLoginResponseDto>("api/auth/login", {
+        const response = await $api<string>("api/auth/login", {
           method: "POST",
           body: loginDto,
         });
+
+        localStorage.setItem("token", response);
 
         console.info("[login] Login API response:", response);
 
@@ -139,6 +141,7 @@ export const useUserStore = defineStore("user-store", {
       } catch (error) {
         notificationStore.handleError(error, "logout");
       }
+      localStorage.removeItem("token");
       router.push("/login");
     },
 
