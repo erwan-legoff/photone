@@ -37,8 +37,6 @@ export const useKeyStore = defineStore("key-store", {
       const notificationStore = useNotificationStore();
       const idb = useIdb();
       //
-
-      notificationStore.notifyInfo('Encrypting your private key for your photos...');
       try {
         // Generate a specific salt for the PIN
         const pinSalt = crypto.getRandomValues(new Uint8Array(16));
@@ -64,7 +62,7 @@ export const useKeyStore = defineStore("key-store", {
             wrappingKey,
             jwkBuffer
           );
-          notificationStore.notifyInfo('JWK successfully encrypted.');
+
         } catch (wrapError) {
           notificationStore.notifyError(
             'Error encrypting JWK: ' + (wrapError as any)?.message
@@ -78,7 +76,7 @@ export const useKeyStore = defineStore("key-store", {
           pinSalt: uint8ToBase64(pinSalt),
           iv: uint8ToBase64(initializationVector),
         };
-        notificationStore.notifyInfo("Storing the encrypted key in idb...");
+
         await idb.setItem(IDB_KEYS.wrappedKeyData, wrappedKeyData);
         this.needsPinVerification = false;
         if (!(await this.hasWrappedKey())) {
@@ -86,7 +84,7 @@ export const useKeyStore = defineStore("key-store", {
           return false;
         }
 
-        notificationStore.notifySuccess("Key successfully wrapped!");
+
         console.log("Key successfully wrapped.");
         this.hasAlreadyWrappedTheKey = true;
         return true;
