@@ -39,11 +39,16 @@
 
 <script setup lang="ts">
 import { useMediumStore } from '~/stores/mediumStore'
+import { useKeyStore } from '~/stores/keyStore'
+import { useNotificationStore } from '~/stores/notificationStore'
+const { $convertToWebp } = useNuxtApp()
+
 const keyStore = useKeyStore()
 const pinLoading = ref(false)
 
 const mediumStore = useMediumStore()
 const mediumToUpload: Ref<File | File[] | null | undefined> = ref(null)
+
 const canUpload = computed(() => {
   if (!mediumToUpload.value) return false
   if (Array.isArray(mediumToUpload.value)) {
@@ -52,38 +57,60 @@ const canUpload = computed(() => {
   return true
 })
 
-
 const media = computed(() => mediumStore.media)
 const isMediumOpen = ref(false)
 const openedMediumIndex = ref(0)
 const openedMedium = computed(() => media.value[openedMediumIndex.value])
+
 const openMedium = (mediumNumber: number) => {
   openedMediumIndex.value = mediumNumber
   isMediumOpen.value = true
 }
+
 const deleteMedium = () => {
   const notificationStore = useNotificationStore()
   if (!openedMedium.value) return notificationStore.notifyError("Something went wrong when deleting the photo(s).")
   mediumStore.deleteMedium(openedMedium.value)
 }
+
 const uploadMany = async () => {
   const notificationStore = useNotificationStore()
-  if (!mediumToUpload.value) return notificationStore.notifyError("Something went wrong when selecting the photo(s).")
-  if (!Array.isArray(mediumToUpload.value)) {
-    return await mediumStore.uploadMedia([mediumToUpload.value as File])
+
+  if (!mediumToUpload.value) {
+    return notificationStore.notifyError("Something went wrong when selecting the photo(s).")
   }
-  if ((mediumToUpload.value as File[]).length) {
-    return await mediumStore.uploadMedia(mediumToUpload.value as File[])
+
+  const files: File[] = Array.isArray(mediumToUpload.value)
+    ? [...mediumToUpload.value]
+    : [mediumToUpload.value]
+
+  try {
+    notificationStore.notifyInfo('Preparing images for upload...') 
+    const filesToUpload = await Promise.all(
+      files.map(file => {
+        return $convertToWebp(file, 1920)
+      })
+    )
+    notificationStore.notifyInfo('Uploading images...')
+
+    await mediumStore.uploadMedia(filesToUpload)
+    mediumToUpload.value = null // empty file selection to prevent spamming
+
+  } catch (error) {
+    console.error('Image processing failed:', error)
+    notificationStore.notifyError('An error occurred while preparing the images.')
   }
 }
 
 const downloadAll = async () => {
   mediumStore.fetchMedia()
 }
+
 const unwrapKey = async (pin: string) => {
   await keyStore.unwrapKeyWithPIN(pin)
   downloadAll()
 }
+
 const createURL = (file: File) => {
   return URL.createObjectURL(file)
 }
@@ -91,8 +118,8 @@ const createURL = (file: File) => {
 onMounted(() => {
   downloadAll()
 })
-
 </script>
+
 
 <style scoped>
 .photo-grid .v-img {
