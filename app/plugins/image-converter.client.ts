@@ -1,7 +1,6 @@
 import heic2any from "heic2any";
 import imageCompression from "browser-image-compression";
 import { filetypeinfo } from "magic-bytes.js";
-import { fi } from "date-fns/locale";
 
 export default defineNuxtPlugin(() => {
   /**
@@ -17,51 +16,19 @@ export default defineNuxtPlugin(() => {
     maxSizeMB = 0.8
   ): Promise<File> => {
     let fileToCompress = file;
-    const fileType = await detectFileType(fileToCompress);
-    if (!fileType) throw new Error("Cannot convert because no file type");
-    if (!fileType.ext) throw new Error("Cannot convert because no ext");
-    console.log("fileName", fileToCompress.name);
-    if (
-      !fileToCompress.name
-        .toLowerCase()
-        .endsWith("." + fileType.ext.toLowerCase())
-    ) {
+    const { extension, mime } = (await detectFileType(fileToCompress)) || {};
+    if (!extension) throw new Error("Cannot convert because no file type");
+    if (!mime) throw new Error("Cannot convert because no extension");
+    if (hasWrongExtensionComparedToMagicBytes(fileToCompress, extension)) {
       fileToCompress = matchExtensionWithMagicBytes(
         fileToCompress,
-        fileType as { ext: string; mime: string }
+        extension,
+        mime
       );
     }
-    if (fileType?.ext.toLowerCase() === "heic") {
-      console.log("HEIC DETECTED");
-      try {
-        const result = await heic2any({
-          blob: fileToCompress,
-          toType: "image/png",
-        });
-        const pngBlob = Array.isArray(result) ? result[0] : result;
-        if (!pngBlob) throw new Error("Error while converting from HEIC");
-        fileToCompress = new File(
-          [pngBlob],
-          file.name.replace(/\.heic$/, ".png"),
-          {
-            type: "image/png",
-          }
-        );
-      } catch (error: any) {
-        if (
-          error?.code === 1 &&
-          error?.message.includes("Image is already browser readable")
-        ) {
-          console.warn(
-            "Le fichier est déjà lisible par le navigateur, conversion ignorée."
-          );
-        } else {
-          throw error; 
-        }
-      }
+    if (extension === "heic") {
+      fileToCompress = await handleHeicConvertion(fileToCompress, file);
     }
-
-    const fileToCompressType = await detectFileType(fileToCompress);
 
     const compressed = await imageCompression(fileToCompress, {
       maxWidthOrHeight: maxWidth,
@@ -74,13 +41,6 @@ export default defineNuxtPlugin(() => {
       type: "image/webp",
     });
   };
-  async function detectFileType(file: File) {
-    const buffer = new Uint8Array(await file.arrayBuffer());
-
-    const [info] = filetypeinfo(buffer);
-
-    return info ? { ext: info.extension, mime: info.mime } : null;
-  }
 
   return {
     provide: {
@@ -88,16 +48,71 @@ export default defineNuxtPlugin(() => {
     },
   };
 });
+
+async function handleHeicConvertion(fileToCompress: File, file: File) {
+  try {
+    const result = await heic2any({
+      blob: fileToCompress,
+      toType: "image/png",
+    });
+    const pngBlob = Array.isArray(result) ? result[0] : result;
+    if (!pngBlob) throw new Error("Error while converting from HEIC");
+    fileToCompress = new File([pngBlob], file.name.replace(/\.heic$/, ".png"), {
+      type: "image/png",
+    });
+  } catch (error: any) {
+    if (
+      error?.code === 1 &&
+      error?.message.includes("Image is already browser readable")
+    ) {
+      console.warn(
+        "Le fichier est déjà lisible par le navigateur, conversion ignorée."
+      );
+    } else {
+      throw error;
+    }
+  }
+  return fileToCompress;
+}
+
+function hasWrongExtensionComparedToMagicBytes(
+  fileToCompress: File,
+  magicBytesExtension: string
+) {
+  const splited = fileToCompress.name.split(".");
+  if (splited.length < 2) return true; // No extension found
+  const currentExtension = splited[splited.length - 1]?.toLowerCase();
+  if (!currentExtension) return true;
+  if (magicBytesExtension === "jpeg") {
+    return !["jpg", "jpeg"].includes(currentExtension);
+  }
+  return currentExtension != magicBytesExtension;
+}
+
+async function detectFileType(file: File) {
+  const buffer = new Uint8Array(await file.arrayBuffer());
+
+  const [info] = filetypeinfo(buffer);
+
+  return info
+    ? {
+        extension: info.extension?.toLowerCase(),
+        mime: info.mime?.toLowerCase(),
+      }
+    : null;
+}
+
 function matchExtensionWithMagicBytes(
   file: File,
-  fileType: { ext: string; mime: string }
+  extension: string,
+  mime: string
 ) {
   const splited = file.name.split(".");
-  let newExtension = fileType.ext;
+  let newExtension = extension;
   splited[splited.length - 1] = newExtension;
   const recomposedName = splited.join(".");
   file = new File([file], recomposedName, {
-    type: fileType.mime,
+    type: mime,
   });
   return file;
 }
