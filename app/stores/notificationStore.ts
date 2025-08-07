@@ -49,9 +49,7 @@ export const useNotificationStore = defineStore("notification-store", {
           (error as any)?.data?.message || (error as any)?.message;
 
         if (status) {
-          errorMessage += `[${method || "FETCH"}] ${url || ""} → ${status} ${
-            statusText || ""
-          }`;
+          errorMessage += `${url || ""} → ${status} ${statusText || ""}`;
           if (message) {
             errorMessage += ` | ${message}`;
           }
@@ -67,9 +65,16 @@ export const useNotificationStore = defineStore("notification-store", {
       } else {
         errorMessage += String(error);
       }
-
+      errorMessage = this.cleanMessage(errorMessage);
       console.error(errorMessage);
-      this.notifyError(errorMessage);
+      this.notifyError(errorMessage, 10000);
+    },
+    cleanMessage(currentMessage: string): string {
+      if (currentMessage.length <= 0) return currentMessage;
+      if (currentMessage.includes("DisabledException")) {
+        return "Votre compte n'est pas encore validé par l'administrateur, veuillez attendre sa validation, si cela persiste, contactez le.";
+      }
+      return currentMessage;
     },
   },
 });
