@@ -96,10 +96,20 @@ export const useUserStore = defineStore("user-store", {
           method: "POST",
           body: createUserRequestDto,
         });
-        notificationStore.notifySuccess("Your account has been created!");
+        notificationStore.notifySuccess("Le compte a été créé avec succès.");
         this.email = createUserRequestDto.email;
         return true;
-      } catch (error) {
+      } catch (error: any) {
+        if (
+          error?.status === 409 &&
+          error?.data?.code === "USER_ALREADY_EXISTS"
+        ) {
+          notificationStore.notifyWarning(
+            "Un compte existe déjà avec cette adresse email.",
+            10000
+          );
+          return false;
+        }
         notificationStore.handleError(error, "createUser");
         return false;
       }
@@ -142,7 +152,7 @@ export const useUserStore = defineStore("user-store", {
           params: { email: this.email },
         });
 
-        notificationStore.notifySuccess("Verification email sent.");
+        notificationStore.notifySuccess("Mail de validation envoyé.");
       } catch (error) {
         notificationStore.handleError(error, "sendValidationEmail");
         this.logout();
@@ -159,7 +169,13 @@ export const useUserStore = defineStore("user-store", {
           params: { token },
         });
 
-        notificationStore.notifySuccess("Your account has been validated.");
+        notificationStore.notifySuccess(
+          "Votre adresse mail a été validée avec succès."
+        );
+        notificationStore.notifyWarning(
+          "Il faudra attendre la validation de l'administrateur pour vous connecter.",
+          15000
+        );
         return true;
       } catch (error) {
         notificationStore.handleError(error, "verifyToken");
