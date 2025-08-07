@@ -65,16 +65,16 @@ export const useNotificationStore = defineStore("notification-store", {
       } else {
         errorMessage += String(error);
       }
-      errorMessage = this.cleanMessage(errorMessage);
+      // errorMessage = this.cleanMessage(errorMessage);
       console.error(errorMessage);
       this.notifyError(errorMessage, 10000);
     },
-    cleanMessage(currentMessage: string): string {
-      if (currentMessage.length <= 0) return currentMessage;
-      if (currentMessage.includes("DisabledException")) {
-        return "Votre compte n'est pas encore validé par l'administrateur, veuillez attendre sa validation, si cela persiste, contactez le.";
-      }
-      return currentMessage;
-    },
+    // cleanMessage(currentMessage: string): string {
+    //   if (currentMessage.length <= 0) return currentMessage;
+    //   if (currentMessage.includes("DisabledException")) {
+    //     return "Votre compte n'est pas encore validé par l'administrateur, veuillez attendre sa validation, si cela persiste, contactez le.";
+    //   }
+    //   return currentMessage;
+    // },
   },
 });

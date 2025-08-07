@@ -51,8 +51,18 @@ export const useUserStore = defineStore("user-store", {
         keyStore.deriveAndStoreKey(loginDto.password, salt);
 
         notificationStore.notifySuccess("Successfully logged in!");
-      } catch (error) {
+      } catch (error: any) {
         this.isLogged = false;
+        if (
+          error?.status === 409 &&
+          error?.data?.message?.includes("account is not validated")
+        ) {
+          notificationStore.notifyWarning(
+            "Votre compte n'est pas encore validé par l'administrateur, veuillez attendre sa validation, si cela persiste, contactez le.",
+            10000
+          );
+          return;
+        }
         useNotificationStore().handleError(error, "login");
       }
     },
