@@ -85,7 +85,7 @@ const uploadMany = async () => {
     : [mediumToUpload.value]
 
   try {
-    notificationStore.notifyInfo('Preparing images for upload...') 
+    notificationStore.notifyInfo('Preparing images for upload...')
     const filesToUpload = await Promise.all(
       files.map(file => {
         return $convertToWebp(file, 1920)

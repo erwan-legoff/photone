@@ -3,7 +3,8 @@
     "title": "Se connecter",
     "email" : "@:global.email",
     "password": "Mot de passe",
-    "submit": "Connexion"
+    "submit": "Connexion",
+    "noAccount": "Pas de compte ?"
     
   },
   "signup": {

@@ -3,7 +3,8 @@
     "title": "Log in",
     "email": "@:global.email",
     "password": "Password",
-    "submit": "Log in"
+    "submit": "Log in",
+    "noAccount": "No account?"
   },
   "signup": {
     "title": "Sign up",

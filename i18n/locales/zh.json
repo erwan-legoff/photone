@@ -3,7 +3,8 @@
     "title": "登录",
     "email": "@:global.email",
     "password": "密码",
-    "submit": "登录"
+    "submit": "登录",
+    "noAccount": "没有账户？"
   },
   "signup": {
     "title": "注册",

@@ -3,7 +3,8 @@
     "title": "Konèkt aou",
     "email": "@:global.email",
     "password": "Mot de pas",
-    "submit": "Konèksyon"
+    "submit": "Konèksyon",
+    "noAccount": "Pa d'kont ?"
   },
   "signup": {
     "title": "Enskri aou",

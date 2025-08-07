@@ -3,7 +3,8 @@
     "title": "Iniciar sesión",
     "email": "@:global.email",
     "password": "Contraseña",
-    "submit": "Iniciar sesión"
+    "submit": "Iniciar sesión",
+    "noAccount": "¿Sin cuenta?"
   },
   "signup": {
     "title": "Registrarse",

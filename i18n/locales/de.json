@@ -3,7 +3,8 @@
     "title": "Anmelden",
     "email": "@:global.email",
     "password": "Passwort",
-    "submit": "Anmelden"
+    "submit": "Anmelden",
+    "noAccount": "Kein Konto?"
   },
   "signup": {
     "title": "Registrieren",

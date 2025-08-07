@@ -1,8 +1,10 @@
 <template>
-    <PinPopup :needsPin="keyStore.needsPinInitialization" :loading="loading" title-type="CREATE_PIN" @submit:pin="handlePinCreation"></PinPopup>
+    <PinPopup :needs-pin="keyStore.needsPinInitialization" :loading="loading" title-type="CREATE_PIN"
+        @submit:pin="handlePinCreation" />
     <v-container class="d-flex justify-center align-center" style="min-height: 100vh;">
         <v-sheet class="pa-6 rounded" max-width="400" elevation="6">
             <h1 class="mb-5">{{ $t("login.title") }}</h1>
+
             <v-form @submit.prevent="handleLogin">
                 <v-row dense>
                     <v-col cols="12">
@@ -20,7 +22,15 @@
                         <v-btn type="submit" block color="primary" class="mt-4" size="large">
                             {{ $t("login.submit") }}
                         </v-btn>
+                        <p class="mt-4 text-center">
+                            {{ $t("login.noAccount") }}
+                            <a @click="navigateTo(localePath({ name: 'signup' }))" class="text-primary"
+                                style="cursor:pointer;">
+                                {{ $t("signup.page_title") }}
+                            </a>
+                        </p>
                     </v-col>
+
                 </v-row>
             </v-form>
         </v-sheet>
@@ -28,6 +38,9 @@
 </template>
 
 <script setup lang="ts">
+import PinPopup from '~/components/PinPopup.vue'
+import type { LoginDto } from '~/stores/types/LoginDto'
+import { useUserStore } from '~/stores/userStore'
 defineI18nRoute({
     paths: {
         en: '/login',
@@ -37,9 +50,6 @@ defineI18nRoute({
 definePageMeta({
     public: true
 })
-import PinPopup from '~/components/PinPopup.vue'
-import type { LoginDto } from '~/stores/types/LoginDto'
-import { useUserStore } from '~/stores/userStore'
 const keyStore = useKeyStore()
 const email = ref('')
 const password = ref('')
