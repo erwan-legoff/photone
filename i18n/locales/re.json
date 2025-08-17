@@ -54,6 +54,9 @@
     "error_selecting_photos": "Néna in lérèr la parèt kan ou la shwazi out bann foto.",
     "logout": "Dékonèkt aou",
     "upload_your_file": "Shwazi in fisyé pou anvoyé dann out léspas privé.",
+  "nav_bar": {
+    "photos": "Mo bann photos"
+  },
     "choose_a_file": "Klik pou shwazi",
     "pseudo": "Tinon",
     "upload": "anvoyé",

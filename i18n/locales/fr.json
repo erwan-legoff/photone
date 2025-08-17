@@ -62,6 +62,9 @@
     "last_name" : "Nom de famille",
     "email" : "Email"
   },
+  "nav_bar":{
+    "photos":"Mes photos"
+  },
   "mail_verification":{
     "title":"Confirmez votre adresse mail",
     "email_explanation":"Nous vous avons envoyé un mail de confirmation, veuillez cliquer sur le lien présent dans le mail.",

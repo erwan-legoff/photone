@@ -61,6 +61,9 @@
     "last_name": "姓氏",
     "email": "电子邮件"
   },
+  "nav_bar":{
+    "photos":"我的照片"
+  },
   "mail_verification": {
     "title": "确认你的邮箱地址",
     "email_explanation": "我们已向你发送了一封确认邮件，请点击其中的链接。",

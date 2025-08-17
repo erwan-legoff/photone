@@ -8,6 +8,16 @@
                 Photone
             </NuxtLink>
         </v-app-bar-title>
+        <div v-if="userStore.isLogged">
+            <v-btn @click="navigateTo(localePath({ name: 'photos' }))">
+                {{ $t("nav_bar.photos") }}
+            </v-btn>
+        </div>
+        <div v-else>
+            <v-btn @click="navigateTo(localePath({ name: 'login' }))">
+                {{ $t('login.title') }}
+            </v-btn>
+        </div>
         <v-btn>
             {{ locale }}
 

@@ -61,6 +61,9 @@
     "last_name": "Apellido",
     "email": "Correo electrónico"
   },
+  "nav_bar":{
+    "photos":"Mis fotos"
+  },
   "mail_verification": {
     "title": "Confirma tu dirección de correo",
     "email_explanation": "Te hemos enviado un correo de confirmación — haz clic en el enlace incluido.",

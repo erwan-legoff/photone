@@ -61,6 +61,9 @@
     "last_name": "Nachname",
     "email": "E-Mail"
   },
+  "nav_bar":{
+    "photos":"Meine Fotos"
+  },
   "mail_verification": {
     "title": "Bestätigen Sie Ihre E-Mail-Adresse",
     "email_explanation": "Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte klicken Sie auf den Link in der E-Mail.",
