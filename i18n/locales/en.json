@@ -16,6 +16,7 @@
       "demo": "I understand this application is a technical demonstration without guarantee of availability or data retention.",
       "encryption": "I understand my files are encrypted in my browser using my password, and are therefore unreadable by the server or anyone without my credentials.",
       "lostPassword": "I understand that if I lose my password I cannot change it and it is impossible to recover my files because they are encrypted with my password.",
+      "accountValidation": "I understand that after creating my account, my registration is subject to administrator validation and this may take several days.",
       "terms": "I have read and accept the Terms of Use"
     },
     "submit": "Request access"
@@ -150,5 +151,21 @@
     "user_blocked": "User account blocked.",
     "user_unblocked": "User account unblocked.",
     "email_sent": "Email sent."
+  },
+  "cgu": {
+    "open": "Read the Terms of Use",
+    "summaryTitle": "Summary of Photone Terms of Use",
+    "summaryP1": "Photone is a technical demonstration: your data may be lost at any time and the service may stop without notice.",
+    "summaryP2": "Your files are encrypted in your browser using your password. The server cannot read them or recover your keys.",
+    "summaryP3": "If you lose your password there is no way to reset it: your files become permanently inaccessible.",
+    "termsTitle": "Terms of Use – Photone",
+    "article1": { "title": "Article 1 – Purpose", "content": "These Terms of Use define the terms and conditions under which the Photone service provides a technical demonstration of client-side encrypted photo storage." },
+    "article2": { "title": "Article 2 – Access to the service", "content": "Access to Photone is free and reserved for personal use. Account creation is subject to prior and discretionary validation by the Publisher." },
+    "article3": { "title": "Article 3 – Conditions of use", "li1": "Personal and non-commercial use only;", "li2": "No abusive, fraudulent or illegal use (intrusion attempts, spam, illegal distribution, etc.);", "li3": "Respect storage limits set by the Publisher, which may be changed at any time without notice." },
+    "article4": { "title": "Article 4 – Security and confidentiality", "li1": "Files are encrypted directly in the user's browser using a key derived from their password.", "li2": "The password is used to create the encryption key and neither the password nor the key are stored in plain text by the service.", "li3": "Files can only be viewed in clear text in the user's browser after entering the password.", "li4": "If the password is lost, it is impossible to reset it or recover the encrypted files." },
+    "article5": { "title": "Article 5 – Liability", "content": "Photone is provided 'as is' as a technical demonstration, without guarantee of availability, continuity or data retention. The Publisher declines any liability in case of loss, unavailability, leak, alteration or deletion of data." },
+    "article6": { "title": "Article 6 – Removal and modification of the service", "content": "The Publisher reserves the right, at any time and without notice, to delete an account or associated data, as well as to modify or interrupt the service." },
+    "article7": { "title": "Article 7 – Changes to the Terms of Use", "content": "These Terms of Use may be modified at any time by the Publisher. The applicable version is the one available online at the time of use." },
+    "close": "Close"
   }
 }

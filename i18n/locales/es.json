@@ -16,6 +16,7 @@
       "demo": "Entiendo que esta aplicación es una demostración técnica sin garantía de disponibilidad ni conservación de mis datos.",
       "encryption": "Entiendo que mis archivos se cifran en mi navegador con mi contraseña, y por lo tanto son ilegibles para el servidor o cualquier persona sin mis credenciales.",
       "lostPassword": "Entiendo que si pierdo mi contraseña no puedo cambiarla y es imposible recuperar mis archivos porque están cifrados con mi contraseña.",
+      "accountValidation": "Entiendo que tras crear mi cuenta, mi inscripción está sujeta a validación por parte del administrador y que esto puede tardar varios días.",
       "terms": "He leído y acepto las condiciones de uso"
     },
     "submit": "Solicitar acceso"
@@ -149,5 +150,21 @@
     "user_blocked": "Cuenta de usuario bloqueada.",
     "user_unblocked": "Cuenta de usuario desbloqueada.",
     "email_sent": "Correo enviado."
+  },
+  "cgu": {
+    "open": "Leer las condiciones de uso",
+    "summaryTitle": "Resumen de las Condiciones de Uso de Photone",
+    "summaryP1": "Photone es una demostración técnica: sus datos pueden perderse en cualquier momento y el servicio puede detenerse sin previo aviso.",
+    "summaryP2": "Sus archivos se cifran en su navegador con su contraseña. El servidor no puede leerlos ni recuperar sus claves.",
+    "summaryP3": "Si pierde su contraseña no hay forma de restablecerla: sus archivos serán permanentemente inaccesibles.",
+    "termsTitle": "Condiciones de Uso – Photone",
+    "article1": { "title": "Artículo 1 – Objeto", "content": "Estas Condiciones de Uso definen los términos y condiciones bajo los cuales el servicio Photone ofrece una demostración técnica de almacenamiento de fotos cifradas en el lado del cliente." },
+    "article2": { "title": "Artículo 2 – Acceso al servicio", "content": "El acceso a Photone es gratuito y reservado para uso personal. La creación de una cuenta está sujeta a la validación previa y discrecional del Editor." },
+    "article3": { "title": "Artículo 3 – Condiciones de uso", "li1": "Uso exclusivamente personal y no comercial;", "li2": "Prohibición de cualquier uso abusivo, fraudulento o ilegal (intentos de intrusión, spam, difusión ilícita, etc.);", "li3": "Respeto de los límites de almacenamiento fijados por el Editor, que pueden modificarse en cualquier momento y sin previo aviso." },
+    "article4": { "title": "Artículo 4 – Seguridad y confidencialidad", "li1": "Los archivos depositados se cifran directamente en el navegador del usuario mediante una clave derivada de su contraseña.", "li2": "La contraseña sirve para crear la clave de cifrado y ni la contraseña ni la clave se almacenan en texto claro por el servicio.", "li3": "Los archivos solo pueden consultarse en claro en el navegador del usuario tras la introducción de su contraseña.", "li4": "En caso de pérdida de la contraseña, es imposible restablecerla o recuperar los archivos cifrados." },
+    "article5": { "title": "Artículo 5 – Responsabilidades", "content": "Photone se proporciona 'tal cual' como demostración técnica, sin garantía de disponibilidad, continuidad ni conservación de datos. El Editor declina cualquier responsabilidad en caso de pérdida, indisponibilidad, fuga, alteración o eliminación de datos." },
+    "article6": { "title": "Artículo 6 – Supresión y modificación del servicio", "content": "El Editor se reserva el derecho, en cualquier momento y sin previo aviso, de suprimir una cuenta o los datos asociados, así como de modificar o interrumpir el servicio." },
+    "article7": { "title": "Artículo 7 – Evolución de las Condiciones de Uso", "content": "Estas Condiciones de Uso pueden modificarse en cualquier momento por el Editor. La versión aplicable es la disponible en línea en el momento del uso." },
+    "close": "Cerrar"
   }
 }

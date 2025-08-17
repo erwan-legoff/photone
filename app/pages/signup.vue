@@ -28,26 +28,38 @@
               persistent-hint />
           </v-col>
 
-          <v-col cols="12">
+          <v-col cols="12" v-if="isPasswordValid">
             <v-text-field v-model="copiedPassword" type="password" :label="$t('signup.rewritePassword')"
               variant="outlined" color="primary"></v-text-field>
           </v-col>
 
-          <v-col cols="12">
+          <v-col cols="12" v-show="isInitialFormValid">
             <v-checkbox v-model="agreements.demo" :label="$t('signup.agreements.demo')" />
           </v-col>
 
-          <v-col cols="12">
+          <v-col cols="12" v-show="agreements.demo">
             <v-checkbox v-model="agreements.encryption" :label="$t('signup.agreements.encryption')" />
           </v-col>
 
-          <v-col cols="12">
+
+
+          <v-col cols="12" v-show="agreements.encryption">
             <v-checkbox v-model="agreements.lostPassword" :label="$t('signup.agreements.lostPassword')" />
+
           </v-col>
 
-          <!-- <v-col cols="12">
+          <v-col cols="12" v-show="agreements.lostPassword">
+            <v-checkbox v-model="agreements.accountValidation" :label="$t('signup.agreements.accountValidation')" />
+          </v-col>
+
+          <v-col cols="12" v-show="agreements.accountValidation">
+            <v-btn @click="openCgu = true">{{ $t('cgu.open') }}</v-btn>
+            <CguDialog v-model="openCgu" />
+          </v-col>
+
+          <v-col cols="12" v-show="agreements.accountValidation">
             <v-checkbox v-model="agreements.terms" :label="$t('signup.agreements.terms')" />
-          </v-col> -->
+          </v-col>
 
           <v-col cols="12">
             <v-btn block color="primary" class="mt-4" size="large" type="submit" :disabled="!canSubmit">
@@ -77,7 +89,8 @@ const agreements = reactive({
   demo: false,
   encryption: false,
   lostPassword: false,
-  terms: false
+  terms: false,
+  accountValidation: false
 })
 const allAccepted = computed(() =>
   Object.values(agreements).every(Boolean)
@@ -89,6 +102,9 @@ const pseudo = ref('')
 const email = ref('')
 const password = ref('')
 const copiedPassword = ref('')
+
+const openCgu = ref(false)
+
 const isFirstNameValid = computed(() => {
   const trimed = firstName.value.trim()
   return trimed.length > 1 && trimed.length < 60
@@ -104,7 +120,8 @@ const isPseudoValid = computed(() => {
 const isPasswordValid = computed(() => { return password.value.length >= 6 })
 const isCopiedPasswordValid = computed(() => { return password.value === copiedPassword.value })
 const isEmailValid = computed(() => { return email.value.trim().length > 5 && email.value.length < 60 && email.value.includes("@") && email.value.includes(".") })
-const canSubmit = computed(() => { return isFirstNameValid.value && isLastNameValid.value && isPseudoValid.value && isEmailValid.value && isPasswordValid.value && isCopiedPasswordValid.value && allAccepted.value })
+const isInitialFormValid = computed(() => { return isFirstNameValid.value && isLastNameValid.value && isPseudoValid.value && isEmailValid.value && isPasswordValid.value && isCopiedPasswordValid.value })
+const canSubmit = computed(() => { return isInitialFormValid.value && allAccepted.value })
 const showPassword = ref(false)
 // We don't want them to copy a visible password
 watch(copiedPassword, () => { if (copiedPassword.value.length > 0) { showPassword.value = false } })

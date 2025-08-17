@@ -16,6 +16,7 @@
       "demo": "Mon konpran ki sa aplikasyon la i enn demonstrasyon teknik san garanti disponiblite ni konzervasion mo bann done.",
       "encryption": "Mon konpran ki mo fichyé i kripte dann mon navigatèr avek mon mo de pas, alor i pa lizib pou serveur ni lezot san moin identifiants.",
       "lostPassword": "Mon konpran si mon perdi mon mo de pas, mon na pa kapav ranplas li ek i enpossib pou récupéré mo fichyé paski zot i kripte avek mon mo de pas.",
+      "accountValidation": "Mon konpran ki apre kréasyon mon kont, mon enskripsion i soumet a validasyon par l'administrater e sa la i kapab pran plizier zour.",
       "terms": "Mon la li ek mon accepte bann kondisyon d'utilizasyon"
     },
     "submit": "Domann laksé"
@@ -147,5 +148,21 @@
     "user_blocked": "Kont litilizatèr la finn bloké.",
     "user_unblocked": "Kont litilizatèr la finn débloké.",
     "email_sent": "Imèl la finn anvoyé."
+  },
+  "cgu": {
+    "open": "Li kondisyon d'utilisation",
+    "summaryTitle": "Rezime Kondision Jeneral d'Utilizasyon Photone",
+    "summaryP1": "Photone li enn demonstrasyon teknik : ou bann done kapav perdi n'importe kan e servis-la kapav arrete san avi.",
+    "summaryP2": "Ou bann fichyé i kripte dan ou navigater avek ou mo de pas. Serveur pa kapav lir zot ni retourn ou kle.",
+    "summaryP3": "Si ou perdi ou mot de pas pa ena ninme fason pou reinitializ li : ou bann fichyé pou ganny inaccessib permanentman.",
+    "termsTitle": "Kondision Jeneral d'Utilizasyon – Photone",
+    "article1": { "title": "Article 1 – Objektif", "content": "Sa Kondision Jeneral d'Utilizasyon la defin fason kot Photone met a dispozision enn demonstrasyon teknik pou stokaz foto kripte kout kot klient." },
+    "article2": { "title": "Article 2 – Aksé au servis", "content": "Aksé pou Photone li gratis ek rezerv pou itilizasyon personel. Kreasyon kont soumet a validasyon avan ek discretioner par l'Editeur." },
+    "article3": { "title": "Article 3 – Kondision d'utilizasyon", "li1": "Itilizasyon zis personel ek pa komersyal ;", "li2": "Pa fer itilizasyon abizif, fraudulent ousa ilegal (tentativ intrizyon, spam, difizyon ilegal, etc.) ;", "li3": "Respek limit stokaz fixe par l'Editeur, ki kapav sanze n'importe kan san avi." },
+    "article4": { "title": "Article 4 – Sekirite ek konfidentialite", "li1": "Fichyé deponé i kripte direkteman dan navigater avek enn kle derive depi ou mot de pas.", "li2": "Mot de pas servi pou kree kle kriptaz ek ni mot de pas ni kle pa stoke an klar par servis-la.", "li3": "Fichyé kapav lir an klar zis dan navigater apre ou inn met ou mot de pas.", "li4": "Si ou perdi mot de pas li imposible pou reinitializ ousa recuper ou fichyé kripte." },
+    "article5": { "title": "Article 5 – Responsabilite", "content": "Photone fourni 'tel ki', kom demonstrasyon teknik, san garanti disponiblite, continuite ousa stokaz done. L'Editeur denye tou responsabilite an ka perdi, indisponibilite, fuite, alteration ousa supression done." },
+    "article6": { "title": "Article 6 – Supresion ek modifikasion servis", "content": "L'Editeur garde drwa, a n'importe kan ek san avi, pou supprim enn kont ousa done asosye, ek osi pou modifie ousa arrete servis-la." },
+    "article7": { "title": "Article 7 – Evolusion Kondision d'Utilizasyon", "content": "Sa Kondision-la kapav modifie n'importe kan par l'Editeur. Version aplike li celle disponib an ligne kan servi." },
+    "close": "Fermer"
   }
 }

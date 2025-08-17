@@ -17,7 +17,8 @@
       "demo": "Je comprends que cette application est une démonstration technique sans garantie de disponibilité ni de conservation de mes données.",
       "encryption": "Je comprends que mes fichiers sont chiffrés dans mon navigateur grâce à mon mot de passe, et sont donc illisibles par le serveur ou quiconque n'ayant pas mes identifiants.",
       "lostPassword": "Je comprends qu’en cas de perte de mon mot de passe, je ne peux pas le changer et qu’il est impossible de récupérer mes fichiers car ils sont chiffrés par mon mot de passe.",
-      "terms": "J'ai lu et j'accepte les conditions d'utilisation"
+      "terms": "J'ai lu et j'accepte les conditions d'utilisation",
+      "accountValidation" : "Je comprends qu'après la création de mon compte, mon inscription est soumise à validation par l'administrateur et que ce délais peut être de plusieurs jours."
     },
     "submit": "Demander l'accès"
   },
@@ -150,5 +151,21 @@
     "user_blocked": "Compte utilisateur bloqué.",
     "user_unblocked": "Compte utilisateur débloqué.",
     "email_sent": "Email envoyé."
+  },
+  "cgu": {
+    "open": "Lire les conditions d'utilisation",
+    "summaryTitle": "Résumé des Conditions Générales d'Utilisation de Photone",
+    "summaryP1": "Photone est une démonstration technique : vos données peuvent être perdues à tout moment et le service peut s’arrêter sans préavis.",
+    "summaryP2": "Vos fichiers sont chiffrés dans votre navigateur grâce à votre mot de passe. Le serveur ne peut ni les lire, ni récupérer vos clés.",
+    "summaryP3": "En cas de perte de mot de passe, aucun moyen de le réinitialiser : vos fichiers deviennent définitivement inaccessibles.",
+    "termsTitle": "Conditions Générales d'Utilisation – Photone",
+    "article1": { "title": "Article 1 – Objet", "content": "Les présentes Conditions Générales d'Utilisation (\"CGU\") définissent les modalités et conditions selon lesquelles le service Photone met à disposition une démonstration technique de stockage de photographies chiffrées côté client." },
+    "article2": { "title": "Article 2 – Accès au service", "content": "L'accès à Photone est gratuit et réservé à un usage personnel. La création d'un compte est soumise à la validation préalable et discrétionnaire de l'Éditeur." },
+    "article3": { "title": "Article 3 – Conditions d'utilisation", "li1": "Utilisation exclusivement personnelle et non commerciale ;", "li2": "Interdiction de tout usage abusif, frauduleux ou contraire à la loi (tentatives d'intrusion, spam, diffusion illicite, etc.) ;", "li3": "Respect des limites de stockage fixées par l'Éditeur, susceptibles d'être modifiées à tout moment et sans préavis." },
+    "article4": { "title": "Article 4 – Sécurité et confidentialité", "li1": "Les fichiers déposés sont chiffrés directement dans le navigateur de l'utilisateur au moyen d'une clé dérivée à partir de son mot de passe.", "li2": "Le mot de passe sert à créer la clé de chiffrement et ni le mot de passe ni la clé ne sont stockés en clair par le service.", "li3": "Les fichiers peuvent être consultés en clair uniquement dans le navigateur de l'utilisateur, après saisie de son mot de passe.", "li4": "En cas de perte du mot de passe, il est impossible de le réinitialiser ou de récupérer les fichiers chiffrés." },
+    "article5": { "title": "Article 5 – Responsabilités", "content": "Photone est fourni « tel quel », à titre de démonstration technique, sans garantie de disponibilité, de continuité ni de conservation des données. L'Éditeur décline toute responsabilité en cas de perte, d'indisponibilité, de fuite, d'altération ou de suppression des données." },
+    "article6": { "title": "Article 6 – Suppression et modification du service", "content": "L'Éditeur se réserve le droit, à tout moment et sans préavis, de supprimer un compte ou les données associées, ainsi que de modifier ou d'interrompre le service." },
+    "article7": { "title": "Article 7 – Évolution des CGU", "content": "Les présentes CGU peuvent être modifiées à tout moment par l'Éditeur. La version applicable est celle disponible en ligne au moment de l'utilisation du service." },
+    "close": "Fermer"
   }
 }

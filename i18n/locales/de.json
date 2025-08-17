@@ -16,6 +16,7 @@
       "demo": "Ich verstehe, dass diese Anwendung eine technische Demonstration ist, ohne Garantie für Verfügbarkeit oder Aufbewahrung meiner Daten.",
       "encryption": "Ich verstehe, dass meine Dateien in meinem Browser mit meinem Passwort verschlüsselt werden und daher für den Server oder andere ohne meine Zugangsdaten unlesbar sind.",
       "lostPassword": "Ich verstehe, dass ich bei Verlust meines Passworts dieses nicht ändern kann und es unmöglich ist, meine Dateien wiederherzustellen, da sie mit meinem Passwort verschlüsselt sind.",
+      "accountValidation": "Ich verstehe, dass nach der Erstellung meines Kontos meine Registrierung von einem Administrator verifiziert werden muss und dies mehrere Tage dauern kann.",
       "terms": "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie"
     },
     "submit": "Zugang anfordern"
@@ -148,5 +149,21 @@
     "user_blocked": "Benutzerkonto gesperrt.",
     "user_unblocked": "Benutzerkonto entsperrt.",
     "email_sent": "E-Mail gesendet."
+  },
+  "cgu": {
+    "open": "Nutzungsbedingungen lesen",
+    "summaryTitle": "Zusammenfassung der Nutzungsbedingungen von Photone",
+    "summaryP1": "Photone ist eine technische Demonstration: Ihre Daten können jederzeit verloren gehen und der Dienst kann ohne Vorankündigung eingestellt werden.",
+    "summaryP2": "Ihre Dateien werden in Ihrem Browser mit Ihrem Passwort verschlüsselt. Der Server kann sie nicht lesen oder Ihre Schlüssel wiederherstellen.",
+    "summaryP3": "Wenn Sie Ihr Passwort verlieren, gibt es keine Möglichkeit, es zurückzusetzen: Ihre Dateien werden dauerhaft unzugänglich.",
+    "termsTitle": "Nutzungsbedingungen – Photone",
+    "article1": { "title": "Artikel 1 – Zweck", "content": "Diese Nutzungsbedingungen legen die Bedingungen fest, unter denen der Dienst Photone eine technische Demonstration zur clientseitigen Verschlüsselung und Speicherung von Fotos bereitstellt." },
+    "article2": { "title": "Artikel 2 – Zugriff auf den Dienst", "content": "Der Zugriff auf Photone ist kostenlos und für die persönliche Nutzung bestimmt. Die Erstellung eines Kontos unterliegt der vorherigen und nach Ermessen des Herausgebers erfolgenden Validierung." },
+    "article3": { "title": "Artikel 3 – Nutzungsbedingungen", "li1": "Ausschließlich persönliche und nicht-kommerzielle Nutzung;", "li2": "Verbot jeglicher missbräuchlicher, betrügerischer oder rechtswidriger Nutzung (Einbruchsversuche, Spam, illegale Verbreitung usw.);", "li3": "Beachtung der vom Herausgeber festgelegten Speicherkapazitätsgrenzen, die jederzeit ohne Vorankündigung geändert werden können." },
+    "article4": { "title": "Artikel 4 – Sicherheit und Vertraulichkeit", "li1": "Die hochgeladenen Dateien werden direkt im Browser des Nutzers mithilfe eines aus seinem Passwort abgeleiteten Schlüssels verschlüsselt.", "li2": "Das Passwort dient zur Erstellung des Verschlüsselungsschlüssels, und weder das Passwort noch der Schlüssel werden vom Dienst im Klartext gespeichert.", "li3": "Die Dateien können im Klartext nur im Browser des Nutzers nach Eingabe seines Passworts angezeigt werden.", "li4": "Im Falle eines Passwortverlusts ist es unmöglich, dieses zurückzusetzen oder die verschlüsselten Dateien wiederherzustellen." },
+    "article5": { "title": "Artikel 5 – Haftung", "content": "Photone wird als technische Demonstration 'wie besehen' bereitgestellt, ohne Gewähr für Verfügbarkeit, Kontinuität oder Aufbewahrung von Daten. Der Herausgeber lehnt jegliche Haftung im Falle von Verlust, Nichtverfügbarkeit, Lecks, Änderungen oder Löschung von Daten ab." },
+    "article6": { "title": "Artikel 6 – Löschung und Änderung des Dienstes", "content": "Der Herausgeber behält sich das Recht vor, jederzeit und ohne Vorankündigung ein Konto oder zugehörige Daten zu löschen sowie den Dienst zu ändern oder einzustellen." },
+    "article7": { "title": "Artikel 7 – Änderungen der Nutzungsbedingungen", "content": "Diese Nutzungsbedingungen können vom Herausgeber jederzeit geändert werden. Die anwendbare Version ist die zum Zeitpunkt der Nutzung online verfügbare." },
+    "close": "Schließen"
   }
 }
