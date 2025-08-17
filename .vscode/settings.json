@@ -9,6 +9,6 @@
     "markdown": true,
     "scminput": false,
     "yaml": false,
-    "typescript": false
+    "typescript": true
   }
 }

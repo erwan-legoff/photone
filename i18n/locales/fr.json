@@ -11,6 +11,8 @@
     "title": "S'inscrire",
     "page_title": "Créez votre compte",
     "password": "@:login.password",
+    "rewritePassword": "Veuillez confirmer votre mot de passe",
+    "passwordRequirements": "Le mot de passe doit contenir au moins 6 caractères",
     "submit": "Demander l'accès"
   },
   "pin": {

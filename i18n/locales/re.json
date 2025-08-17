@@ -10,6 +10,8 @@
     "title": "Enskri aou",
     "page_title": "Kré out kont",
     "password": "@:login.password",
+    "rewritePassword": "Konfirm out mot de pas siouplé",
+    "passwordRequirements": "Mot de pas i doi kontenir o minimum 6 karaktè",
     "submit": "Domann laksé"
   },
   "pin": {

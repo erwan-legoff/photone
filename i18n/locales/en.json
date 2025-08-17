@@ -10,6 +10,8 @@
     "title": "Sign up",
     "page_title": "Create your account",
     "password": "@:login.password",
+    "rewritePassword": "Please confirm your password",
+    "passwordRequirements": "Password must be at least 6 characters",
     "submit": "Request access"
   },
   "pin": {

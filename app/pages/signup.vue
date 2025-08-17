@@ -21,17 +21,18 @@
           </v-col>
 
 
-          Le mot de passe doit contenir au moins 6 caractères
           <v-col cols="12">
             <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" :label="$t('signup.password')"
               variant="outlined" color="primary" :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-              @click:append-inner="showPassword = !showPassword" />
+              @click:append-inner="showPassword = !showPassword" :hint="$t('signup.passwordRequirements')"
+              persistent-hint />
           </v-col>
 
           <v-col cols="12">
             <v-text-field v-model="copiedPassword" type="password" :label="$t('signup.rewritePassword')"
               variant="outlined" color="primary"></v-text-field>
           </v-col>
+
 
           <v-col cols="12">
             <v-btn block color="primary" class="mt-4" size="large" type="submit" :disabled="!canSubmit">

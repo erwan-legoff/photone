@@ -10,6 +10,8 @@
     "title": "Registrieren",
     "page_title": "Erstellen Sie Ihr Konto",
     "password": "@:login.password",
+    "rewritePassword": "Bitte bestätigen Sie Ihr Passwort",
+    "passwordRequirements": "Das Passwort muss mindestens 6 Zeichen lang sein",
     "submit": "Zugang anfordern"
   },
   "pin": {

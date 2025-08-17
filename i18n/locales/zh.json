@@ -7,10 +7,12 @@
     "noAccount": "没有账户？"
   },
   "signup": {
-    "title": "注册",
-    "page_title": "创建你的账户",
-    "password": "@:login.password",
-    "submit": "申请访问权限"
+  "title": "注册",
+  "page_title": "创建你的账户",
+  "password": "@:login.password",
+  "rewritePassword": "确认密码",
+  "passwordRequirements": "密码必须超过6个字符",
+  "submit": "申请访问权限"
   },
   "pin": {
     "enter": "请输入您的 PIN 码",

@@ -10,6 +10,8 @@
     "title": "Registrarse",
     "page_title": "Crea tu cuenta",
     "password": "@:login.password",
+    "rewritePassword": "Por favor, confirme su contraseña",
+    "passwordRequirements": "La contraseña debe tener al menos 6 caracteres",
     "submit": "Solicitar acceso"
   },
   "pin": {
