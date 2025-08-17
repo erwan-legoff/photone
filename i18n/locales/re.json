@@ -12,6 +12,12 @@
     "password": "@:login.password",
     "rewritePassword": "Konfirm out mot de pas siouplé",
     "passwordRequirements": "Mot de pas i doi kontenir o minimum 6 karaktè",
+    "agreements": {
+      "demo": "Mon konpran ki sa aplikasyon la i enn demonstrasyon teknik san garanti disponiblite ni konzervasion mo bann done.",
+      "encryption": "Mon konpran ki mo fichyé i kripte dann mon navigatèr avek mon mo de pas, alor i pa lizib pou serveur ni lezot san moin identifiants.",
+      "lostPassword": "Mon konpran si mon perdi mon mo de pas, mon na pa kapav ranplas li ek i enpossib pou récupéré mo fichyé paski zot i kripte avek mon mo de pas.",
+      "terms": "Mon la li ek mon accepte bann kondisyon d'utilizasyon"
+    },
     "submit": "Domann laksé"
   },
   "pin": {

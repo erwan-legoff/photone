@@ -12,6 +12,12 @@
     "password": "@:login.password",
     "rewritePassword": "Por favor, confirme su contraseña",
     "passwordRequirements": "La contraseña debe tener al menos 6 caracteres",
+    "agreements": {
+      "demo": "Entiendo que esta aplicación es una demostración técnica sin garantía de disponibilidad ni conservación de mis datos.",
+      "encryption": "Entiendo que mis archivos se cifran en mi navegador con mi contraseña, y por lo tanto son ilegibles para el servidor o cualquier persona sin mis credenciales.",
+      "lostPassword": "Entiendo que si pierdo mi contraseña no puedo cambiarla y es imposible recuperar mis archivos porque están cifrados con mi contraseña.",
+      "terms": "He leído y acepto las condiciones de uso"
+    },
     "submit": "Solicitar acceso"
   },
   "pin": {

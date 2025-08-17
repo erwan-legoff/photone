@@ -13,6 +13,12 @@
     "password": "@:login.password",
     "rewritePassword": "Veuillez confirmer votre mot de passe",
     "passwordRequirements": "Le mot de passe doit contenir au moins 6 caractères",
+    "agreements": {
+      "demo": "Je comprends que cette application est une démonstration technique sans garantie de disponibilité ni de conservation de mes données.",
+      "encryption": "Je comprends que mes fichiers sont chiffrés dans mon navigateur grâce à mon mot de passe, et sont donc illisibles par le serveur ou quiconque n'ayant pas mes identifiants.",
+      "lostPassword": "Je comprends qu’en cas de perte de mon mot de passe, je ne peux pas le changer et qu’il est impossible de récupérer mes fichiers car ils sont chiffrés par mon mot de passe.",
+      "terms": "J'ai lu et j'accepte les conditions d'utilisation"
+    },
     "submit": "Demander l'accès"
   },
   "pin": {

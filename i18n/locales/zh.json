@@ -12,6 +12,12 @@
   "password": "@:login.password",
   "rewritePassword": "确认密码",
   "passwordRequirements": "密码必须超过6个字符",
+  "agreements": {
+    "demo": "我理解此应用为技术演示，不保证可用性或数据保留。",
+    "encryption": "我理解我的文件在浏览器中使用我的密码被加密，因此服务器或任何没有我的凭据的人无法读取它们。",
+    "lostPassword": "我理解如果我丢失密码，我无法更改它，并且由于文件使用我的密码加密，无法恢复我的文件。",
+    "terms": "我已阅读并接受使用条款"
+  },
   "submit": "申请访问权限"
   },
   "pin": {

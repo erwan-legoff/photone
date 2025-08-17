@@ -33,6 +33,21 @@
               variant="outlined" color="primary"></v-text-field>
           </v-col>
 
+          <v-col cols="12">
+            <v-checkbox v-model="agreements.demo" :label="$t('signup.agreements.demo')" />
+          </v-col>
+
+          <v-col cols="12">
+            <v-checkbox v-model="agreements.encryption" :label="$t('signup.agreements.encryption')" />
+          </v-col>
+
+          <v-col cols="12">
+            <v-checkbox v-model="agreements.lostPassword" :label="$t('signup.agreements.lostPassword')" />
+          </v-col>
+
+          <!-- <v-col cols="12">
+            <v-checkbox v-model="agreements.terms" :label="$t('signup.agreements.terms')" />
+          </v-col> -->
 
           <v-col cols="12">
             <v-btn block color="primary" class="mt-4" size="large" type="submit" :disabled="!canSubmit">
@@ -58,6 +73,15 @@ defineI18nRoute({
 })
 import type { CreateUserRequestDto } from '~/stores/types/user/CreateUserRequestDto'
 import { useUserStore } from '~/stores/userStore'
+const agreements = reactive({
+  demo: false,
+  encryption: false,
+  lostPassword: false,
+  terms: false
+})
+const allAccepted = computed(() =>
+  Object.values(agreements).every(Boolean)
+)
 
 const firstName = ref('')
 const lastName = ref('')
@@ -80,7 +104,7 @@ const isPseudoValid = computed(() => {
 const isPasswordValid = computed(() => { return password.value.length >= 6 })
 const isCopiedPasswordValid = computed(() => { return password.value === copiedPassword.value })
 const isEmailValid = computed(() => { return email.value.trim().length > 5 && email.value.length < 60 && email.value.includes("@") && email.value.includes(".") })
-const canSubmit = computed(() => { return isFirstNameValid.value && isLastNameValid.value && isPseudoValid.value && isEmailValid.value && isPasswordValid.value && isCopiedPasswordValid.value })
+const canSubmit = computed(() => { return isFirstNameValid.value && isLastNameValid.value && isPseudoValid.value && isEmailValid.value && isPasswordValid.value && isCopiedPasswordValid.value && allAccepted.value })
 const showPassword = ref(false)
 // We don't want them to copy a visible password
 watch(copiedPassword, () => { if (copiedPassword.value.length > 0) { showPassword.value = false } })

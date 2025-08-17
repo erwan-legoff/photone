@@ -12,6 +12,12 @@
     "password": "@:login.password",
     "rewritePassword": "Please confirm your password",
     "passwordRequirements": "Password must be at least 6 characters",
+    "agreements": {
+      "demo": "I understand this application is a technical demonstration without guarantee of availability or data retention.",
+      "encryption": "I understand my files are encrypted in my browser using my password, and are therefore unreadable by the server or anyone without my credentials.",
+      "lostPassword": "I understand that if I lose my password I cannot change it and it is impossible to recover my files because they are encrypted with my password.",
+      "terms": "I have read and accept the Terms of Use"
+    },
     "submit": "Request access"
   },
   "pin": {
