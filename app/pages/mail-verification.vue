@@ -5,7 +5,7 @@
 
             <v-icon class="mb-6" color="secondary" size="96" icon="mdi-email-alert" />
 
-            <h2 class="text-h5 font-weight-bold mb-4">
+            <h2 class="text-h4 font-weight-bold mb-4">
                 {{ $t("mail_verification.title") }}
             </h2>
 
@@ -15,12 +15,12 @@
 
 
             <!-- Countdown -->
-            <h1 :class="['text-h2 font-weight-bold mb-2', { 'shake text-error': showError }]">
+            <h1 :class="['text-h4  font-weight-bold mb-2', { 'shake text-error': showError }]">
                 {{ secondCounter }}
             </h1>
 
             <h4 v-if="secondCounter" :class="[
-                'text-body-1 font-weight-medium mb-6',
+                'text-body-2 font-weight-medium mb-6',
                 { 'shake text-error': showError }
             ]">
                 {{ $t("mail_verification.please_wait") }}
