@@ -107,19 +107,19 @@ const openCgu = ref(false)
 
 const isFirstNameValid = computed(() => {
   const trimed = firstName.value.trim()
-  return trimed.length > 1 && trimed.length < 60
+  return trimed.length > 1 && trimed.length <= 60
 })
 const isLastNameValid = computed(() => {
   const trimed = lastName.value.trim()
-  return trimed.length > 1 && trimed.length < 100
+  return trimed.length > 1 && trimed.length <= 100
 })
 const isPseudoValid = computed(() => {
   const trimed = pseudo.value.trim()
-  return trimed.length >= 3 && trimed.length < 30
+  return trimed.length >= 3 && trimed.length <= 30
 })
-const isPasswordValid = computed(() => { return password.value.length >= 6 })
+const isPasswordValid = computed(() => { return password.value.length >= 6 && password.value.length <= 30 })
 const isCopiedPasswordValid = computed(() => { return password.value === copiedPassword.value })
-const isEmailValid = computed(() => { return email.value.trim().length > 5 && email.value.length < 60 && email.value.includes("@") && email.value.includes(".") })
+const isEmailValid = computed(() => { return email.value.trim().length >= 5 && email.value.length <= 60 && email.value.includes("@") && email.value.includes(".") })
 const isInitialFormValid = computed(() => { return isFirstNameValid.value && isLastNameValid.value && isPseudoValid.value && isEmailValid.value && isPasswordValid.value && isCopiedPasswordValid.value })
 const canSubmit = computed(() => { return isInitialFormValid.value && allAccepted.value })
 const showPassword = ref(false)
