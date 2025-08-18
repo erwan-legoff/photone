@@ -53,14 +53,14 @@ export const useUserStore = defineStore("user-store", {
         notificationStore.notifySuccess("Successfully logged in!");
       } catch (error: any) {
         this.isLogged = false;
-        if (
-          error?.status === 409 &&
-          error?.data?.message?.includes("account is not validated")
-        ) {
-          notificationStore.notifyWarning(
-            "Votre compte n'est pas encore validé par l'administrateur, veuillez attendre sa validation, si cela persiste, contactez le.",
-            10000
-          );
+        if (error?.status === 409) {
+          if (error?.data?.message?.includes("account is not validated")) {
+            notificationStore.notifyWarning(
+              "Votre compte n'est pas encore validé par l'administrateur, veuillez attendre sa validation, si cela persiste, contactez le.",
+              10000
+            );
+          }
+
           return;
         }
         useNotificationStore().handleError(error, "login");
@@ -100,16 +100,21 @@ export const useUserStore = defineStore("user-store", {
         this.email = createUserRequestDto.email;
         return true;
       } catch (error: any) {
-        if (
-          error?.status === 409 &&
-          error?.data?.code === "USER_ALREADY_EXISTS"
-        ) {
+        if (error?.data?.message?.includes("USER_MAIL_ALREADY_EXISTS")) {
           notificationStore.notifyWarning(
             "Un compte existe déjà avec cette adresse email.",
             10000
           );
           return false;
         }
+        if (error?.data?.message?.includes("USER_PSEUDO_ALREADY_EXISTS")) {
+          notificationStore.notifyWarning(
+            "Un compte existe déjà avec ce pseudo.",
+            10000
+          );
+          return false;
+        }
+
         notificationStore.handleError(error, "createUser");
         return false;
       }
