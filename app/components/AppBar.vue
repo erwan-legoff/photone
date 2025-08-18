@@ -9,6 +9,9 @@
             </NuxtLink>
         </v-app-bar-title>
         <div v-if="userStore.isLogged">
+            <v-btn @click="navigateTo(localePath({ name: 'albums' }))">
+                Mes albums
+            </v-btn>
             <v-btn @click="navigateTo(localePath({ name: 'photos' }))">
                 {{ $t("nav_bar.photos") }}
             </v-btn>
