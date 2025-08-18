@@ -18,17 +18,13 @@ export const useAlbumStore = defineStore("album-store", () => {
 
     const { $api } = useNuxtApp();
     try {
-      if (await keyStore.shouldPromptForPin()) {
-        return;
-      }
-
       await $api("/album", {
         method: "POST",
         body: album,
       });
       notificationStore.notifySuccess(`${album.title} uploaded!`);
     } catch (error) {
-      notificationStore.handleError(error, "getMedium");
+      notificationStore.handleError(error, "createAlbum");
     }
   }
 
