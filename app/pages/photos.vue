@@ -18,19 +18,7 @@
               <v-btn :disabled="!canUpload" @click="uploadMany"> {{ $t("global.upload") }} </v-btn>
             </v-row>
           </div>
-          <v-row class="photo-grid" dense>
-            <v-col v-for="(medium, i) in media" :key="medium.id" cols="12" sm="6" md="4" xl="2">
-              <v-card class="overflow-hidden rounded-lg" elevation="2">
-                <v-img :src="createURL(medium.file)" height="200" cover @click="() => { openMedium(i) }">
-                  <template #placeholder>
-                    <div class="d-flex align-center justify-center fill-height">
-                      <v-progress-circular color="grey-lighten-4" indeterminate />
-                    </div>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-          </v-row>
+          <PhotoGrid :media="media" @open="openMedium" />
         </div>
       </div>
     </v-container>
@@ -38,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import PhotoGrid from '~/components/PhotoGrid.vue'
 import { useMediumStore } from '~/stores/mediumStore'
 import { useKeyStore } from '~/stores/keyStore'
 import { useNotificationStore } from '~/stores/notificationStore'
