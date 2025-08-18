@@ -146,6 +146,16 @@
     "sendMail": "Send an email",
     "openApplication": "Try the app"
   }
+  ,
+  "albums": {
+    "createButton": "Create album",
+    "createDialogTitle": "Create an album",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description"
+  },
+  "common": {
+    "cancel": "Cancel"
+  }
 
   ,
   "backoffice": {

@@ -145,6 +145,16 @@
     "sendMail": "E-Mail senden",
     "openApplication": "App ausprobieren"
   }
+    ,
+    "albums": {
+      "createButton": "Album erstellen",
+      "createDialogTitle": "Album erstellen",
+      "titleLabel": "Titel",
+      "descriptionLabel": "Beschreibung"
+    },
+    "common": {
+      "cancel": "Abbrechen"
+    }
   ,
   "backoffice": {
     "users_loaded": "Benutzer geladen.",

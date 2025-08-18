@@ -147,6 +147,15 @@
     "openApplication": "Probar la aplicación"
   }
   ,
+  "albums": {
+    "createButton": "Crear álbum",
+    "createDialogTitle": "Crear un álbum",
+    "titleLabel": "Título",
+    "descriptionLabel": "Descripción"
+  },
+  "common": {
+    "cancel": "Cancelar"
+  },
   "backoffice": {
     "users_loaded": "Usuarios cargados.",
     "user_validated": "Cuenta de usuario validada.",

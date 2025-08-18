@@ -79,6 +79,15 @@
     "projectTitle": "Prézantasyon do projé",
     "projectDesc1": "Lobjéktif prinsipal Photone sé d pèrmèt aou stoké out bann foto personèl an toute sékirité. Linovasyon prinsipal, sé l kriptaz out bann foto dirèkteman si out laparèy (koté kliyan) avan mèm anvoy sa si le sèrvèr. Sa i garan-ti aou in nivo d konfidansialité pli o, le sèrvèr la zamé laksé a out bann foto an klèr.",
     "projectDesc2": "Pli tar, ou sra kapab organiz out bann foto par albom, partaz azot dann bann group (Fanmi, Zami, Travay...), azout bann tag pou trouv azot pli fasilman, é pètèt mèm profit in analiz lokal par in IA pou tiré otomatikman bann métadoné ki kont, toultan an réspéktan out vi privé.",
+     "albums": {
+       "createButton": "Create album",
+       "createDialogTitle": "Create an album",
+       "titleLabel": "Title",
+       "descriptionLabel": "Description"
+     },
+     "common": {
+       "cancel": "Cancel"
+     },
     "mailCopied": "Ladrès imèl la finn kopyé dann prés-papyé",
     "tech": {
       "title": "Teknoloji la utilizé",
