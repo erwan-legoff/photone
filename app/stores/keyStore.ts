@@ -2,6 +2,7 @@ import { useIdb } from "#imports";
 import { defineStore } from "pinia";
 import type { WrappedKeyData } from "./types/WrappedKeyData";
 import { deriveKeyFromPassword } from "~/tools/security/encryption/deriveKeyFromPassword";
+import { uint8ToArrayBuffer } from "~/tools/security/encryption/arrayBufferUtils";
 
 import { decryptFileBinary } from "~/tools/security/encryption/decryptFileBinary";
 import { useNotificationStore } from "./notificationStore";
@@ -47,7 +48,7 @@ export const useKeyStore = defineStore("key-store", {
         ]);
 
         if (!inMemoryKey) {
-          notificationStore.notifyError('No key to encrypt, please reconnect.');
+          notificationStore.notifyError("No key to encrypt, please reconnect.");
           return false;
         }
 
@@ -58,14 +59,13 @@ export const useKeyStore = defineStore("key-store", {
         let wrappedKey;
         try {
           wrappedKey = await crypto.subtle.encrypt(
-            { name: "AES-GCM", iv: initializationVector },
+            { name: "AES-GCM", iv: uint8ToArrayBuffer(initializationVector) },
             wrappingKey,
             jwkBuffer
           );
-
         } catch (wrapError) {
           notificationStore.notifyError(
-            'Error encrypting JWK: ' + (wrapError as any)?.message
+            "Error encrypting JWK: " + (wrapError as any)?.message
           );
           throw wrapError;
         }
@@ -80,17 +80,16 @@ export const useKeyStore = defineStore("key-store", {
         await idb.setItem(IDB_KEYS.wrappedKeyData, wrappedKeyData);
         this.needsPinVerification = false;
         if (!(await this.hasWrappedKey())) {
-          notificationStore.notifyError('No encrypted key is stored.');
+          notificationStore.notifyError("No encrypted key is stored.");
           return false;
         }
-
 
         console.log("Key successfully wrapped.");
         this.hasAlreadyWrappedTheKey = true;
         return true;
       } catch (error: any) {
         console.error("Failed to wrap key:", error);
-        notificationStore.notifyError('Failed to wrap key: ' + error.message);
+        notificationStore.notifyError("Failed to wrap key: " + error.message);
         return false;
       }
     },
@@ -103,7 +102,7 @@ export const useKeyStore = defineStore("key-store", {
       let wrappedKeyData = (await idb.getItem(IDB_KEYS.wrappedKeyData)) as any;
       if (!wrappedKeyData) {
         this.needsPinVerification = true;
-        notificationStore.notifyError('No encrypted key found.');
+        notificationStore.notifyError("No encrypted key found.");
         return undefined;
       }
       // Désérialise les buffers
@@ -121,14 +120,14 @@ export const useKeyStore = defineStore("key-store", {
         let decryptedJwkBuffer;
         try {
           decryptedJwkBuffer = await crypto.subtle.decrypt(
-            { name: "AES-GCM", iv },
+            { name: "AES-GCM", iv: uint8ToArrayBuffer(iv) },
             wrappingKey,
             wrappedKey
           );
         } catch (decryptError) {
           console.error("Error decrypting JWK:", decryptError);
           this.needsPinVerification = true;
-          notificationStore.notifyError('Error decrypting JWK.');
+          notificationStore.notifyError("Error decrypting JWK.");
           return undefined;
         }
         const decoder = new TextDecoder();
@@ -139,7 +138,7 @@ export const useKeyStore = defineStore("key-store", {
         } catch (parseError) {
           console.error("Error parsing JWK:", parseError);
           this.needsPinVerification = true;
-          notificationStore.notifyError('Error parsing JWK.');
+          notificationStore.notifyError("Error parsing JWK.");
           return undefined;
         }
         // Importe la clé maître à partir du JWK
@@ -186,7 +185,7 @@ export const useKeyStore = defineStore("key-store", {
       const needsPin = hasNoWrappedKey && userStore.isLogged;
       this.needsPinInitialization = needsPin;
       if (needsPin) {
-        notificationStore.notifyInfo('Please create your PIN.');
+        notificationStore.notifyInfo("Please create your PIN.");
       }
       return needsPin;
     },
@@ -203,7 +202,7 @@ export const useKeyStore = defineStore("key-store", {
       }
       this.needsPinVerification = true;
       //
-      useNotificationStore().notifyWarning('PIN code is required.');
+      useNotificationStore().notifyWarning("PIN code is required.");
       return true;
     },
 
@@ -216,7 +215,9 @@ export const useKeyStore = defineStore("key-store", {
       const requiresAuthentication = hasNoWrappedKey && !this.getKey();
       if (requiresAuthentication || !userStore.isLogged) {
         userStore.logout();
-        notificationStore.notifyWarning('A problem occurred, please reconnect.');
+        notificationStore.notifyWarning(
+          "A problem occurred, please reconnect."
+        );
         return true;
       }
 
@@ -253,12 +254,16 @@ export const useKeyStore = defineStore("key-store", {
 });
 async function convertCryptoKeyToBinaryJwk(
   inMemoryKey: CryptoKey
-): Promise<Uint8Array> {
+): Promise<ArrayBuffer> {
   const jwk = await crypto.subtle.exportKey("jwk", inMemoryKey);
   const jwkString = JSON.stringify(jwk);
   const encoder = new TextEncoder();
   const binaryJwk = encoder.encode(jwkString);
-  return binaryJwk;
+  // Return a sliced ArrayBuffer that exactly matches the Uint8Array (preserve offsets)
+  return binaryJwk.buffer.slice(
+    binaryJwk.byteOffset,
+    binaryJwk.byteOffset + binaryJwk.byteLength
+  );
 }
 function bufferToBase64(buffer: ArrayBuffer): string {
   return btoa(String.fromCharCode(...new Uint8Array(buffer)));
@@ -280,3 +285,6 @@ function uint8ToBase64(arr: Uint8Array): string {
 function base64ToUint8(base64: string): Uint8Array {
   return new Uint8Array(base64ToBuffer(base64));
 }
+
+// Ensure an ArrayBuffer that exactly matches the Uint8Array (accounts for byteOffset)
+// ...use shared uint8ToArrayBuffer from arrayBufferUtils.ts

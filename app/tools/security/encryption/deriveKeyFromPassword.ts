@@ -5,6 +5,8 @@
  * @param extractable (optional) - whether the key is extractable
  * @param keyUsages (optional) - usages for the derived key
  */
+import { uint8ToArrayBuffer } from "~/tools/security/encryption/arrayBufferUtils";
+
 export async function deriveKeyFromPassword(
   password: string,
   salt: Uint8Array,
@@ -25,7 +27,7 @@ export async function deriveKeyFromPassword(
   );
   const derivationAlgorithm: Pbkdf2Params = {
     name: "PBKDF2",
-    salt: salt,
+    salt: uint8ToArrayBuffer(salt),
     iterations: 250000,
     hash: "SHA-256",
   };
