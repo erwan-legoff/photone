@@ -11,13 +11,21 @@
         <div v-else>
           <h1 class="text-h2">{{ $t("global.photos") }}</h1>
           <p class="text-subtitle-1 mb-5">{{ $t("global.upload_your_file") }}</p>
-          <div>
-            <v-row>
+          <v-row>
+            <v-col>
               <v-file-input v-model="mediumToUpload" :label="$t('global.choose_a_file')" accept="image/*"
                 :multiple="true" />
-              <v-btn :disabled="!canUpload" @click="uploadMany"> {{ $t("global.upload") }} </v-btn>
-            </v-row>
-          </div>
+            </v-col>
+
+            <!-- le truc qui manquait : h-100 + d-flex align-center -->
+            <v-col cols="auto" class="d-flex">
+              <v-btn :disabled="!canUpload" @click="uploadMany" class="mt-3">
+                {{ $t('global.upload') }}
+              </v-btn>
+            </v-col>
+          </v-row>
+
+
           <PhotoGrid :media="media" @open="openMedium" />
         </div>
       </div>
