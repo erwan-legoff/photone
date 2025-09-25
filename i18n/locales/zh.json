@@ -107,7 +107,8 @@
       "title": "后端其他",
       "springDataJpa": "Spring Data JPA",
       "lombok": "Lombok",
-      "awsS3": "AWS S3"
+      "awsS3": "AWS S3",
+      "kafka": "Apache Kafka"
     },
     "otherFrontend": {
       "title": "前端其他",

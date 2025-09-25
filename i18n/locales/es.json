@@ -107,7 +107,8 @@
       "title": "Backend Diverso",
       "springDataJpa": "Spring Data JPA",
       "lombok": "Lombok",
-      "awsS3": "AWS S3"
+      "awsS3": "AWS S3",
+      "kafka": "Apache Kafka"
     },
     "otherFrontend": {
       "title": "Frontend Diverso",
